@@ -28,7 +28,7 @@ namespace EntityRepository.Interfaces
 
 		public IQueryable<User> GetAllUsers()
 		{
-			return GetAll<User>().Include(u => u.Roles);
+			return GetAll<User>().Include(u => u.Roles).ThenInclude(uur =>uur.UserRole);
 		}
 
 		public UserRole GetRoles()

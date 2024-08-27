@@ -185,7 +185,7 @@ namespace my_dental_health.Migrations
                             BirthdayDate = new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             Name = "admin",
-                            Password = "1234",
+                            Password = "A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=",
                             Surname = "admin"
                         });
                 });

@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<RepositoryContext>(options =>
 {
-	options.UseSqlServer(builder.Configuration.GetConnectionString("mssqlconnection"), b => b.MigrationsAssembly("my-dental-health"));
+	options.UseSqlServer(builder.Configuration.GetConnectionString("mssqlconnection"), b => b.MigrationsAssembly("My-Dental-Health"));
 	options.EnableSensitiveDataLogging(true);
 });
 

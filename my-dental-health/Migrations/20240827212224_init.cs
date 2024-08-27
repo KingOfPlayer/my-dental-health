@@ -7,13 +7,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace my_dental_health.Migrations
 {
-	/// <inheritdoc />
-#pragma warning disable IDE1006 // Naming Styles
-#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
-	public partial class init : Migration
-#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
-#pragma warning restore IDE1006 // Naming Styles
-	{
+    /// <inheritdoc />
+    public partial class init : Migration
+    {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -200,7 +196,7 @@ namespace my_dental_health.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "BirthdayDate", "Email", "Name", "Password", "Surname" },
-                values: new object[] { 1, new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", "admin", "1234", "admin" });
+                values: new object[] { 1, new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", "admin", "A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=", "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserUserRoles",

@@ -12,11 +12,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace my_dental_health.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240827114631_init")]
-#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
-	partial class init
-#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
-	{
+    [Migration("20240827212224_init")]
+    partial class init
+    {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -190,7 +188,7 @@ namespace my_dental_health.Migrations
                             BirthdayDate = new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             Name = "admin",
-                            Password = "1234",
+                            Password = "A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=",
                             Surname = "admin"
                         });
                 });
