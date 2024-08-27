@@ -3,7 +3,7 @@
 	public class TargetPiroity
 	{
 		public int Id { get; set; }
-		public string Name { get; set; }
-		public HashSet<Target> targets { get; set; } = new HashSet<Target>();
+		public required string Name { get; set; }
+		public HashSet<Target> Target { get; set; } = new HashSet<Target>();
 	}
 }

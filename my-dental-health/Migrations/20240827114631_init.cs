@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace my_dental_health.Migrations
 {
     /// <inheritdoc />
@@ -12,20 +14,20 @@ namespace my_dental_health.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TagetPeriodTypes",
+                name: "TargetPeriodTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TagetPeriodTypes", x => x.Id);
+                    table.PrimaryKey("PK_TargetPeriodTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TargetPiroity",
+                name: "TargetPiroities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -34,7 +36,7 @@ namespace my_dental_health.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TargetPiroity", x => x.Id);
+                    table.PrimaryKey("PK_TargetPiroities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,7 +45,7 @@ namespace my_dental_health.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -73,12 +75,12 @@ namespace my_dental_health.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UsersId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TargetPiroityId = table.Column<int>(type: "int", nullable: false),
                     PeriodTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TagetPeriodTypeId = table.Column<int>(type: "int", nullable: false),
+                    TargetPeriodTypeId = table.Column<int>(type: "int", nullable: false),
                     PeriodLength = table.Column<int>(type: "int", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false)
                 },
@@ -86,20 +88,20 @@ namespace my_dental_health.Migrations
                 {
                     table.PrimaryKey("PK_Targets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Targets_TagetPeriodTypes_TagetPeriodTypeId",
-                        column: x => x.TagetPeriodTypeId,
-                        principalTable: "TagetPeriodTypes",
+                        name: "FK_Targets_TargetPeriodTypes_TargetPeriodTypeId",
+                        column: x => x.TargetPeriodTypeId,
+                        principalTable: "TargetPeriodTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Targets_TargetPiroity_TargetPiroityId",
+                        name: "FK_Targets_TargetPiroities_TargetPiroityId",
                         column: x => x.TargetPiroityId,
-                        principalTable: "TargetPiroity",
+                        principalTable: "TargetPiroities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Targets_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_Targets_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -112,38 +114,38 @@ namespace my_dental_health.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CookieHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserLogins", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserLogins_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_UserLogins_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserUserRole",
+                name: "UserUserRoles",
                 columns: table => new
                 {
-                    UserRolesId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserRoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserUserRole", x => new { x.UserRolesId, x.UsersId });
+                    table.PrimaryKey("PK_UserUserRoles", x => new { x.UserId, x.UserRoleId });
                     table.ForeignKey(
-                        name: "FK_UserUserRole_UserRoles_UserRolesId",
-                        column: x => x.UserRolesId,
+                        name: "FK_UserUserRoles_UserRoles_UserRoleId",
+                        column: x => x.UserRoleId,
                         principalTable: "UserRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserUserRole_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_UserUserRoles_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -158,24 +160,53 @@ namespace my_dental_health.Migrations
                     Attime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Minutes = table.Column<int>(type: "int", nullable: false),
                     Second = table.Column<int>(type: "int", nullable: false),
-                    ImgHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TargetsId = table.Column<int>(type: "int", nullable: false)
+                    ImgHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TargetId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TargetStatus", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TargetStatus_Targets_TargetsId",
-                        column: x => x.TargetsId,
+                        name: "FK_TargetStatus_Targets_TargetId",
+                        column: x => x.TargetId,
                         principalTable: "Targets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "TargetPeriodTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "High" },
+                    { 2, "Medium" },
+                    { 3, "Low" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Admin" },
+                    { 2, "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "BirthdayDate", "Email", "Name", "Password", "Surname" },
+                values: new object[] { 1, new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", "admin", "1234", "admin" });
+
+            migrationBuilder.InsertData(
+                table: "UserUserRoles",
+                columns: new[] { "UserId", "UserRoleId" },
+                values: new object[] { 1, 1 });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Targets_TagetPeriodTypeId",
+                name: "IX_Targets_TargetPeriodTypeId",
                 table: "Targets",
-                column: "TagetPeriodTypeId");
+                column: "TargetPeriodTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Targets_TargetPiroityId",
@@ -183,24 +214,24 @@ namespace my_dental_health.Migrations
                 column: "TargetPiroityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Targets_UsersId",
+                name: "IX_Targets_UserId",
                 table: "Targets",
-                column: "UsersId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TargetStatus_TargetsId",
+                name: "IX_TargetStatus_TargetId",
                 table: "TargetStatus",
-                column: "TargetsId");
+                column: "TargetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserLogins_UsersId",
+                name: "IX_UserLogins_UserId",
                 table: "UserLogins",
-                column: "UsersId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserUserRole_UsersId",
-                table: "UserUserRole",
-                column: "UsersId");
+                name: "IX_UserUserRoles_UserRoleId",
+                table: "UserUserRoles",
+                column: "UserRoleId");
         }
 
         /// <inheritdoc />
@@ -213,7 +244,7 @@ namespace my_dental_health.Migrations
                 name: "UserLogins");
 
             migrationBuilder.DropTable(
-                name: "UserUserRole");
+                name: "UserUserRoles");
 
             migrationBuilder.DropTable(
                 name: "Targets");
@@ -222,10 +253,10 @@ namespace my_dental_health.Migrations
                 name: "UserRoles");
 
             migrationBuilder.DropTable(
-                name: "TagetPeriodTypes");
+                name: "TargetPeriodTypes");
 
             migrationBuilder.DropTable(
-                name: "TargetPiroity");
+                name: "TargetPiroities");
 
             migrationBuilder.DropTable(
                 name: "Users");

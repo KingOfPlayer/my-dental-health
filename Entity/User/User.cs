@@ -17,8 +17,8 @@ namespace Entity.User
 		[DataType(DataType.Password)]
 		public string Password { get; set; } = string.Empty;
 		public DateTime BirthdayDate { get; set; }
-        public HashSet<Target.Target> Targets { get; set; } = new HashSet<Target.Target>();
-		public HashSet<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
-		public HashSet<UserLogin> UserLogins { get; set; } = new HashSet<UserLogin>();
+		public HashSet<Target.Target> Target { get; set; } = new HashSet<Target.Target>();
+		public HashSet<UserUserRole> Roles { get; set; } = new HashSet<UserUserRole>();
+		public HashSet<UserLogin> Logins { get; set; } = new HashSet<UserLogin>();
 	}
 }

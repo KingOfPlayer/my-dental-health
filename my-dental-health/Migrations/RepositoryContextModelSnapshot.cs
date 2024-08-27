@@ -34,7 +34,6 @@ namespace my_dental_health.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImgHash")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Minutes")
@@ -43,30 +42,14 @@ namespace my_dental_health.Migrations
                     b.Property<int>("Second")
                         .HasColumnType("int");
 
-                    b.Property<int>("TargetsId")
+                    b.Property<int>("TargetId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TargetsId");
+                    b.HasIndex("TargetId");
 
                     b.ToTable("TargetStatus");
-                });
-
-            modelBuilder.Entity("Entity.Target.TagetPeriodType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TagetPeriodTypes");
                 });
 
             modelBuilder.Entity("Entity.Target.Target", b =>
@@ -94,24 +77,57 @@ namespace my_dental_health.Migrations
                     b.Property<DateTime>("PeriodTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TagetPeriodTypeId")
+                    b.Property<int>("TargetPeriodTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("TargetPiroityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TagetPeriodTypeId");
+                    b.HasIndex("TargetPeriodTypeId");
 
                     b.HasIndex("TargetPiroityId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Targets");
+                });
+
+            modelBuilder.Entity("Entity.Target.TargetPeriodType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TargetPeriodTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "High"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Medium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Low"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Target.TargetPiroity", b =>
@@ -128,7 +144,7 @@ namespace my_dental_health.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TargetPiroity");
+                    b.ToTable("TargetPiroities");
                 });
 
             modelBuilder.Entity("Entity.User.User", b =>
@@ -161,6 +177,17 @@ namespace my_dental_health.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthdayDate = new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "admin@admin.com",
+                            Name = "admin",
+                            Password = "1234",
+                            Surname = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Entity.User.UserLogin", b =>
@@ -175,12 +202,12 @@ namespace my_dental_health.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserLogins");
                 });
@@ -194,96 +221,113 @@ namespace my_dental_health.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "User"
+                        });
                 });
 
-            modelBuilder.Entity("UserUserRole", b =>
+            modelBuilder.Entity("Entity.User.UserUserRole", b =>
                 {
-                    b.Property<int>("UserRolesId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int>("UserRoleId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserRolesId", "UsersId");
+                    b.HasKey("UserId", "UserRoleId");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UserRoleId");
 
-                    b.ToTable("UserUserRole");
+                    b.ToTable("UserUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            UserRoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("Entity.Target.Status.TargetStatus", b =>
                 {
-                    b.HasOne("Entity.Target.Target", "Targets")
+                    b.HasOne("Entity.Target.Target", "Target")
                         .WithMany("TargetStatus")
-                        .HasForeignKey("TargetsId")
+                        .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Targets");
+                    b.Navigation("Target");
                 });
 
             modelBuilder.Entity("Entity.Target.Target", b =>
                 {
-                    b.HasOne("Entity.Target.TagetPeriodType", "TagetPeriodType")
-                        .WithMany("Targets")
-                        .HasForeignKey("TagetPeriodTypeId")
+                    b.HasOne("Entity.Target.TargetPeriodType", "TargetPeriodType")
+                        .WithMany("Target")
+                        .HasForeignKey("TargetPeriodTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entity.Target.TargetPiroity", "TargetPiroity")
-                        .WithMany("targets")
+                        .WithMany("Target")
                         .HasForeignKey("TargetPiroityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.User.User", "Users")
-                        .WithMany("Targets")
-                        .HasForeignKey("UsersId")
+                    b.HasOne("Entity.User.User", "User")
+                        .WithMany("Target")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TagetPeriodType");
+                    b.Navigation("TargetPeriodType");
 
                     b.Navigation("TargetPiroity");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Entity.User.UserLogin", b =>
                 {
-                    b.HasOne("Entity.User.User", "Users")
-                        .WithMany("UserLogins")
-                        .HasForeignKey("UsersId")
+                    b.HasOne("Entity.User.User", "User")
+                        .WithMany("Logins")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UserUserRole", b =>
+            modelBuilder.Entity("Entity.User.UserUserRole", b =>
                 {
-                    b.HasOne("Entity.User.UserRole", null)
-                        .WithMany()
-                        .HasForeignKey("UserRolesId")
+                    b.HasOne("Entity.User.User", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entity.User.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
+                    b.HasOne("Entity.User.UserRole", "UserRole")
+                        .WithMany("Users")
+                        .HasForeignKey("UserRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("Entity.Target.TagetPeriodType", b =>
-                {
-                    b.Navigation("Targets");
+                    b.Navigation("User");
+
+                    b.Navigation("UserRole");
                 });
 
             modelBuilder.Entity("Entity.Target.Target", b =>
@@ -291,16 +335,28 @@ namespace my_dental_health.Migrations
                     b.Navigation("TargetStatus");
                 });
 
+            modelBuilder.Entity("Entity.Target.TargetPeriodType", b =>
+                {
+                    b.Navigation("Target");
+                });
+
             modelBuilder.Entity("Entity.Target.TargetPiroity", b =>
                 {
-                    b.Navigation("targets");
+                    b.Navigation("Target");
                 });
 
             modelBuilder.Entity("Entity.User.User", b =>
                 {
-                    b.Navigation("Targets");
+                    b.Navigation("Logins");
 
-                    b.Navigation("UserLogins");
+                    b.Navigation("Roles");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("Entity.User.UserRole", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

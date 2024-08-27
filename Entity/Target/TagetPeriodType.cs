@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Entity.Target
 {
-	public class TagetPeriodType
+	public class TargetPeriodType
 	{
 		public int Id { get; set; }
-		public int Name { get; set; }
-		public ICollection<Target> Targets { get; set; }
+		public string? Name { get; set; }
+		public ICollection<Target> Target { get; set; } = new List<Target>();
 	}
 }

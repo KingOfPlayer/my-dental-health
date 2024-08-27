@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entity.User
 {
-    public class UserLogin
+	public class UserUserRole
 	{
-		public int Id { get; set; }
-		public string CookieHash { get; set; } = string.Empty;
+		public int UserId { get; set; }
+		public int UserRoleId { get; set; }
 		public User User { get; set; } = null!;
+		public UserRole UserRole { get; set; } = null!;
 	}
 }

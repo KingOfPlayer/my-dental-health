@@ -1,6 +1,7 @@
 ﻿using Entity.Target;
 using Entity.Target.Status;
 using Entity.User;
+using EntityRepository.ContextConfig;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,11 @@ namespace EntityRepository
 		public DbSet<UserRole> UserRoles { get; set; }
 		public DbSet<UserLogin> UserLogins { get; set; }
 		public DbSet<User> Users {  get; set; }
-		public DbSet<TargetStatus> TargetStatus { get; set; }
-		public DbSet<TagetPeriodType> TagetPeriodTypes { get; set; }
+		public DbSet<UserUserRole> UserUserRoles { get; set; }
+		public DbSet<TargetPeriodType> TargetPeriodTypes { get; set; }
+		public DbSet<TargetPiroity> TargetPiroities { get; set; }
 		public DbSet<Target> Targets { get; set; }
+		public DbSet<TargetStatus> TargetStatus { get; set; }
 
 		public RepositoryContext(DbContextOptions<RepositoryContext> options)
 		: base(options)
@@ -29,6 +32,10 @@ namespace EntityRepository
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
+			modelBuilder.ApplyConfiguration(new UserConfig());
+			modelBuilder.ApplyConfiguration(new UserRoleConfig());
+			modelBuilder.ApplyConfiguration(new UserUserRoleConfig());
+			modelBuilder.ApplyConfiguration(new TargetPeriodTypeConfig());
 		}
 	}
 }
