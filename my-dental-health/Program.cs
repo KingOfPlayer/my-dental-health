@@ -2,6 +2,8 @@ using EntityRepository;
 using EntityRepository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Services;
+using Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,9 @@ builder.Services.AddDbContext<RepositoryContext>(options =>
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ITargetRepository, TargetRepository>();
+
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

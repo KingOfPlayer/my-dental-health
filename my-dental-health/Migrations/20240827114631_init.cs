@@ -7,9 +7,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace my_dental_health.Migrations
 {
-    /// <inheritdoc />
-    public partial class init : Migration
-    {
+	/// <inheritdoc />
+#pragma warning disable IDE1006 // Naming Styles
+#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
+	public partial class init : Migration
+#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
+#pragma warning restore IDE1006 // Naming Styles
+	{
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {

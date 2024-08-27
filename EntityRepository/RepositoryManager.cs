@@ -1,4 +1,7 @@
 ﻿using Entity;
+using Entity.Target.Status;
+using Entity.Target;
+using Entity.User;
 using EntityRepository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,20 +14,15 @@ namespace EntityRepository
 {
 	public class RepositoryManager : IRepositoryManager
 	{
-		private readonly RepositoryContext context;
-
+		private readonly RepositoryContext repositoryContext;
 		private readonly IUserRepository userRepository;
-		private readonly ITargetRepository targetRepository;
 
-		public RepositoryManager(RepositoryContext context, IUserRepository userRepository, ITargetRepository targetRepository)
+		public RepositoryManager(RepositoryContext repositoryContext, IUserRepository userRepository)
 		{
-			this.context = context;
+			this.repositoryContext = repositoryContext;
 			this.userRepository = userRepository;
-			this.targetRepository = targetRepository;
 		}
 
 		public IUserRepository UserRepository => userRepository;
-
-		public ITargetRepository TargetRepository => targetRepository;
 	}
 }
