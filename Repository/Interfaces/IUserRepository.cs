@@ -1,4 +1,5 @@
-﻿using Entity.Models.User;
+﻿using Entity.Models.Dto;
+using Entity.Models.User;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Repository.Interfaces
 		UserRole GetRoles();
 		void GiveRole(User user, UserRole roleId);
 		void RemoveRole(User user, UserRole roleId);
-
-	}
+		public void AddUserLogin(User user, string token);
+        User? Login(UserLoginDataDto userLoginData);
+    }
 }

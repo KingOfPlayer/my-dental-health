@@ -20,11 +20,24 @@ namespace MyDentalHealth.Extentions
 			serviceDescriptors.AddScoped<IUserService, UserService>();
 
 		}
+		public static void ConfigureSession(this IServiceCollection serviceDescriptors)
+		{
+            serviceDescriptors.AddDistributedMemoryCache();
+
+            serviceDescriptors.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+				options.Cookie.Name = ".mdh.Session";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
+        }
 		public static void ConfigureSqlConnection(this IServiceCollection serviceDescriptors, WebApplicationBuilder builder)
 		{
 			serviceDescriptors.AddDbContext<RepositoryContext>(options =>
 			{
-				options.UseSqlServer(builder.Configuration.GetConnectionString("mssqlconnection"), b => b.MigrationsAssembly("My-Dental-Health"));
+				options.UseSqlServer(builder.Configuration.GetConnectionString("mssqlconnection"), b => b.MigrationsAssembly("MyDentalHealth"));
 				options.EnableSensitiveDataLogging(true);
 			});
 		}

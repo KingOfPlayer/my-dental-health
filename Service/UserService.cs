@@ -1,4 +1,5 @@
-﻿using Entity.Models.User;
+﻿using Entity.Models.Dto;
+using Entity.Models.User;
 using Repository.Interfaces;
 using Services.Interfaces;
 using System;
@@ -22,5 +23,10 @@ namespace Services
 		{
 			return repositoryManager.UserRepository.GetAllUsers();
 		}
-	}
+
+        public User? Login(UserLoginDataDto userLoginData)
+        {
+			return repositoryManager.UserRepository.Login(userLoginData);
+        }
+    }
 }

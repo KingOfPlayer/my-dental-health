@@ -7,11 +7,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyDentalHealth.Migrations
 {
-	/// <inheritdoc />
-#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
-	public partial class init : Migration
-#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
-	{
+    /// <inheritdoc />
+    public partial class init : Migration
+    {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -115,7 +113,7 @@ namespace MyDentalHealth.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CookieHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

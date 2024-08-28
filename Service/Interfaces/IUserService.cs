@@ -1,4 +1,5 @@
-﻿using Entity.Models.User;
+﻿using Entity.Models.Dto;
+using Entity.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Services.Interfaces
     public interface IUserService
 	{
 		IQueryable<User> GetAllUsers();
-	}
+        User Login(UserLoginDataDto userLoginData);
+    }
 }

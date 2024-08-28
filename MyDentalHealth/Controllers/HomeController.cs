@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
+using MyDentalHealth.Extentions;
 using Services.Interfaces;
 
 namespace MyDentalHealth.Controllers
@@ -14,7 +16,7 @@ namespace MyDentalHealth.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+            return View();
 		}
 
 		public IActionResult Users()

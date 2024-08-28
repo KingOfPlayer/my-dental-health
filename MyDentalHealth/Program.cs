@@ -15,12 +15,15 @@ builder.Services.ConfigureSqlConnection(builder);
 
 builder.Services.ConfigureRepository();
 builder.Services.ConfigureService();
+builder.Services.ConfigureSession();
 
 var app = builder.Build();
 
-app.UseRouting();
 app.UseHttpsRedirection();
+app.UseRouting();
 app.UseStaticFiles("/static");
+
+app.UseSession();
 
 app.ConfigureEndPoints();
 

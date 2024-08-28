@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace MyDentalHealth.Extentions
 {
-	public class RazorAuthPage<TModel> : RazorPage<TModel>
+	public class AuthRazorPage<TModel> : RazorPage<TModel>
 	{
         public string Auth { get; set; } = "test";
         public override Task ExecuteAsync()

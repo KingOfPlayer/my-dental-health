@@ -1,4 +1,5 @@
-﻿using Entity.Models.User;
+﻿using Entity.Models.Dto;
+using Entity.Models.User;
 using Microsoft.EntityFrameworkCore;
 using Repository.Interfaces;
 using System;
@@ -27,7 +28,7 @@ namespace Repository
 			throw new NotImplementedException();
 		}
 
-		public IQueryable<User> GetAllUsers()
+        public IQueryable<User> GetAllUsers()
 		{
 			return GetAll<User>().Include(u => u.Roles).ThenInclude(uur => uur.UserRole);
 		}
@@ -60,6 +61,17 @@ namespace Repository
 		public void UpdateUser(User user)
 		{
 			throw new NotImplementedException();
-		}
+        }
+
+		public void AddUserLogin(User user,string token)
+        {
+			UserLogin userLogin = new UserLogin(){Token = token,User = user};
+			Create(userLogin);
+        }
+
+        public User? Login(UserLoginDataDto userLoginData)
+		{
+			return GetAll<User>().Where(u => u.Email.Equals(userLoginData.Email) && u.Password.Equals(userLoginData.Password)).Include(u => u.Roles).ThenInclude(uur => uur.UserRole).SingleOrDefault();
+        }
 	}
 }
