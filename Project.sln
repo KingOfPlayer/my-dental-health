@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "My-Dental-Health", "my-dental-health\My-Dental-Health.csproj", "{D82CBCAC-63B3-4C40-B5FF-2E5F82FC10A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyDentalHealth", "MyDentalHealth\MyDentalHealth.csproj", "{D82CBCAC-63B3-4C40-B5FF-2E5F82FC10A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "Entity\Entity.csproj", "{C86F4CE9-B499-41A5-9402-8C4361CEA421}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityRepository", "EntityRepository\EntityRepository.csproj", "{A2A75D0E-C0C2-4E88-8104-D95635557024}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{A2A75D0E-C0C2-4E88-8104-D95635557024}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{D7C36F6B-7F39-47FC-86B8-4FBA032CE4DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{D7C36F6B-7F39-47FC-86B8-4FBA032CE4DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
