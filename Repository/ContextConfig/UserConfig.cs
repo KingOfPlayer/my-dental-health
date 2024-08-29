@@ -20,11 +20,8 @@ namespace Repository.ContextConfig
 					Name = "admin",
 					Surname = "admin",
 					Email="admin@admin.com", 
-					Password="1234", 
-					BirthdayDate = new DateTime(1999,9,9), 
-					Target = new HashSet<Target>(), 
-					Logins = new HashSet<UserLogin>(), 
-					Roles=new HashSet<UserUserRole>()
+					Password=User.HashPassword("Admin1234"), 
+					BirthdayDate = new DateTime(1999,9,9)
 				});
 		}
 	}

@@ -18,60 +18,26 @@ namespace Repository
 
 		}
 
-		public void ChangePassword(User User)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Create(User user)
-		{
-			throw new NotImplementedException();
-		}
+		public void CreateUser(User user) => Create(user);
+        public void UpdateUser(User user) => Update(user);
 
         public IQueryable<User> GetAllUsers()
 		{
-			return GetAll<User>().Include(u => u.Roles).ThenInclude(uur => uur.UserRole);
+			return GetAll<User>();
 		}
 
-		public UserRole GetRoles()
+		public IQueryable<UserRole> GetRoles()
 		{
-			throw new NotImplementedException();
-		}
+			return GetAll<UserRole>();
+        }
 
-		public User? GetUser(int id)
+		public IQueryable<User> GetUser(int id)
 		{
 			return Query<User>(U => U.Id.Equals(id));
 		}
 
-		public void GiveRole(User user, UserRole roleId)
-		{
-			throw new NotImplementedException();
-		}
+        public void GiveRole(UserUserRole userUserRole) => Create(userUserRole);
+        public void RemoveRole(UserUserRole userUserRole) => Remove(userUserRole);
 
-		public void RemoveRole(User user, UserRole roleId)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Update(User user)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void UpdateUser(User user)
-		{
-			throw new NotImplementedException();
-        }
-
-		public void AddUserLogin(User user,string token)
-        {
-			UserLogin userLogin = new UserLogin(){Token = token,User = user};
-			Create(userLogin);
-        }
-
-        public User? Login(UserLoginDataDto userLoginData)
-		{
-			return GetAll<User>().Where(u => u.Email.Equals(userLoginData.Email) && u.Password.Equals(userLoginData.Password)).Include(u => u.Roles).ThenInclude(uur => uur.UserRole).SingleOrDefault();
-        }
 	}
 }

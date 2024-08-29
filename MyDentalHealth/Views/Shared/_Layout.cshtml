@@ -12,6 +12,29 @@
 			<script src="~/static/lib/jquery/jquery.min.js"></script>
 			<script src="~/static/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 			<script src="~/static/lib/font-awesome/js/all.min.js"></script>
+
+
+			<script>
+				// Example starter JavaScript for disabling form submissions if there are invalid fields
+				(() => {
+					'use strict'
+
+					// Fetch all the forms we want to apply custom Bootstrap validation styles to
+					const forms = document.querySelectorAll('.needs-validation')
+
+					// Loop over them and prevent submission
+					Array.from(forms).forEach(form => {
+						form.addEventListener('submit', event => {
+							if (!form.checkValidity()) {
+								event.preventDefault()
+								event.stopPropagation()
+							}
+
+							form.classList.add('was-validated')
+						}, false)
+					})
+				})()
+			</script>
 		@await RenderSectionAsync("Scripts", false)
 	</body>
 </html>

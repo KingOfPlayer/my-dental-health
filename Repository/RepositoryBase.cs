@@ -34,14 +34,14 @@ namespace Repository
 			repositoryContext.Set<T>().Update(entity);
 		}
 
-		public T? Query<T>(Expression<Func<T, bool>> conditional) where T : class
+		public IQueryable<T> Query<T>(Expression<Func<T, bool>> conditional) where T : class
 		{
-			return repositoryContext.Set<T>().Where(conditional).AsNoTracking().SingleOrDefault();
+			return repositoryContext.Set<T>().Where(conditional).AsNoTracking();
 		}
 
-		public T? QueryWithTrack<T>(Expression<Func<T, bool>> conditional,bool Tracking = false) where T : class
+		public IQueryable<T> QueryWithTrack<T>(Expression<Func<T, bool>> conditional,bool Tracking = false) where T : class
 		{
-			return repositoryContext.Set<T>().Where(conditional).SingleOrDefault();
+			return repositoryContext.Set<T>().Where(conditional);
 		}
 
 		public IQueryable<T> GetAll<T>() where T : class

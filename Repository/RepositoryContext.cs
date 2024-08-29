@@ -15,7 +15,6 @@ namespace Repository
     public class RepositoryContext : DbContext
 	{
 		public DbSet<UserRole> UserRoles { get; set; }
-		public DbSet<UserLogin> UserLogins { get; set; }
 		public DbSet<User> Users {  get; set; }
 		public DbSet<UserUserRole> UserUserRoles { get; set; }
 		public DbSet<TargetPeriodType> TargetPeriodTypes { get; set; }

@@ -12,7 +12,7 @@ using Repository;
 namespace MyDentalHealth.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240828202334_init")]
+    [Migration("20240829130525_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -188,31 +188,9 @@ namespace MyDentalHealth.Migrations
                             BirthdayDate = new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             Name = "admin",
-                            Password = "A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=",
+                            Password = "YP50QG5/NT7ZefNQ8vu2ouhpCl+n0bDDKYPR2LP5X2c=",
                             Surname = "admin"
                         });
-                });
-
-            modelBuilder.Entity("Entity.Models.User.UserLogin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserLogins");
                 });
 
             modelBuilder.Entity("Entity.Models.User.UserRole", b =>
@@ -224,6 +202,7 @@ namespace MyDentalHealth.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -303,17 +282,6 @@ namespace MyDentalHealth.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Entity.Models.User.UserLogin", b =>
-                {
-                    b.HasOne("Entity.Models.User.User", "User")
-                        .WithMany("Logins")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Entity.Models.User.UserUserRole", b =>
                 {
                     b.HasOne("Entity.Models.User.User", "User")
@@ -350,8 +318,6 @@ namespace MyDentalHealth.Migrations
 
             modelBuilder.Entity("Entity.Models.User.User", b =>
                 {
-                    b.Navigation("Logins");
-
                     b.Navigation("Roles");
 
                     b.Navigation("Target");

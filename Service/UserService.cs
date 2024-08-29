@@ -1,5 +1,6 @@
 ﻿using Entity.Models.Dto;
 using Entity.Models.User;
+using Microsoft.EntityFrameworkCore;
 using Repository.Interfaces;
 using Services.Interfaces;
 using System;
@@ -24,9 +25,18 @@ namespace Services
 			return repositoryManager.UserRepository.GetAllUsers();
 		}
 
-        public User? Login(UserLoginDataDto userLoginData)
+        public async Task<List<UserRole>> GetUserRoles(User user)
         {
-			return repositoryManager.UserRepository.Login(userLoginData);
+            List<UserRole> userRole = await repositoryManager.UserRepository.GetUser(user.Id).SelectMany(u => u.Roles.Select(urr => urr.UserRole)).ToListAsync();
+            return userRole;
+        }
+
+        public async Task<User?> FindUserWithEmail(string email)
+        {
+			User? user = await repositoryManager.UserRepository.GetAllUsers().Where(u =>
+				u.Email.Equals(email)).SingleOrDefaultAsync();
+            
+            return user;
         }
     }
 }

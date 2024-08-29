@@ -1,17 +1,24 @@
 ﻿@model UserLoginDataDto
 
-<form method="post" asp-action="Login">
+<form method="post" asp-action="Login" class="needs-validation" novalidate>
 	<h1>Oturum aç</h1>
 	<div class="form-group my-2">
 		<label asp-for="Email"></label>
-		<input asp-for="Email" class="form-control"/>
+		<input asp-for="Email" class="form-control @(ViewData.ModelState["Err_email"] is not null?"is-invalid":"")" title="" \>
+		<div id="Email" class="invalid-feedback">
+			@ViewData.ModelState["Err_email"]?.Errors?[0].ErrorMessage
+		</div>
 	</div>
 	<div class="form-group my-2">
 		<label asp-for="Password"></label>
-		<input asp-for="Password" class="form-control" />
+		<input asp-for="Password" class="form-control @(ViewData.ModelState["Err_password"] is not null?"is-invalid":"")"\>
+		<div id="Password" class="invalid-feedback">
+			@ViewData.ModelState["Err_password"]?.Errors?[0].ErrorMessage
+		</div>
 	</div>
 	<div class="form-group my-2">
 		<button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
 		<p class="text-center"><a>Kayıt Ol</a> / <a>Şifremi Unuttum</a></p>
 	</div>
 </form>
+

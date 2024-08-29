@@ -11,16 +11,12 @@ namespace Repository.Interfaces
 {
     public interface IUserRepository
 	{
-		void Create(User user);
-		void Update(User user);
+		void CreateUser(User user);
 		void UpdateUser(User user);
 		IQueryable<User> GetAllUsers();
-		User? GetUser(int id);
-		void ChangePassword(User User);
-		UserRole GetRoles();
-		void GiveRole(User user, UserRole roleId);
-		void RemoveRole(User user, UserRole roleId);
-		public void AddUserLogin(User user, string token);
-        User? Login(UserLoginDataDto userLoginData);
+        IQueryable<User> GetUser(int id);
+        IQueryable<UserRole> GetRoles();
+		void GiveRole(UserUserRole userUserRole);
+		void RemoveRole(UserUserRole userUserRole);
     }
 }

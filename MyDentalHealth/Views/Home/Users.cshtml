@@ -1,19 +1,16 @@
-﻿@model IQueryable<Entity.Models.User.User>
+﻿
 
-@foreach(var user in Model)
+@User?.Id
+<br />
+@User?.Name
+<br />
+@User?.Surname
+<br />
+@User?.Email
+<br />
+@foreach (var role in Roles)
 {
-	@user.Id
-	<br />
-	@user.Name
-	<br />
-	@user.Surname
-	<br />
-	@user.Email
-	<br />
-	@foreach(var role in user.Roles)
-	{
-		@role.UserRole.Name
-	}
-	<br />
-	@user.Password
+	<span>@role.Name</span>
 }
+<br />
+@User?.Password

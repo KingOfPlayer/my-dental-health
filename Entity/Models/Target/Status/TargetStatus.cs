@@ -13,6 +13,7 @@ namespace Entity.Models.Target.Status
         public int Minutes { get; set; }
         public int Second { get; set; }
         public string? ImgHash { get; set; }
+        public int TargetId { get; set; }
         public required Target Target { get; set; }
     }
 }
