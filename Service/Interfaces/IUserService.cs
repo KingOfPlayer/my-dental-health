@@ -11,7 +11,9 @@ namespace Services.Interfaces
     public interface IUserService
 	{
 		IQueryable<User> GetAllUsers();
-        Task<List<UserRole>> GetUserRoles(User user);
-        Task<User?> FindUserWithEmail(string email);
-    }
+		User? GetUserWithId(int UserId);
+		List<UserRole>? GetUserRolesWithUserId(int UserId);
+		User? FindUserWithEmail(string? email);
+		void CreateNewUser(NewUserDto newUserDto);
+	}
 }

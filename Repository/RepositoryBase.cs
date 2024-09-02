@@ -21,17 +21,24 @@ namespace Repository
 		public void Create<T>(T entity) where T : class
 		{
 			repositoryContext.Set<T>().Add(entity);
+			Save<T>();
 		}
 
 
 		public void Remove<T>(T entity) where T : class
 		{
 			repositoryContext.Set<T>().Remove(entity);
+			Save<T>();
 		}
 
 		public void Update<T>(T entity) where T : class
 		{
 			repositoryContext.Set<T>().Update(entity);
+			Save<T>();
+		}
+		public void Save<T>() where T : class
+		{
+			repositoryContext.SaveChanges();
 		}
 
 		public IQueryable<T> Query<T>(Expression<Func<T, bool>> conditional) where T : class
@@ -53,5 +60,6 @@ namespace Repository
 		{
 			return repositoryContext.Set<T>();
 		}
+
 	}
 }
