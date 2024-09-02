@@ -1,6 +1,7 @@
 ﻿using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Services.Interfaces;
 
 namespace MyDentalHealth.Extentions
 {
@@ -12,19 +13,21 @@ namespace MyDentalHealth.Extentions
         public string RedirectAction = "Index";
         public List<string> roles = new List<string>();
 
-        public void OnActionExecuted(ActionExecutedContext context)
+		public void OnActionExecuted(ActionExecutedContext context)
         {
             return;
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            User? user = context.HttpContext.Session.GetJson<User>("User");
-            if (Login == (user != null) )
-            {
-                if (roles.Count != 0)
-                {
-                    List<UserRole>? userRoles = context.HttpContext.Session.GetJson<List<UserRole>>("Roles");
+            int UserId = context.HttpContext.Session.GetJson<int>("UserId");
+            if (Login == (UserId != 0))
+			{
+				if (roles.Count != 0)
+				{
+					IServiceManager? serviceManager = context.HttpContext.RequestServices.CreateScope().ServiceProvider.GetService<IServiceManager>();
+
+					List<UserRole>? userRoles = serviceManager?.UserService.GetUserRolesWithUserId(UserId);
                     if (userRoles != null && userRoles.Any(ur => roles.Contains(ur.Name)))
                         return;
                 }

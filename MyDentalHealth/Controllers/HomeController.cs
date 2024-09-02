@@ -19,9 +19,10 @@ namespace MyDentalHealth.Controllers
             return View();
 		}
 
-		public IActionResult Users()
+		[Auth]
+		public IActionResult MyInfo()
 		{
-			return View(serviceManager.UserService.GetAllUsers());
+			return View();
 		}
 	}
 }
