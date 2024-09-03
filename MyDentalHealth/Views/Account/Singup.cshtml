@@ -25,14 +25,14 @@
 	</div>
 	<div class="form-group my-2">
 		<label asp-for="Password"></label>
-		<input asp-for="Password" class="form-control @(ViewData.ModelState["Err_Password"] is not null?"is-invalid":"")" title="" required\>
+		<input asp-for="Password" class="form-control @(ViewData.ModelState["Err_Password"] is not null?"is-invalid":"")" title="" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}" required\>
 		<div id="Password" class="invalid-feedback">
 			@ViewData.ModelState["Err_Password"]?.Errors?[0].ErrorMessage
 		</div>
 	</div>
 	<div class="form-group my-2">
 		<label asp-for="ValidatePassword"></label>
-		<input asp-for="ValidatePassword" class="form-control @(ViewData.ModelState["Err_ValidatePassword"] is not null?"is-invalid":"")" required\>
+		<input asp-for="ValidatePassword" class="form-control @(ViewData.ModelState["Err_ValidatePassword"] is not null?"is-invalid":"")" title="" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}" required\>
 		<div id="ValidatePassword" class="invalid-feedback">
 			@ViewData.ModelState["Err_ValidatePassword"]?.Errors?[0].ErrorMessage
 		</div>

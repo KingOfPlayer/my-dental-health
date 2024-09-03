@@ -8,12 +8,6 @@ namespace MyDentalHealth.Extentions
 {
 	public class AuthRazorPage<TModel> : RazorPage<TModel>
     {
-        /*private readonly IServiceManager? serviceManager;
-		public AuthRazorPage(IServiceManager serviceManager)
-		{
-			this.serviceManager = Context.RequestServices.CreateScope().ServiceProvider.GetService<IServiceManager>();
-		}*/
-
 		public User? User
 		{
 			get

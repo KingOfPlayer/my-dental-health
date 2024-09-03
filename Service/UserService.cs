@@ -47,6 +47,12 @@ namespace Services
 			repositoryManager.UserRepository.CreateUser(user);
 			UserRole? role = (UserRole?)repositoryManager.UserRepository.GetRoles().Where(r => r.Name.Equals("User")).SingleOrDefault();
 			repositoryManager.UserRepository.GiveRole(new UserUserRole() {UserId = user.Id, UserRoleId = role.Id});
+			Console.WriteLine("Sending mail to wlc");
+		}
+
+		public void UpdateUser(User user)
+		{
+			repositoryManager.UserRepository.UpdateUser(user);
 		}
 	}
 }

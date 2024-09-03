@@ -15,5 +15,6 @@ namespace Services.Interfaces
 		List<UserRole>? GetUserRolesWithUserId(int UserId);
 		User? FindUserWithEmail(string? email);
 		void CreateNewUser(NewUserDto newUserDto);
+		void UpdateUser(User user);
 	}
 }

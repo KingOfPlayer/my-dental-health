@@ -1,0 +1,33 @@
+﻿@model RecoveryEmailDto
+
+<form method="post" asp-action="Recovery" class="needs-validation" novalidate>
+	<h1>Şifremi Unuttum</h1>
+	<div class="form-group my-2">
+		<label asp-for="Email"></label>
+		<input asp-for="Email" class="form-control @(ViewData.ModelState["Err_Email"] is not null?"is-invalid":"")" title="" required\>
+		<div id="Email" class="invalid-feedback">
+			@ViewData.ModelState["Err_Email"]?.Errors?[0].ErrorMessage
+		</div>
+	</div>
+	@if(ViewData.ModelState["Success"] is not null)
+	{
+		<div class="form-group my-2 alert alert-success" role="alert">
+			@ViewData.ModelState["Success"]?.Errors?[0].ErrorMessage
+		</div>
+	}
+	else if (ViewData.ModelState["Failed"] is not null)
+	{
+		<div class="form-group my-2 alert alert-warning" role="alert">
+			@ViewData.ModelState["Failed"]?.Errors?[0].ErrorMessage
+		</div>
+	}
+	@if (ViewData.ModelState["Temp"] is not null)
+	{
+		<p>temp</p>
+		<a href="@ViewData.ModelState["Temp"]?.Errors?[0].ErrorMessage">Reset Page</a>
+	}
+	<div class="form-group my-2">
+		<button type="submit" class="btn btn-primary w-100">Sıfırlama Maili Gönder</button>
+		<p class="text-center"><a class="link-info" asp-action="Singup">Yeni Hesap Oluştur</a></p>
+	</div>
+</form>
