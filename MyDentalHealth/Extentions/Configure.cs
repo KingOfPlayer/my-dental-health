@@ -1,9 +1,8 @@
-﻿using Repository.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
 using Repository;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Services.Interfaces;
+using Repository.Interfaces;
 using Services;
+using Services.Interfaces;
 
 namespace MyDentalHealth.Extentions
 {
@@ -22,17 +21,17 @@ namespace MyDentalHealth.Extentions
 		}
 		public static void ConfigureSession(this IServiceCollection serviceDescriptors)
 		{
-            serviceDescriptors.AddDistributedMemoryCache();
+			serviceDescriptors.AddDistributedMemoryCache();
 
-            serviceDescriptors.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
+			serviceDescriptors.AddSession(options =>
+			{
+				options.IdleTimeout = TimeSpan.FromHours(1);
 				options.Cookie.Name = ".mdh.Session";
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-            });
-        }
+				options.Cookie.HttpOnly = true;
+				options.Cookie.IsEssential = true;
+				options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+			});
+		}
 		public static void ConfigureSqlConnection(this IServiceCollection serviceDescriptors, WebApplicationBuilder builder)
 		{
 			serviceDescriptors.AddDbContext<RepositoryContext>(options =>

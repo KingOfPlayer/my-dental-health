@@ -1,18 +1,21 @@
-﻿@if(User == null){
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" asp-controller="Account" asp-action="Singin">Login</a>
-    </li>
-}else{
+﻿<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-user"></i>
+        @(User is null ? "Account" : User.Name)
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        @if (User == null)
+        {
+            <li><a class="dropdown-item " asp-controller="Account" asp-action="Singin"><i class="fa-solid fa-right-to-bracket"></i> Sing in</a></li>
 
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page">
-            Hi @User.Name
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="MyInfo">My Info</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" asp-controller="Account" asp-action="Singout">Logout</a>
-    </li>
-}
+        }
+        else
+        {
+            <li><h6 class="dropdown-item no-icon" asp-controller="Account" asp-action="Singin">As @User.Name @User.Surname</h6></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" asp-controller="Account" asp-action="Singout"><i class="fa-solid fa-right-from-bracket"></i> Sing Out</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" asp-controller="MyHome"><i class="fa-solid fa-house"></i> My Home</a></li>
+        }
+    </ul>
+</li>

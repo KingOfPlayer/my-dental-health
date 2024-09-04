@@ -1,9 +1,3 @@
-using Repository;
-using Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Services;
-using Services.Interfaces;
 using MyDentalHealth.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,34 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Entity.Models.User
 {
-    public class User
-    {
-        public int Id { get; set; }
+	public class User
+	{
+		public int Id { get; set; }
 
 		[Required]
-		public  string Name { get; set; } = string.Empty;
+		public string Name { get; set; } = string.Empty;
 		[Required]
-		public  string Surname { get; set; } = string.Empty;
+		public string Surname { get; set; } = string.Empty;
 		[Required]
 		[DataType(DataType.EmailAddress)]
-        public  string Email { get; set; } = string.Empty;
+		public string Email { get; set; } = string.Empty;
 		[Required]
 		[DataType(DataType.Password)]
-        public  string Password { get; set; } = string.Empty;
+		public string Password { get; set; } = string.Empty;
 		[Required]
 		[DataType(DataType.Date)]
-		public  DateTime BirthdayDate { get; set; }
-        public HashSet<Target.Target> Target { get; set; } = new HashSet<Target.Target>();
-        public HashSet<UserUserRole> Roles { get; set; } = new HashSet<UserUserRole>();
+		public DateTime BirthdayDate { get; set; }
+		public HashSet<Target.Target> Target { get; set; } = new HashSet<Target.Target>();
+		public HashSet<UserUserRole> Roles { get; set; } = new HashSet<UserUserRole>();
 		public static string HashPassword(string Password)
 		{
 			string h_Password = "";
@@ -47,5 +42,5 @@ namespace Entity.Models.User
 		{
 			return this.Password.Equals(Password);
 		}
-    }
+	}
 }

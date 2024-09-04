@@ -2,13 +2,8 @@
 using Entity.Models.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using MyDentalHealth.Extentions;
 using Services.Interfaces;
-using System.Buffers.Text;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,55 +11,55 @@ namespace MyDentalHealth.Controllers
 {
 	public class AccountController : Controller
 	{
-        private readonly IServiceManager serviceManager;
+		private readonly IServiceManager serviceManager;
 
-        public AccountController(IServiceManager serviceManager)
-        {
-            this.serviceManager = serviceManager;
-        }
+		public AccountController(IServiceManager serviceManager)
+		{
+			this.serviceManager = serviceManager;
+		}
 
-        [Auth(Login = false)]
-        public IActionResult Singin()
-        {
-            return View(new UserLoginDataDto());
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Auth(Login=false)]
-        public IActionResult Singin([FromForm] UserLoginDataDto userLoginData)
-        {
-            if (ModelState.IsValid && userLoginData.Password is not null & userLoginData.Email is not null)
-            {
+		[Auth(Login = false)]
+		public IActionResult Singin()
+		{
+			return View(new UserLoginDataDto());
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[Auth(Login = false)]
+		public IActionResult Singin([FromForm] UserLoginDataDto userLoginData)
+		{
+			if (ModelState.IsValid && userLoginData.Password is not null & userLoginData.Email is not null)
+			{
 				User? user = serviceManager.UserService.FindUserWithEmail(userLoginData.Email);
 				if (user != null)
 				{
-                    if (Entity.Models.User.User.isValidPassword(userLoginData.Password) && user.isPasswordMatch(Entity.Models.User.User.HashPassword(userLoginData.Password)))
-                    {
-                        HttpContext.Session.SetJson("UserId", user.Id);
-                        return Redirect("/Home");
-                    }
-                    else
-                    {
-                        userLoginData.Password = "";
+					if (Entity.Models.User.User.isValidPassword(userLoginData.Password) && user.isPasswordMatch(Entity.Models.User.User.HashPassword(userLoginData.Password)))
+					{
+						HttpContext.Session.SetJson("UserId", user.Id);
+						return Redirect("/MyHome/");
+					}
+					else
+					{
+						userLoginData.Password = "";
 						ModelState.AddModelError("Err_Password", "Wrong Password");
-                    }
-                }
-                else
-                    ModelState.AddModelError("Err_Email", "Email Invalid");
-            }
-            else
-            {
-				if(userLoginData.Password is null)
-                    ModelState.AddModelError("Err_Password", "Fill Password Field");
-				if(userLoginData.Email is null)
-                    ModelState.AddModelError("Err_Email", "Fill Email Field");
+					}
+				}
+				else
+					ModelState.AddModelError("Err_Email", "Email Invalid");
+			}
+			else
+			{
+				if (userLoginData.Password is null)
+					ModelState.AddModelError("Err_Password", "Fill Password Field");
+				if (userLoginData.Email is null)
+					ModelState.AddModelError("Err_Email", "Fill Email Field");
 
 			}
 
 			return View(userLoginData);
 		}
-        [Auth]
-        public async Task<IActionResult> Singout([FromQuery(Name="mode")] string Mode = "NULL")
+		[Auth]
+		public async Task<IActionResult> Singout([FromQuery(Name = "mode")] string Mode = "NULL")
 		{
 			HttpContext.Session.Remove("UserId");
 			if (Mode.Equals("Secure"))
@@ -75,60 +70,60 @@ namespace MyDentalHealth.Controllers
 
 			}
 			return Redirect("/Home");
-        }
+		}
 
-        [Auth(Login = false)]
-        public IActionResult SingUp()
-        {
-            return View(new NewUserDto());
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Auth(Login = false)]
-        public IActionResult Singup([FromForm] NewUserDto newUserDto)
-        {
-            bool Valid=true;
+		[Auth(Login = false)]
+		public IActionResult SingUp()
+		{
+			return View(new NewUserDto());
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		[Auth(Login = false)]
+		public IActionResult Singup([FromForm] NewUserDto newUserDto)
+		{
+			bool Valid = true;
 			if (newUserDto.Name is null)
 			{
 				ModelState.AddModelError("Err_Name", "Fill Name Field");
-				Valid=false;
+				Valid = false;
 			}
-			if (newUserDto.Surname is null) 
-            { 
+			if (newUserDto.Surname is null)
+			{
 				ModelState.AddModelError("Err_Surname", "Fill Surname Field");
 				Valid = false;
 			}
 			if (newUserDto.Email is null)
 			{
-			    ModelState.AddModelError("Err_Email", "Fill Email Field");
+				ModelState.AddModelError("Err_Email", "Fill Email Field");
 				Valid = false;
 			}
 			if (newUserDto.Password is null)
 			{
-			    ModelState.AddModelError("Err_Password", "Fill Password Field");
+				ModelState.AddModelError("Err_Password", "Fill Password Field");
 				Valid = false;
 			}
 			if (newUserDto.ValidatePassword is null)
 			{
-			    ModelState.AddModelError("Err_ValidatePassword", "Fill ValidatePassword Field");
+				ModelState.AddModelError("Err_ValidatePassword", "Fill ValidatePassword Field");
 				Valid = false;
 			}
 			if (newUserDto.Password != newUserDto.ValidatePassword)
 			{
-			    ModelState.AddModelError("Err_ValidatePassword", "Validate Password Is Wrong");
+				ModelState.AddModelError("Err_ValidatePassword", "Validate Password Is Wrong");
 				Valid = false;
 			}
 			else if (!Entity.Models.User.User.isValidPassword(newUserDto.Password))
 			{
-			    ModelState.AddModelError("Err_Password", "Password Invalid");
+				ModelState.AddModelError("Err_Password", "Password Invalid");
 				Valid = false;
 			}
 
 			if (ModelState.IsValid && Valid)
-            {
+			{
 				User? user = serviceManager.UserService.FindUserWithEmail(newUserDto.Email);
-                if(user is null)
-                {
+				if (user is null)
+				{
 					serviceManager.UserService.CreateNewUser(newUserDto);
 					return RedirectToAction("Singin");
 				}
@@ -136,7 +131,7 @@ namespace MyDentalHealth.Controllers
 					ModelState.AddModelError("Err_Email", "This Email Using");
 			}
 			return View(newUserDto);
-        }
+		}
 
 		[Auth(Login = false)]
 		public IActionResult Recovery()
@@ -171,7 +166,9 @@ namespace MyDentalHealth.Controllers
 		{
 			return View(new RecoveryPasswordDto()
 			{
-				h = Hash,t = timestamp,u = u
+				h = Hash,
+				t = timestamp,
+				u = u
 			});
 		}
 
@@ -185,9 +182,10 @@ namespace MyDentalHealth.Controllers
 			if (recoveryPasswordDto.Password is null)
 			{
 				ModelState.AddModelError("Err_Password", "Fill Password Field");
-				Valid = false; 
-				
-			}else if (!Entity.Models.User.User.isValidPassword(recoveryPasswordDto.Password))
+				Valid = false;
+
+			}
+			else if (!Entity.Models.User.User.isValidPassword(recoveryPasswordDto.Password))
 			{
 				ModelState.AddModelError("Err_Password", "Password Invalid");
 				Valid = false;
@@ -196,7 +194,7 @@ namespace MyDentalHealth.Controllers
 			{
 				ModelState.AddModelError("Err_ValidatePassword", "Fill ValidatePassword Field");
 				Valid = false;
-				
+
 			}
 			else if (recoveryPasswordDto.Password != recoveryPasswordDto.ValidatePassword)
 			{
@@ -207,7 +205,7 @@ namespace MyDentalHealth.Controllers
 			if (ModelState.IsValid && Valid)
 			{
 				DateTime dateTime = DateTime.Parse(Encoding.UTF8.GetString(Convert.FromBase64String(recoveryPasswordDto.t)));
-				
+
 				if (DateTime.Now < dateTime.AddMinutes(180))
 				{
 					User? user = serviceManager.UserService.GetUserWithId(Convert.ToInt32(recoveryPasswordDto.u));
@@ -229,6 +227,6 @@ namespace MyDentalHealth.Controllers
 			}
 			return View(recoveryPasswordDto);
 		}
-		
+
 	}
 }

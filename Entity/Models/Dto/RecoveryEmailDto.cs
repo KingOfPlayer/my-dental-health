@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Models.Dto
 {
-	public  class RecoveryEmailDto
+	public class RecoveryEmailDto
 	{
 		[Required]
 		[DataType(DataType.EmailAddress)]

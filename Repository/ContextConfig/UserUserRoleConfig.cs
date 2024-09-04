@@ -1,15 +1,10 @@
 ﻿using Entity.Models.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.ContextConfig
 {
-    public class UserUserRoleConfig : IEntityTypeConfiguration<UserUserRole>
+	public class UserUserRoleConfig : IEntityTypeConfiguration<UserUserRole>
 	{
 		public void Configure(EntityTypeBuilder<UserUserRole> builder)
 		{
@@ -24,7 +19,7 @@ namespace Repository.ContextConfig
 				   .HasForeignKey(r => r.UserRoleId);
 
 			builder.HasData(
-				new UserUserRole() {UserId = 1, UserRoleId = 1}
+				new UserUserRole() { UserId = 1, UserRoleId = 1 }
 				);
 		}
 	}

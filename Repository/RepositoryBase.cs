@@ -1,11 +1,6 @@
-﻿using Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository.Interfaces;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -46,7 +41,7 @@ namespace Repository
 			return repositoryContext.Set<T>().Where(conditional).AsNoTracking();
 		}
 
-		public IQueryable<T> QueryWithTrack<T>(Expression<Func<T, bool>> conditional,bool Tracking = false) where T : class
+		public IQueryable<T> QueryWithTrack<T>(Expression<Func<T, bool>> conditional, bool Tracking = false) where T : class
 		{
 			return repositoryContext.Set<T>().Where(conditional);
 		}

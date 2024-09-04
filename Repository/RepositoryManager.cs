@@ -1,14 +1,4 @@
-﻿using Entity;
-using Entity.Models.Target.Status;
-using Entity.Models.Target;
-using Entity.Models.User;
-using Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Repository.Interfaces;
 
 namespace Repository
 {

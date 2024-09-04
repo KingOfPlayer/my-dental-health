@@ -1,27 +1,22 @@
-﻿using Entity.Models.Target;
-using Entity.Models.User;
+﻿using Entity.Models.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.ContextConfig
 {
-    public class UserConfig : IEntityTypeConfiguration<User>
+	public class UserConfig : IEntityTypeConfiguration<User>
 	{
 		public void Configure(EntityTypeBuilder<User> builder)
 		{
 			builder.HasData(
-				new User() { 
+				new User()
+				{
 					Id = 1,
 					Name = "admin",
 					Surname = "admin",
-					Email="admin@admin.com", 
-					Password=User.HashPassword("Admin1234"), 
-					BirthdayDate = new DateTime(1999,9,9)
+					Email = "admin@admin.com",
+					Password = User.HashPassword("Admin1234"),
+					BirthdayDate = new DateTime(1999, 9, 9)
 				});
 		}
 	}

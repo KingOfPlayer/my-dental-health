@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+﻿
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" asp-controller="Home" asp-action="Index">My Dental Health</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,15 +7,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <partial name="_NavbarMenu"/>
                 <!--
-                <li class="nav-item">
+                    <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">-----</a>
                 </li>
-                -->
+            -->
             </ul>
             <ul class="navbar-nav m-0 mb-2 mb-lg-0">
                 <partial name="_NavbarLoginMenu" />
             </ul>
         </div>
     </div>
-</nav>
+</nav> 

@@ -1,0 +1,6 @@
+﻿.no-icon {
+    padding-left: calc(var(--bs-dropdown-item-padding-y) + 2.1rem);
+}
+.w-20 {
+    width: 20%;
+}
