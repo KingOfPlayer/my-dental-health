@@ -11,6 +11,7 @@ namespace Repository.Interfaces
 		void Save<T>() where T : class;
 		IQueryable<T> Query<T>(Expression<Func<T, bool>> conditional) where T : class;
 		IQueryable<T> QueryWithTrack<T>(Expression<Func<T, bool>> conditional, bool Tracking = false) where T : class;
-
+		IQueryable<T> GetAll<T>() where T : class;
+		IQueryable<T> GetAllWithTrack<T>(Expression<Func<T, bool>> conditional, bool Tracking = false) where T : class;
 	}
 }

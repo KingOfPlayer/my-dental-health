@@ -21,12 +21,12 @@ namespace MyDentalHealth.Controllers
 		[Auth(Login = false)]
 		public IActionResult Singin()
 		{
-			return View(new UserLoginDataDto());
+			return View(new UserLoginDto());
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Auth(Login = false)]
-		public IActionResult Singin([FromForm] UserLoginDataDto userLoginData)
+		public IActionResult Singin([FromForm] UserLoginDto userLoginData)
 		{
 			if (ModelState.IsValid && userLoginData.Password is not null & userLoginData.Email is not null)
 			{

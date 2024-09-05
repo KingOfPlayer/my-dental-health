@@ -1,4 +1,5 @@
-﻿using Entity.Models.Dto;
+﻿using AutoMapper;
+using Entity.Models.Dto;
 using Entity.Models.User;
 using Repository.Interfaces;
 using Services.Interfaces;
@@ -8,13 +9,15 @@ namespace Services
 	public class UserService : IUserService
 	{
 		private readonly IRepositoryManager repositoryManager;
+		private readonly IMapper mapper;
 
-		public UserService(IRepositoryManager repositoryManager)
-		{
-			this.repositoryManager = repositoryManager;
-		}
+        public UserService(IRepositoryManager repositoryManager, IMapper mapper)
+        {
+            this.repositoryManager = repositoryManager;
+            this.mapper = mapper;
+        }
 
-		public IQueryable<User> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
 		{
 			return repositoryManager.UserRepository.GetAllUsers();
 		}
@@ -37,8 +40,9 @@ namespace Services
 
 		public void CreateNewUser(NewUserDto newUserDto)
 		{
-			User? user = newUserDto.ToUser();
-			repositoryManager.UserRepository.CreateUser(user);
+			User? user = new User();
+			mapper.Map(newUserDto, user);
+            repositoryManager.UserRepository.CreateUser(user);
 			UserRole? role = (UserRole?)repositoryManager.UserRepository.GetRoles().Where(r => r.Name.Equals("User")).SingleOrDefault();
 			repositoryManager.UserRepository.GiveRole(new UserUserRole() { UserId = user.Id, UserRoleId = role.Id });
 			Console.WriteLine("Sending mail to wlc");
@@ -48,5 +52,7 @@ namespace Services
 		{
 			repositoryManager.UserRepository.UpdateUser(user);
 		}
+
+
 	}
 }

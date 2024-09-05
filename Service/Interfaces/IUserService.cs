@@ -5,7 +5,7 @@ namespace Services.Interfaces
 {
 	public interface IUserService
 	{
-		IQueryable<User> GetAllUsers();
+		IEnumerable<User> GetAllUsers();
 		User? GetUserWithId(int UserId);
 		List<UserRole>? GetUserRolesWithUserId(int UserId);
 		User? FindUserWithEmail(string? email);

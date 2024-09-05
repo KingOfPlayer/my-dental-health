@@ -20,19 +20,5 @@ namespace Entity.Models.Dto
 		[Required]
 		[DataType(DataType.Date)]
 		public DateTime BirthdayDate { get; set; }
-
-		public User.User ToUser()
-		{
-			return new User.User()
-			{
-				Name = Name,
-				Surname = Surname,
-				Email = Email,
-				Password = User.User.HashPassword(Password),
-				BirthdayDate = BirthdayDate,
-				Target = new HashSet<Target.Target>(),
-				Roles = new HashSet<User.UserUserRole>()
-			};
-		}
 	}
 }

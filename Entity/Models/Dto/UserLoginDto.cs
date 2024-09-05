@@ -2,7 +2,7 @@
 
 namespace Entity.Models.Dto
 {
-	public record UserLoginDataDto
+	public class UserLoginDto
 	{
 		[Required]
 		[DataType(DataType.EmailAddress)]

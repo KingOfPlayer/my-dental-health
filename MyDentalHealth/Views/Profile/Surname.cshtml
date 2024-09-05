@@ -1,0 +1,22 @@
+﻿@model SurnameUpdateDto
+
+<form method="post" asp-action="Surname" class="needs-validation" novalidate>
+	<a class="fs-1 text-black link-underline link-underline-opacity-0" asp-action=""><i class="fa-solid fa-arrow-left"></i> Surname</a>
+	<div class="form-group my-2">
+		<label asp-for="Surname"></label>
+		<input asp-for="Surname" class="form-control @(ViewData.ModelState["Surname"] is not null?"is-invalid":"")" title="" required\>
+		<div id="Email" class="invalid-feedback">
+			@{
+				if (ViewData.ModelState["Surname"] is not null)
+					foreach (var err in @ViewData.ModelState["Surname"]?.Errors)
+					{
+						@err.ErrorMessage
+						<br />
+					}
+			}
+		</div>
+	</div>
+	<div class="form-group my-2">
+		<button type="submit" class="btn btn-primary w-100">Save</button>
+	</div>
+</form>
