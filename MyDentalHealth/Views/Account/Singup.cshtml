@@ -1,51 +1,93 @@
 ﻿@model NewUserDto
 
 <form method="post" asp-action="Singup" class="needs-validation" novalidate>
-	<h1>Yeni Hesap Oluştur</h1>
+	<h1>Sing up</h1>
 	<div class="form-group my-2">
 		<label asp-for="Name"></label>
-		<input asp-for="Name" class="form-control @(ViewData.ModelState["Err_Name"] is not null?"is-invalid":"")" title="" required\>
+		<input asp-for="Name" class="form-control @(ViewData.ModelState["Name"]?.Errors.Count() > 0?"is-invalid":"")" title="" required\>
 		<div id="Name" class="invalid-feedback">
-			@ViewData.ModelState["Err_Name"]?.Errors?[0].ErrorMessage
+			@{
+				if (ViewData.ModelState["Name"] is not null)
+					foreach (var err in @ViewData.ModelState["Name"]?.Errors)
+					{
+						@err.ErrorMessage
+						<br />
+					}
+			}
 		</div>
 	</div>
 	<div class="form-group my-2">
 		<label asp-for="Surname"></label>
-		<input asp-for="Surname" class="form-control @(ViewData.ModelState["Err_Surname"] is not null?"is-invalid":"")" title="" required\>
+		<input asp-for="Surname" class="form-control @(ViewData.ModelState["Surname"]?.Errors.Count() > 0?"is-invalid":"")" title="" required\>
 		<div id="Surname" class="invalid-feedback">
-			@ViewData.ModelState["Err_Surname"]?.Errors?[0].ErrorMessage
+			@{
+				if (ViewData.ModelState["Surname"] is not null)
+					foreach (var err in @ViewData.ModelState["Surname"]?.Errors)
+					{
+						@err.ErrorMessage
+						<br />
+					}
+			}
 		</div>
 	</div>
 	<div class="form-group my-2">
 		<label asp-for="Email"></label>
-		<input asp-for="Email" class="form-control @(ViewData.ModelState["Err_Email"] is not null?"is-invalid":"")" title="" required\>
+		<input asp-for="Email" class="form-control @(ViewData.ModelState["Email"]?.Errors.Count() > 0?"is-invalid":"")" title="" required\>
 		<div id="Email" class="invalid-feedback">
-			@ViewData.ModelState["Err_Email"]?.Errors?[0].ErrorMessage
+			@{
+				if (ViewData.ModelState["Email"] is not null)
+					foreach (var err in @ViewData.ModelState["Email"]?.Errors)
+					{
+						@err.ErrorMessage
+						<br />
+					}
+			}
 		</div>
 	</div>
 	<div class="form-group my-2">
 		<label asp-for="Password"></label>
-		<input asp-for="Password" class="form-control @(ViewData.ModelState["Err_Password"] is not null?"is-invalid":"")" title="" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}" required\>
+		<input asp-for="Password" class="form-control @(ViewData.ModelState["Password"]?.Errors.Count() > 0?"is-invalid":"")" title="" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}" required\>
 		<div id="Password" class="invalid-feedback">
-			@ViewData.ModelState["Err_Password"]?.Errors?[0].ErrorMessage
+			@{
+				if (ViewData.ModelState["Password"] is not null)
+					foreach (var err in @ViewData.ModelState["Password"]?.Errors)
+					{
+						@err.ErrorMessage
+						<br />
+					}
+			}
 		</div>
 	</div>
 	<div class="form-group my-2">
-		<label asp-for="ValidatePassword"></label>
-		<input asp-for="ValidatePassword" class="form-control @(ViewData.ModelState["Err_ValidatePassword"] is not null?"is-invalid":"")" title="" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}" required\>
+		<label asp-for="ValidatePassword">Validate Password</label>
+		<input asp-for="ValidatePassword" class="form-control @(ViewData.ModelState["ValidatePassword"]?.Errors.Count() > 0?"is-invalid":"")" title="" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}" required\>
 		<div id="ValidatePassword" class="invalid-feedback">
-			@ViewData.ModelState["Err_ValidatePassword"]?.Errors?[0].ErrorMessage
+			@{
+				if (ViewData.ModelState["ValidatePassword"] is not null)
+					foreach (var err in @ViewData.ModelState["ValidatePassword"]?.Errors)
+					{
+						@err.ErrorMessage
+						<br />
+					}
+			}
 		</div>
 	</div>
 	<div class="form-group my-2">
 		<label asp-for="BirthdayDate"></label>
-		<input asp-for="BirthdayDate" min="@(DateTime.Now.AddYears(-80).ToString("yyyy-MM-dd"))" max="@(DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd"))" value="@(DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd"))" class="form-control @(ViewData.ModelState["Err_BirthdayDate"] is not null?"is-invalid":"")" title="" required\>
+		<input asp-for="BirthdayDate" min="@(DateTime.Now.AddYears(-80).ToString("yyyy-MM-dd"))" max="@(DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd"))" value="@(DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd"))" class="form-control @(ViewData.ModelState["BirthdayDate"]?.Errors.Count() > 0?"is-invalid":"")" title="" required\>
 		<div id="BirthdayDate" class="invalid-feedback">
-			@ViewData.ModelState["Err_BirthdayDate"]?.Errors?[0].ErrorMessage
+			@{
+				if (ViewData.ModelState["BirthdayDate"] is not null)
+					foreach (var err in @ViewData.ModelState["BirthdayDate"]?.Errors)
+					{
+						@err.ErrorMessage
+						<br />
+					}
+			}
 		</div>
 	</div>
 	<div class="form-group my-2">
-		<button type="submit" class="btn btn-primary w-100"><i class="fa-solid fa-user-plus"></i> Create New Account</button>
-		<p class="text-center"><a class="link-info" asp-action="Singin">Giriş Yap</a> / <a class="link-info" asp-action="Recovery">Şifremi Unuttum</a></p>
+		<button type="submit" class="btn btn-primary w-100">Sing up <i class="fa-solid fa-user-plus"></i></button>
+		<p class="text-center"><a class="link-info" asp-action="Singin">Sing in</a> / <a class="link-info" asp-action="Recovery">Forgot password</a></p>
 	</div>
 </form>

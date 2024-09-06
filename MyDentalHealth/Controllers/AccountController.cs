@@ -41,19 +41,11 @@ namespace MyDentalHealth.Controllers
 					else
 					{
 						userLoginData.Password = "";
-						ModelState.AddModelError("Err_Password", "Wrong Password");
+						ModelState.AddModelError("Password", "Wrong Password");
 					}
 				}
 				else
-					ModelState.AddModelError("Err_Email", "Email Invalid");
-			}
-			else
-			{
-				if (userLoginData.Password is null)
-					ModelState.AddModelError("Err_Password", "Fill Password Field");
-				if (userLoginData.Email is null)
-					ModelState.AddModelError("Err_Email", "Fill Email Field");
-
+					ModelState.AddModelError("Email", "Email Invalid");
 			}
 
 			return View(userLoginData);
@@ -83,39 +75,14 @@ namespace MyDentalHealth.Controllers
 		public IActionResult Singup([FromForm] NewUserDto newUserDto)
 		{
 			bool Valid = true;
-			if (newUserDto.Name is null)
+			if (newUserDto.Password is not null && newUserDto.ValidatePassword is not null && newUserDto.Password != newUserDto.ValidatePassword)
 			{
-				ModelState.AddModelError("Err_Name", "Fill Name Field");
+				ModelState.AddModelError("ValidatePassword", "Validate Password Is Wrong");
 				Valid = false;
 			}
-			if (newUserDto.Surname is null)
+			else if (newUserDto.Password is not null && !Entity.Models.User.User.isValidPassword(newUserDto.Password))
 			{
-				ModelState.AddModelError("Err_Surname", "Fill Surname Field");
-				Valid = false;
-			}
-			if (newUserDto.Email is null)
-			{
-				ModelState.AddModelError("Err_Email", "Fill Email Field");
-				Valid = false;
-			}
-			if (newUserDto.Password is null)
-			{
-				ModelState.AddModelError("Err_Password", "Fill Password Field");
-				Valid = false;
-			}
-			if (newUserDto.ValidatePassword is null)
-			{
-				ModelState.AddModelError("Err_ValidatePassword", "Fill ValidatePassword Field");
-				Valid = false;
-			}
-			if (newUserDto.Password != newUserDto.ValidatePassword)
-			{
-				ModelState.AddModelError("Err_ValidatePassword", "Validate Password Is Wrong");
-				Valid = false;
-			}
-			else if (!Entity.Models.User.User.isValidPassword(newUserDto.Password))
-			{
-				ModelState.AddModelError("Err_Password", "Password Invalid");
+				ModelState.AddModelError("Password", "Password Invalid");
 				Valid = false;
 			}
 
@@ -128,7 +95,7 @@ namespace MyDentalHealth.Controllers
 					return RedirectToAction("Singin");
 				}
 				else
-					ModelState.AddModelError("Err_Email", "This Email Using");
+					ModelState.AddModelError("Email", "This Email Using");
 			}
 			return View(newUserDto);
 		}

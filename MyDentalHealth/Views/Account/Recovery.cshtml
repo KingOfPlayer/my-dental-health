@@ -1,12 +1,19 @@
 ﻿@model RecoveryEmailDto
 
 <form method="post" asp-action="Recovery" class="needs-validation" novalidate>
-	<h1>Şifremi Unuttum</h1>
+	<h1>Forgot Password</h1>
 	<div class="form-group my-2">
 		<label asp-for="Email"></label>
-		<input asp-for="Email" class="form-control @(ViewData.ModelState["Err_Email"] is not null?"is-invalid":"")" title="" required\>
+		<input asp-for="Email" class="form-control @(ViewData.ModelState["Email"]?.Errors.Count() > 0?"is-invalid":"")" title="" required\>
 		<div id="Email" class="invalid-feedback">
-			@ViewData.ModelState["Err_Email"]?.Errors?[0].ErrorMessage
+			@{
+				if (ViewData.ModelState["Email"] is not null)
+					foreach (var err in @ViewData.ModelState["Email"]?.Errors)
+					{
+						@err.ErrorMessage
+						<br />
+					}
+			}
 		</div>
 	</div>
 	@if(ViewData.ModelState["Success"] is not null)
@@ -27,7 +34,10 @@
 		<a href="@ViewData.ModelState["Temp"]?.Errors?[0].ErrorMessage">Reset Page</a>
 	}
 	<div class="form-group my-2">
-		<button type="submit" class="btn btn-primary w-100">Sıfırlama Maili Gönder</button>
-		<p class="text-center"><a class="link-info" asp-action="Singup">Yeni Hesap Oluştur</a></p>
+		<button type="submit" class="btn btn-primary w-100">Send Recovery Mail <i class="fa-solid fa-envelope"></i></button>
+		<p class="text-center">
+			<a class="link-info" asp-action="Recovery">Sing in</a> / 
+			<a class="link-info" asp-action="Singup">Sing up</a>
+		</p>
 	</div>
 </form>

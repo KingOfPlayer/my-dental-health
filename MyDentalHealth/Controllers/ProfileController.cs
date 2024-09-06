@@ -116,10 +116,16 @@ namespace MyDentalHealth.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				User _user = User;
-				mapper.Map(emailUpdateDto, _user);
-				serviceManager.UserService.UpdateUser(_user);
-				return RedirectToAction("");
+				User? t_serchedUser = serviceManager.UserService.FindUserWithEmail(emailUpdateDto.Email);
+				if (t_serchedUser is null)
+				{
+					User _user = User;
+					mapper.Map(emailUpdateDto, _user);
+					serviceManager.UserService.UpdateUser(_user);
+					return RedirectToAction("");
+				}
+				else
+					ModelState.AddModelError("Email", "This email using");
 			}
 			return View(emailUpdateDto);
 		}
