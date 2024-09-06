@@ -2,9 +2,9 @@
 using Entity.Models.Dto;
 using Entity.Models.User;
 using Repository.Interfaces;
-using Services.Interfaces;
+using Service.Interfaces;
 
-namespace Services
+namespace Service
 {
 	public class UserService : IUserService
 	{

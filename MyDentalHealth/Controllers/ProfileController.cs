@@ -4,7 +4,7 @@ using Entity.Models.Dto.Profile;
 using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using MyDentalHealth.Extentions;
-using Services.Interfaces;
+using Service.Interfaces;
 
 namespace MyDentalHealth.Controllers
 {

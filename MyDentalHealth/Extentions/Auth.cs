@@ -1,7 +1,7 @@
 ﻿using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Services.Interfaces;
+using Service.Interfaces;
 
 namespace MyDentalHealth.Extentions
 {

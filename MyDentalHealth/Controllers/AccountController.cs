@@ -3,7 +3,7 @@ using Entity.Models.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using MyDentalHealth.Extentions;
-using Services.Interfaces;
+using Service.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
 

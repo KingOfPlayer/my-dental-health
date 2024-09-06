@@ -2,8 +2,10 @@
 using MyDentalHealth.Extentions.Mapper;
 using Repository;
 using Repository.Interfaces;
-using Services;
-using Services.Interfaces;
+using Service;
+using Service.Interfaces;
+using Service;
+using Service.Interfaces;
 
 namespace MyDentalHealth.Extentions
 {
@@ -13,11 +15,13 @@ namespace MyDentalHealth.Extentions
 		{
 			serviceDescriptors.AddScoped<IRepositoryManager, RepositoryManager>();
 			serviceDescriptors.AddScoped<IUserRepository, UserRepository>();
+			serviceDescriptors.AddScoped<ITargetRepository, TargetRepository>();
 		}
 		public static void ConfigureService(this IServiceCollection serviceDescriptors)
 		{
 			serviceDescriptors.AddScoped<IServiceManager, ServiceManager>();
 			serviceDescriptors.AddScoped<IUserService, UserService>();
+			serviceDescriptors.AddScoped<ITargetService, TargetService>();
 
 			serviceDescriptors.AddAutoMapper(typeof(MappingProfile));
 

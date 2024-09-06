@@ -1,8 +1,6 @@
-﻿@if (User == null)
+﻿@if (User is not null)
 {
-    
-}
-else
-{
-    //@Context.Request.Path.ToString().Split('/')[1]
+    <li class="nav-item">
+        <a class="nav-link @(Context.Request.Path.ToString().Split('/').Length > 0 && Context.Request.Path.ToString().Split('/')[1] == "Target"?"active":"")" aria-current="page" asp-controller="Target">My Targets</a>
+    </li>
 }

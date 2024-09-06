@@ -1,6 +1,6 @@
 ﻿using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Services.Interfaces;
+using Service.Interfaces;
 
 namespace MyDentalHealth.Extentions
 {

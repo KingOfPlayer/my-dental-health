@@ -1,7 +1,7 @@
 ﻿using Entity.Models.Dto;
 using Entity.Models.User;
 
-namespace Services.Interfaces
+namespace Service.Interfaces
 {
 	public interface IUserService
 	{

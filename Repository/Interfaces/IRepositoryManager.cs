@@ -3,5 +3,6 @@
 	public interface IRepositoryManager
 	{
 		IUserRepository UserRepository { get; }
+		ITargetRepository TargetRepository { get; }
 	}
 }

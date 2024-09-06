@@ -6,13 +6,16 @@ namespace Repository
 	{
 		private readonly RepositoryContext repositoryContext;
 		private readonly IUserRepository userRepository;
+		private readonly ITargetRepository targetRepository;
 
-		public RepositoryManager(RepositoryContext repositoryContext, IUserRepository userRepository)
-		{
-			this.repositoryContext = repositoryContext;
-			this.userRepository = userRepository;
-		}
+        public RepositoryManager(RepositoryContext repositoryContext, IUserRepository userRepository, ITargetRepository targetRepository)
+        {
+            this.repositoryContext = repositoryContext;
+            this.userRepository = userRepository;
+            this.targetRepository = targetRepository;
+        }
 
-		public IUserRepository UserRepository => userRepository;
+        public IUserRepository UserRepository => userRepository;
+		public ITargetRepository TargetRepository => targetRepository;
 	}
 }

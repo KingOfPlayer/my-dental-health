@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Entity.Models.User;
+using Microsoft.AspNetCore.Mvc;
 using MyDentalHealth.Extentions;
-using Services.Interfaces;
+using Service.Interfaces;
 
 namespace MyDentalHealth.Controllers
 {
@@ -8,14 +9,32 @@ namespace MyDentalHealth.Controllers
 	{
 		IServiceManager serviceManager;
 
-		public HomeController(IServiceManager serviceManager)
+        public User? User
+        {
+            get
+            {
+                int UserId = HttpContext.Session.GetJson<int>("UserId");
+                if (UserId != 0)
+                {
+                    return serviceManager?.UserService.GetUserWithId(UserId);
+                }
+                return null;
+            }
+        }
+
+        public HomeController(IServiceManager serviceManager)
 		{
 			this.serviceManager = serviceManager;
 		}
 
 		public IActionResult Index()
 		{
-			return View();
+            if(User is not null)
+            {
+                return RedirectToAction("Index","MyHome");
+            }
+
+            return View();
 		}
 
 		[Auth]
