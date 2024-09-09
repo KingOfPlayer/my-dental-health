@@ -33,7 +33,7 @@ namespace MyDentalHealth.Controllers
 				User? user = serviceManager.UserService.FindUserWithEmail(userLoginData.Email);
 				if (user != null)
 				{
-					if (Entity.Models.User.User.isValidPassword(userLoginData.Password) && user.isPasswordMatch(Entity.Models.User.User.HashPassword(userLoginData.Password)))
+					if (Entity.Models.User.User.isValidPassword(userLoginData.Password!) && user.isPasswordMatch(Entity.Models.User.User.HashPassword(userLoginData.Password!)))
 					{
 						HttpContext.Session.SetJson("UserId", user.Id);
 						return Redirect("/MyHome/");
@@ -185,7 +185,7 @@ namespace MyDentalHealth.Controllers
 						}
 						if (recoveryPasswordDto.h == reHash)
 						{
-							user.Password = Entity.Models.User.User.HashPassword(recoveryPasswordDto.Password);
+							user.Password = Entity.Models.User.User.HashPassword(recoveryPasswordDto.Password!);
 							serviceManager.UserService.UpdateUser(user);
 						}
 						return RedirectToAction("Singin");

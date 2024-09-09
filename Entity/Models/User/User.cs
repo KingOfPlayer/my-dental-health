@@ -25,7 +25,7 @@ namespace Entity.Models.User
 			return h_Password;
 		}
 
-		public static bool isValidPassword(string? password)
+		public static bool isValidPassword(string password)
 		{
 			return Regex.Match(password, @"(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$").Success;
 		}

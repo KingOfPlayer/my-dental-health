@@ -4,8 +4,6 @@ using Repository;
 using Repository.Interfaces;
 using Service;
 using Service.Interfaces;
-using Service;
-using Service.Interfaces;
 
 namespace MyDentalHealth.Extentions
 {

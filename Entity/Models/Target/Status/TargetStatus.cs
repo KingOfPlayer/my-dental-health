@@ -6,7 +6,7 @@
 		public DateTime Attime { get; set; }
 		public int Minutes { get; set; }
 		public int Second { get; set; }
-		public string? ImgHash { get; set; }
+		public string ImgHash { get; set; } = string.Empty;
 		public int TargetId { get; set; }
 		public required Target Target { get; set; }
 	}

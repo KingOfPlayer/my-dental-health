@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entity.Models.Dto;
 using Entity.Models.Dto.Profile;
+using Entity.Models.Target;
 using Entity.Models.User;
 
 namespace MyDentalHealth.Extentions.Mapper
@@ -18,6 +19,9 @@ namespace MyDentalHealth.Extentions.Mapper
             CreateMap<NameUpdateDto, User>();
             CreateMap<SurnameUpdateDto, User>();
             CreateMap<PasswordUpdateDto, User>();
+
+            //Target Dto
+            CreateMap<TargetDto, Target>().ReverseMap();
         }
     }
 }

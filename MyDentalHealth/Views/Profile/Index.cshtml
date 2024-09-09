@@ -1,5 +1,5 @@
 ﻿<div>
-	<h1 class="mx-5 px-5 text-center">Hi @User.Name</h1>
+	<h1 class="mx-5 px-5 text-center">Hi @User?.Name</h1>
 	<hr />
 	<div class="container mb-2">
 		<h4 class="px-4 text-center">Personal Info</h4>
@@ -23,19 +23,19 @@
 
 						<a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between" asp-action="Name">
 							<p class="fs-6 my-0 w-25">Name</p>
-							<p class="fs-5 my-0 w-25">@User.Name</p>
+							<p class="fs-5 my-0 w-25">@User?.Name</p>
 							<i class="fa-solid fa-angle-right"></i>
 						</a>
 
 						<a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between" asp-action="Surname">
 							<p class="fs-6 my-0 w-25">Surname</p>
-							<p class="fs-5 my-0 w-25">@User.Surname</p>
+							<p class="fs-5 my-0 w-25">@User?.Surname</p>
 							<i class="fa-solid fa-angle-right"></i>
 						</a>
 
 						<a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between" asp-action="Birthday">
 							<p class="fs-6 my-0 w-25">Birthday Date</p>
-							<p class="fs-5 my-0 w-25">@User.BirthdayDate.ToString("dd MMMM yyyy")</p>
+							<p class="fs-5 my-0 w-25">@User?.BirthdayDate.ToString("dd MMMM yyyy")</p>
 							<i class="fa-solid fa-angle-right"></i>
 						</a>
 					</ul>
@@ -58,7 +58,7 @@
 					<ul class="list-group list-group-flush ">
 						<a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between" asp-action="Email">
 							<p class="fs-6 my-0 w-25">Mail Adress</p>
-							<p class="fs-5 my-0 w-25">@User.Email</p>
+							<p class="fs-5 my-0 w-25">@User?.Email</p>
 							<i class="fa-solid fa-angle-right"></i>
 						</a>
 					</ul>

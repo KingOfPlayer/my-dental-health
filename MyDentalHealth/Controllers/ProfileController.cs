@@ -14,7 +14,7 @@ namespace MyDentalHealth.Controllers
 		private readonly IServiceManager serviceManager;
 		private readonly IMapper mapper;
 
-		public User? User
+		public new User? User
 		{
 			get
 			{
@@ -54,7 +54,7 @@ namespace MyDentalHealth.Controllers
 
 		public IActionResult Name()
 		{
-			return View(new NameUpdateDto() { Name = User.Name});
+			return View(new NameUpdateDto() { Name = User!.Name});
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
@@ -62,7 +62,7 @@ namespace MyDentalHealth.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				User _user = User;
+				User _user = User!;
 				mapper.Map(nameUpdateDto, _user);
 				serviceManager.UserService.UpdateUser(_user);
 				return RedirectToAction("");
@@ -72,7 +72,7 @@ namespace MyDentalHealth.Controllers
 
         public IActionResult Surname()
         {
-            return View(new SurnameUpdateDto() { Surname = User.Surname });
+            return View(new SurnameUpdateDto() { Surname = User!.Surname });
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -80,7 +80,7 @@ namespace MyDentalHealth.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				User _user = User;
+				User _user = User!;
 				mapper.Map(surnameUpdateDto, _user);
 				serviceManager.UserService.UpdateUser(_user);
 				return RedirectToAction("");
@@ -90,7 +90,7 @@ namespace MyDentalHealth.Controllers
 
         public IActionResult Birthday()
 		{
-			return View(new BirthdayDateUpdateDto() { BirthdayDate = User.BirthdayDate });
+			return View(new BirthdayDateUpdateDto() { BirthdayDate = User!.BirthdayDate });
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
@@ -98,7 +98,7 @@ namespace MyDentalHealth.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				User _user = User;
+				User _user = User!;
 				mapper.Map(birthdayDateUpdateDto, _user);
 				serviceManager.UserService.UpdateUser(_user);
 				return RedirectToAction("");
@@ -108,7 +108,7 @@ namespace MyDentalHealth.Controllers
 
 		public IActionResult Email()
 		{
-			return View(new EmailUpdateDto() { Email = User.Email });
+			return View(new EmailUpdateDto() { Email = User!.Email });
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
@@ -119,7 +119,7 @@ namespace MyDentalHealth.Controllers
 				User? t_serchedUser = serviceManager.UserService.FindUserWithEmail(emailUpdateDto.Email);
 				if (t_serchedUser is null)
 				{
-					User _user = User;
+					User _user = User!;
 					mapper.Map(emailUpdateDto, _user);
 					serviceManager.UserService.UpdateUser(_user);
 					return RedirectToAction("");
@@ -140,7 +140,7 @@ namespace MyDentalHealth.Controllers
 		{
 
 			bool Valid = true;
-			if (passwordUpdateDto.CurrentPassword is not null && User.HashPassword(passwordUpdateDto.CurrentPassword) != User.Password)
+			if (passwordUpdateDto.CurrentPassword is not null && User.HashPassword(passwordUpdateDto.CurrentPassword) != User!.Password)
 			{
 				ModelState.AddModelError("CurrentPassword", "Current Password Is Wrong");
 				Valid = false;
@@ -157,8 +157,8 @@ namespace MyDentalHealth.Controllers
 			}
 			if (ModelState.IsValid && Valid)
 			{
-				User _user = User;
-				passwordUpdateDto.Password = User.HashPassword(passwordUpdateDto.Password);
+				User _user = User!;
+				passwordUpdateDto.Password = User.HashPassword(passwordUpdateDto.Password!);
 				mapper.Map(passwordUpdateDto, _user);
 				serviceManager.UserService.UpdateUser(_user);
 				return RedirectToAction("");

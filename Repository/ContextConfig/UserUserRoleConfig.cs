@@ -19,7 +19,8 @@ namespace Repository.ContextConfig
 				   .HasForeignKey(r => r.UserRoleId);
 
 			builder.HasData(
-				new UserUserRole() { UserId = 1, UserRoleId = 1 }
+				new UserUserRole() { UserId = 1, UserRoleId = 1 },
+				new UserUserRole() { UserId = 1, UserRoleId = 2 }
 				);
 		}
 	}

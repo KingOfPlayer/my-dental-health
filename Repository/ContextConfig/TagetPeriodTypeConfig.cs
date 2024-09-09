@@ -9,9 +9,10 @@ namespace Repository.ContextConfig
 		public void Configure(EntityTypeBuilder<TargetPeriodType> builder)
 		{
 			builder.HasData(
-				new TargetPeriodType() { Id = 1, Name = "High" },
-				new TargetPeriodType() { Id = 2, Name = "Medium" },
-				new TargetPeriodType() { Id = 3, Name = "Low" }
+				new TargetPeriodType() { Id = 1, Name = "Daily" },
+				new TargetPeriodType() { Id = 2, Name = "Weekly" },
+				new TargetPeriodType() { Id = 3, Name = "Monthly" },
+				new TargetPeriodType() { Id = 4, Name = "Yearly" }
 				);
 		}
 	}

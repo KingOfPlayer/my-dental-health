@@ -9,7 +9,7 @@ namespace MyDentalHealth.Controllers
 	{
 		IServiceManager serviceManager;
 
-        public User? User
+        public new User? User
         {
             get
             {
@@ -35,12 +35,6 @@ namespace MyDentalHealth.Controllers
             }
 
             return View();
-		}
-
-		[Auth]
-		public IActionResult MyInfo()
-		{
-			return View();
 		}
 	}
 }

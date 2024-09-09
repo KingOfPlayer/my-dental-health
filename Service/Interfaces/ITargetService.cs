@@ -15,9 +15,10 @@ namespace Service.Interfaces
         void CreateTarget(TargetStatus targetStatus);
         List<TargetStatus> GetAllTargetStatus(Target target);
         List<TargetStatus> GetAllTargetStatus(int targetId);
-        TargetStatus? GetTargetStatus(TargetStatus targetStatus);
+		List<TargetPeriodType> GetTargetPeriodTypes();
+		List<TargetPiroity> GetTargetPiroities();
+		TargetStatus? GetTargetStatus(TargetStatus targetStatus);
         TargetStatus? GetTargetStatus(int targetStatusId);
-        Target? GetTargetWithTargetIdAndUserId(int TargetId, int userId);
         List<Target> GetUserTargets(User user);
         List<Target> GetUserTargets(int userId);
         void RemoveTarget(Target target);

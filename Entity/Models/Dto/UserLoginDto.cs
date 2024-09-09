@@ -6,9 +6,9 @@ namespace Entity.Models.Dto
 	{
 		[Required]
 		[DataType(DataType.EmailAddress)]
-		public string Email { get; set; }
+		public string Email { get; set; } = string.Empty;
 		[Required]
 		[DataType(DataType.Password)]
-		public string Password { get; set; }
+		public string Password { get; set; } = string.Empty;
 	}
 }

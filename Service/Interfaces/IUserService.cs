@@ -8,7 +8,7 @@ namespace Service.Interfaces
 		IEnumerable<User> GetAllUsers();
 		User? GetUserWithId(int UserId);
 		List<UserRole>? GetUserRolesWithUserId(int UserId);
-		User? FindUserWithEmail(string? email);
+		User? FindUserWithEmail(string email);
 		void CreateNewUser(NewUserDto newUserDto);
 		void UpdateUser(User user);
 	}

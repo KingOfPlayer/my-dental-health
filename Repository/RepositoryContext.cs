@@ -29,6 +29,8 @@ namespace Repository
 			modelBuilder.ApplyConfiguration(new UserRoleConfig());
 			modelBuilder.ApplyConfiguration(new UserUserRoleConfig());
 			modelBuilder.ApplyConfiguration(new TargetPeriodTypeConfig());
+			modelBuilder.ApplyConfiguration(new TargetPiroityConfig());
+			modelBuilder.ApplyConfiguration(new TargetConfig());
 		}
 	}
 }

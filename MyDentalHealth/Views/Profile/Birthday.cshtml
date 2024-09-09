@@ -4,11 +4,11 @@
 	<a class="fs-1 text-black link-underline link-underline-opacity-0" asp-action=""><i class="fa-solid fa-arrow-left"></i> Birthday Date</a>
 	<div class="form-group my-2">
 		<label asp-for="BirthdayDate">Birthday</label>
-		<input asp-for="BirthdayDate" class="form-control @(ViewData.ModelState["BirthdayDate"]?.Errors.Count() > 0?"is-invalid":"")" min="@(DateTime.Now.AddYears(-80).ToString("yyyy-MM-dd"))" max="@(DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd"))" title="" required\>
+		<input asp-for="BirthdayDate" class="form-control @(ViewData.ModelState["BirthdayDate"]?.Errors.Count() > 0?"is-invalid":"")" min="@(DateTime.Now.AddYears(-80).ToString("yyyy-MM-dd"))" max="@(DateTime.Now.AddYears(-15).ToString("yyyy-MM-dd"))" title="" >
 		<div id="Email" class="invalid-feedback">
 			@{
-				if (ViewData.ModelState["BirthdayDate"] is not null)
-					foreach (var err in @ViewData.ModelState["BirthdayDate"]?.Errors)
+				if (ViewData?.ModelState?.TryGetValue("BirthdayDate", out var modelStateEntry) == true)
+					foreach (var err in modelStateEntry.Errors)
 					{
 						@err.ErrorMessage
 						<br />

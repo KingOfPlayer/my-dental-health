@@ -34,6 +34,7 @@ namespace MyDentalHealth.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImgHash")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Minutes")
@@ -95,6 +96,20 @@ namespace MyDentalHealth.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Targets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Count = 1,
+                            Description = "My Description",
+                            Name = "My Target Test",
+                            PeriodLength = 1,
+                            PeriodTime = new DateTime(2024, 9, 9, 17, 12, 31, 975, DateTimeKind.Local).AddTicks(4005),
+                            TargetPeriodTypeId = 1,
+                            TargetPiroityId = 1,
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("Entity.Models.Target.TargetPeriodType", b =>
@@ -106,6 +121,7 @@ namespace MyDentalHealth.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -116,17 +132,22 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "High"
+                            Name = "Daily"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Medium"
+                            Name = "Weekly"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Low"
+                            Name = "Monthly"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Yearly"
                         });
                 });
 
@@ -145,6 +166,23 @@ namespace MyDentalHealth.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TargetPiroities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "High"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Medium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Low"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Models.User.User", b =>
@@ -238,6 +276,11 @@ namespace MyDentalHealth.Migrations
                         {
                             UserId = 1,
                             UserRoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            UserRoleId = 2
                         });
                 });
 

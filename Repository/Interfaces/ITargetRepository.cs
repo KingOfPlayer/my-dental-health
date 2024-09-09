@@ -20,6 +20,7 @@ namespace Repository.Interfaces
         void RemoveTargetStatus(TargetStatus targetStatus);
         void RemoveTargetStatus(List<TargetStatus> targetStatus);
         public IQueryable<TargetStatus> GetAllTargetStatus();
-
-    }
+        public IQueryable<TargetPeriodType> GetTargetPeriodTypes();
+		public IQueryable<TargetPiroity> GetTargetPiroities();
+	}
 }

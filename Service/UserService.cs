@@ -30,11 +30,10 @@ namespace Service
 			List<UserRole> userRole = repositoryManager.UserRepository.GetUser(UserId).SelectMany(u => u.Roles.Select(urr => urr.UserRole)).ToList();
 			return userRole;
 		}
-		public User? FindUserWithEmail(string? email)
+		public User? FindUserWithEmail(string email)
 		{
 			User? user = repositoryManager.UserRepository.GetAllUsers().Where(u =>
 				u.Email.Equals(email)).SingleOrDefault();
-
 			return user;
 		}
 
@@ -42,9 +41,10 @@ namespace Service
 		{
 			User? user = new User();
 			mapper.Map(newUserDto, user);
-            repositoryManager.UserRepository.CreateUser(user);
-			UserRole? role = (UserRole?)repositoryManager.UserRepository.GetRoles().Where(r => r.Name.Equals("User")).SingleOrDefault();
-			repositoryManager.UserRepository.GiveRole(new UserUserRole() { UserId = user.Id, UserRoleId = role.Id });
+			user.Password = User.HashPassword(newUserDto.Password);
+			repositoryManager.UserRepository.CreateUser(user);
+			UserRole? role = repositoryManager.UserRepository.GetRoles().Where(r => r.Name.Equals("User")).SingleOrDefault();
+			repositoryManager.UserRepository.GiveRole(new UserUserRole() { UserId = user.Id, UserRoleId = role!.Id });
 			Console.WriteLine("Sending mail to wlc");
 		}
 

@@ -2,6 +2,7 @@
 using Entity.Models.Target;
 using Entity.Models.Target.Status;
 using Entity.Models.User;
+using Microsoft.EntityFrameworkCore;
 using Repository.Interfaces;
 using Service.Interfaces;
 using System;
@@ -25,19 +26,17 @@ namespace Service
 
         public List<Target> GetUserTargets(User user)
         {
-            return repositoryManager.TargetRepository.GetAllTargets().Where(t => t.UserId.Equals(user.Id)).ToList();
-        }
+            return repositoryManager.TargetRepository.GetAllTargets()
+                .Where(t => t.UserId.Equals(user.Id))
+				.ToList();
+		}
 
-        public List<Target> GetUserTargets(int userId)
-        {
-            return repositoryManager.TargetRepository.GetAllTargets().Where(t => t.UserId.Equals(userId)).ToList();
-        }
-        public Target? GetTargetWithTargetIdAndUserId(int TargetId,int userId)
+		public List<Target> GetUserTargets(int userId)
         {
             return repositoryManager.TargetRepository.GetAllTargets()
-                .Where(t => t.UserId.Equals(userId))
-                .Where(t => t.Id.Equals(TargetId)).SingleOrDefault();
-        }
+				.Where(t => t.UserId.Equals(userId))
+                .ToList();
+		}
         public void CreateTarget(Target target)
         {
             repositoryManager.TargetRepository.CreateTarget(target);
@@ -62,7 +61,7 @@ namespace Service
             Target? _target = repositoryManager.TargetRepository.GetAllTargets()
                 .Where(t => t.UserId.Equals(userId))
                 .Where(t => t.Id.Equals(targetId)).SingleOrDefault();
-            repositoryManager.TargetRepository.RemoveTarget(_target);
+            repositoryManager.TargetRepository.RemoveTarget(_target!);
         }
 
         public List<TargetStatus> GetAllTargetStatus(Target target)
@@ -101,7 +100,17 @@ namespace Service
         {
             TargetStatus? _targetStatus = repositoryManager.TargetRepository.GetAllTargetStatus()
                 .Where(ts => ts.Id.Equals(targetStatusId)).SingleOrDefault();
-            repositoryManager.TargetRepository.RemoveTargetStatus(_targetStatus);
+            repositoryManager.TargetRepository.RemoveTargetStatus(_targetStatus!);
+        }
+
+        public List<TargetPeriodType> GetTargetPeriodTypes()
+        {
+            return repositoryManager.TargetRepository.GetTargetPeriodTypes().ToList();
+		}
+
+        public List<TargetPiroity> GetTargetPiroities()
+        {
+            return repositoryManager.TargetRepository.GetTargetPiroities().ToList();
         }
     }
 }

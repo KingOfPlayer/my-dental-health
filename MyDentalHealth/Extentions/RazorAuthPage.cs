@@ -6,7 +6,7 @@ namespace MyDentalHealth.Extentions
 {
 	public class AuthRazorPage<TModel> : RazorPage<TModel>
 	{
-		public User? User
+		public new User? User
 		{
 			get
 			{
