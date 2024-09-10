@@ -49,27 +49,39 @@ namespace MyDentalHealth.Controllers
 			this.mapper = mapper;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
         {
-			List<Target> targets = serviceManager.TargetService.GetUserTargets(User!);
+			await serviceManager.TargetService.UpdateTargetCheckDates(User!.Id);
+			List<Target> targets = await serviceManager.TargetService.GetUserTargets(User!);
             return View(targets);
         }
 
+		public void SetViewBagTargetContent()
+		{
+			ViewBag.TargetPiroities = new SelectList(serviceManager.TargetService.GetTargetPiroities(), "Id", "Name", "1");
+			ViewBag.TargetPeriodTypes = new SelectList(serviceManager.TargetService.GetTargetPeriodTypes(), "Id", "Name", "1");
+		}
+
         public IActionResult CreateTarget()
         {
-			ViewBag.TargetPiroities = new SelectList(serviceManager.TargetService.GetTargetPiroities(), "Id", "Name", "1");
-			ViewBag.TargetPeriodTypes = new SelectList(serviceManager.TargetService.GetTargetPeriodTypes(), "Id", "Name", "1"); ;
-
+			SetViewBagTargetContent();
 			return View(new TargetDto());
         }
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
         public IActionResult CreateTarget([FromForm] TargetDto targetDto)
         {
 			var Valid = true;
-			if(ModelState.IsValid && Valid)
-				return View(new TargetDto());
-            return View(targetDto);
+			if (ModelState.IsValid && Valid)
+			{
+				Target target = mapper.Map<Target>(targetDto);
+				target.UserId = HttpContext.Session.GetJson<int>("UserId");
+				serviceManager.TargetService.CreateTarget(target);
+				return RedirectToAction("");
+			}
+			SetViewBagTargetContent();
+			return View(targetDto);
         }
 
         public IActionResult TargetDetails([FromQuery(Name = "TargetId")] int TargetId)

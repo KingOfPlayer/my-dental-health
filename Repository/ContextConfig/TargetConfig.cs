@@ -25,6 +25,18 @@ namespace Repository.ContextConfig
 					TargetPeriodTypeId = 1,
 					PeriodLength = 1,
 					Count = 1
+				},
+				new Target()
+				{
+					Id = 2,
+					UserId = 1,
+					Name = "My Target Test2",
+					Description = "My Description",
+					TargetPiroityId = 1,
+					TargetPeriodTypeId = 2,
+					PeriodLength = 2,
+					Count = 10,
+					PeriodTime = new DateTime(2024, 6, 15)
 				});
 		}
 	}

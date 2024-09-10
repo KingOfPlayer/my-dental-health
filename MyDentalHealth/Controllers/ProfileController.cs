@@ -112,11 +112,11 @@ namespace MyDentalHealth.Controllers
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Email([FromForm] EmailUpdateDto emailUpdateDto)
+		public async Task<IActionResult> Email([FromForm] EmailUpdateDto emailUpdateDto)
 		{
 			if (ModelState.IsValid)
 			{
-				User? t_serchedUser = serviceManager.UserService.FindUserWithEmail(emailUpdateDto.Email);
+				User? t_serchedUser = await serviceManager.UserService.FindUserWithEmail(emailUpdateDto.Email);
 				if (t_serchedUser is null)
 				{
 					User _user = User!;

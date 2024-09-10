@@ -36,6 +36,12 @@ namespace Repository
 			repositoryContext.Set<T>().Update(entity);
 			Save<T>();
 		}
+
+        public void UpdateRange<T>(IEnumerable<T> entity) where T : class
+		{
+			repositoryContext.Set<T>().UpdateRange(entity);
+			Save<T>();
+		}
 		public void Save<T>() where T : class
 		{
 			repositoryContext.SaveChanges();
@@ -46,7 +52,7 @@ namespace Repository
 			return repositoryContext.Set<T>().Where(conditional).AsNoTracking();
 		}
 
-		public IQueryable<T> QueryWithTrack<T>(Expression<Func<T, bool>> conditional, bool Tracking = false) where T : class
+		public IQueryable<T> QueryWithTrack<T>(Expression<Func<T, bool>> conditional) where T : class
 		{
 			return repositoryContext.Set<T>().Where(conditional);
 		}
@@ -56,7 +62,7 @@ namespace Repository
 			return repositoryContext.Set<T>().AsNoTracking();
 		}
 
-		public IQueryable<T> GetAllWithTrack<T>(Expression<Func<T, bool>> conditional, bool Tracking = false) where T : class
+		public IQueryable<T> GetAllWithTrack<T>() where T : class
 		{
 			return repositoryContext.Set<T>();
 		}

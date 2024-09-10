@@ -159,10 +159,10 @@ namespace MyDentalHealth.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Daily" },
-                    { 2, "Weekly" },
-                    { 3, "Monthly" },
-                    { 4, "Yearly" }
+                    { 1, "Day" },
+                    { 2, "Week" },
+                    { 3, "Month" },
+                    { 4, "Year" }
                 });
 
             migrationBuilder.InsertData(
@@ -192,7 +192,11 @@ namespace MyDentalHealth.Migrations
             migrationBuilder.InsertData(
                 table: "Targets",
                 columns: new[] { "Id", "Count", "Description", "Name", "PeriodLength", "PeriodTime", "TargetPeriodTypeId", "TargetPiroityId", "UserId" },
-                values: new object[] { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 9, 17, 12, 31, 975, DateTimeKind.Local).AddTicks(4005), 1, 1, 1 });
+                values: new object[,]
+                {
+                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 10, 11, 10, 7, 761, DateTimeKind.Local).AddTicks(1094), 1, 1, 1 },
+                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "UserUserRoles",

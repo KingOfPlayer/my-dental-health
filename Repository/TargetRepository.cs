@@ -19,14 +19,20 @@ namespace Repository
 
         public void CreateTarget(Target target) => Create(target);
         public void UpdateTarget(Target target) => Update(target);
-        public void RemoveTarget(Target target) => Remove(target);
+		public void UpdateTargetRange(List<Target> target) => UpdateRange(target);
+		public void RemoveTarget(Target target) => Remove(target);
         public void RemoveTarget(List<Target> target) => Remove(target);
         public IQueryable<Target> GetAllTargets() => GetAll<Target>().
             Include(target => target.TargetPeriodType)
             .Include(target => target.TargetPiroity)
             .Include(target => target.TargetStatus.OrderByDescending(ts => ts.Attime))
             ;
-        public void CreateTargetStatus(TargetStatus targetStatus) => Create(targetStatus);
+
+		public IQueryable<Target> GetAllTargetsWithTrack() => GetAllWithTrack<Target>().
+			Include(target => target.TargetPeriodType)
+			.Include(target => target.TargetPiroity)
+			.Include(target => target.TargetStatus.OrderByDescending(ts => ts.Attime));
+		public void CreateTargetStatus(TargetStatus targetStatus) => Create(targetStatus);
         public void UpdateTargetStatus(TargetStatus targetStatus) => Update(targetStatus);
         public void RemoveTargetStatus(TargetStatus targetStatus) => Remove(targetStatus);
         public void RemoveTargetStatus(List<TargetStatus> targetStatus) => Remove(targetStatus);
@@ -35,5 +41,7 @@ namespace Repository
 		public IQueryable<TargetPeriodType> GetTargetPeriodTypes() => GetAll<TargetPeriodType>();
 
 		public IQueryable<TargetPiroity> GetTargetPiroities() => GetAll<TargetPiroity>();
+
+        public void SaveChanges() => SaveChanges();
 	}
 }

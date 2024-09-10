@@ -1,4 +1,5 @@
 ﻿using Entity.Models.Target.Status;
+using System;
 
 namespace Entity.Models.Target
 {
@@ -17,5 +18,22 @@ namespace Entity.Models.Target
 		public int PeriodLength { get; set; }
 		public int Count { get; set; }
 		public HashSet<TargetStatus> TargetStatus { get; set; } = new HashSet<TargetStatus>();
+
+		public static DateTime GetPeriodEndTime(int TargetPeriodTypeId, DateTime PeriodTime, int PeriodLength)
+		{
+			switch (TargetPeriodTypeId)
+			{
+				case 1:
+					return PeriodTime.AddDays(PeriodLength);
+				case 2:
+					return PeriodTime.AddDays(7 * PeriodLength);
+				case 3:
+					return PeriodTime.AddMonths(PeriodLength);
+				case 4:
+					return PeriodTime.AddYears(PeriodLength);
+				default:
+					return PeriodTime;
+			}
+		}
 	}
 }

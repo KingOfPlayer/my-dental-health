@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entity.Models.Dto;
 using Entity.Models.User;
+using Microsoft.EntityFrameworkCore;
 using Repository.Interfaces;
 using Service.Interfaces;
 
@@ -30,10 +31,10 @@ namespace Service
 			List<UserRole> userRole = repositoryManager.UserRepository.GetUser(UserId).SelectMany(u => u.Roles.Select(urr => urr.UserRole)).ToList();
 			return userRole;
 		}
-		public User? FindUserWithEmail(string email)
+		public async Task<User?> FindUserWithEmail(string email)
 		{
-			User? user = repositoryManager.UserRepository.GetAllUsers().Where(u =>
-				u.Email.Equals(email)).SingleOrDefault();
+			User? user = await repositoryManager.UserRepository.GetAllUsers().Where(u =>
+				u.Email.Equals(email)).SingleOrDefaultAsync();
 			return user;
 		}
 

@@ -19,14 +19,16 @@ namespace Service.Interfaces
 		List<TargetPiroity> GetTargetPiroities();
 		TargetStatus? GetTargetStatus(TargetStatus targetStatus);
         TargetStatus? GetTargetStatus(int targetStatusId);
-        List<Target> GetUserTargets(User user);
-        List<Target> GetUserTargets(int userId);
+		Task<List<Target>> GetUserTargets(User user);
+		Task<List<Target>> GetUserTargets(int userId);
         void RemoveTarget(Target target);
         void RemoveTarget(Target target, int userId);
         void RemoveTarget(int targetId, int userId);
         void RemoveTargetStatus(TargetStatus targetStatus);
         void RemoveTargetStatus(int targetStatusId);
         void UpdateTarget(Target target);
-        void UpdateTargetStatus(TargetStatus targetStatus);
+		Task UpdateTargetCheckDates(int userId);
+		Task UpdateTargetCheckDates(User user);
+		void UpdateTargetStatus(TargetStatus targetStatus);
     }
 }

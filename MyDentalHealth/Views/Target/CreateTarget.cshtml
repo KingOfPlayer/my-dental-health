@@ -1,10 +1,12 @@
 ﻿@model TargetDto
+<a class="fs-1 px-5 text-black link-underline link-underline-opacity-0" asp-action=""><i class="fa-solid fa-arrow-left"></i> New Target</a>
+<hr />
 
-<form method="post" asp-action="CreateTarget" class="needs-validation" novalidate>
-	<h1>Sing up</h1>
-	<div class="form-group my-2">
-		<label asp-for="Name"></label>
-		<input asp-for="Name" class="form-control @(ViewData?.ModelState["Name"]?.Errors.Count() > 0?"is-invalid":"")" title="" >
+<form method="post" asp-action="CreateTarget" class="needs-validation px-4" novalidate>
+
+	<div class="form-floating my-2">
+		<input asp-for="Name" placeholder="name@example.com" class="form-control @(ViewData?.ModelState["Name"]?.Errors.Count() > 0?"is-invalid":"")" title="">
+		<label asp-for="Name">Target Name</label>
 		<div id="Name" class="invalid-feedback">
 			@{
 				if (ViewData?.ModelState?.TryGetValue("Name", out var modelStateEntry) == true)
@@ -16,9 +18,9 @@
 			}
 		</div>
 	</div>
-	<div class="form-group my-2">
-		<label asp-for="Description"></label>
-		<input asp-for="Description" class="form-control @(ViewData?.ModelState["Description"]?.Errors.Count() > 0?"is-invalid":"")" title="" >
+	<div class="form-floating my-2">
+		<textarea asp-for="Description" placeholder="Description" class="form-control @(ViewData?.ModelState["Description"]?.Errors.Count() > 0?"is-invalid":"")" title="" style="height: 100px"></textarea>
+		<label asp-for="Description">Description</label>
 		<div id="Description" class="invalid-feedback">
 			@{
 				if (ViewData?.ModelState?.TryGetValue("Description",out modelStateEntry) == true)
@@ -30,17 +32,17 @@
 			}
 		</div>
 	</div>
-	<div class="form-group my-2">
-		<label asp-for="TargetPiroityId"></label>
-		<select asp-for="TargetPiroityId" asp-items="@ViewBag.TargetPiroities" class="form-control"></select>
+	<div class="form-floating my-2">
+		<select asp-for="TargetPiroityId" asp-items="@ViewBag.TargetPiroities" class="form-select"></select>
+		<label asp-for="TargetPiroityId">Target Piroity</label>
 	</div>
-	<div class="form-group my-2">
-		<label asp-for="TargetPeriodTypeId"></label>
-		<select asp-for="TargetPeriodTypeId" asp-items="@ViewBag.TargetPeriodTypes" class="form-control"></select>
+	<div class="form-floating my-2">
+		<select asp-for="TargetPeriodTypeId" asp-items="@ViewBag.TargetPeriodTypes" class="form-select"></select>
+		<label asp-for="TargetPeriodTypeId">Target Period Type</label>
 	</div>
-	<div class="form-group my-2">
-		<label asp-for="PeriodLength">Validate Password</label>
-		<input asp-for="PeriodLength" class="form-control @(ViewData?.ModelState["PeriodLength"]?.Errors.Count() > 0?"is-invalid":"")" title="" >
+	<div class="form-floating my-2">
+		<input asp-for="PeriodLength" class="form-control @(ViewData?.ModelState["PeriodLength"]?.Errors.Count() > 0?"is-invalid":"")" min="1" value="1" title="">
+		<label asp-for="PeriodLength">Period Length</label>
 		<div id="PeriodLength" class="invalid-feedback">
 			@{
 				if (ViewData?.ModelState?.TryGetValue("PeriodLength", out modelStateEntry) == true)
@@ -52,9 +54,9 @@
 			}
 		</div>
 	</div>
-	<div class="form-group my-2">
+	<div class="form-floating my-2">
+		<input asp-for="Count" class="form-control @(ViewData?.ModelState["Count"]?.Errors.Count() > 0?"is-invalid":"")" min="1" value="1" title="">
 		<label asp-for="Count"></label>
-		<input asp-for="Count" class="form-control @(ViewData?.ModelState["Count"]?.Errors.Count() > 0?"is-invalid":"")" title="" required \>
 		<div id="Count" class="invalid-feedback">
 			@{
 				if (ViewData?.ModelState?.TryGetValue("Count", out modelStateEntry) == true)

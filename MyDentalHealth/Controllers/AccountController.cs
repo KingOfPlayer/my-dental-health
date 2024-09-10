@@ -26,11 +26,11 @@ namespace MyDentalHealth.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Auth(Login = false)]
-		public IActionResult Singin([FromForm] UserLoginDto userLoginData)
+		public async Task<IActionResult> Singin([FromForm] UserLoginDto userLoginData)
 		{
 			if (ModelState.IsValid && userLoginData.Password is not null & userLoginData.Email is not null)
 			{
-				User? user = serviceManager.UserService.FindUserWithEmail(userLoginData.Email);
+				User? user = await serviceManager.UserService.FindUserWithEmail(userLoginData.Email!);
 				if (user != null)
 				{
 					if (Entity.Models.User.User.isValidPassword(userLoginData.Password!) && user.isPasswordMatch(Entity.Models.User.User.HashPassword(userLoginData.Password!)))
@@ -72,7 +72,7 @@ namespace MyDentalHealth.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Auth(Login = false)]
-		public IActionResult Singup([FromForm] NewUserDto newUserDto)
+		public async Task<IActionResult> Singup([FromForm] NewUserDto newUserDto)
 		{
 			bool Valid = true;
 			if (newUserDto.Password is not null && newUserDto.ValidatePassword is not null && newUserDto.Password != newUserDto.ValidatePassword)
@@ -88,7 +88,7 @@ namespace MyDentalHealth.Controllers
 
 			if (ModelState.IsValid && Valid)
 			{
-				User? user = serviceManager.UserService.FindUserWithEmail(newUserDto.Email);
+				User? user = await serviceManager.UserService.FindUserWithEmail(newUserDto.Email);
 				if (user is null)
 				{
 					serviceManager.UserService.CreateNewUser(newUserDto);
@@ -108,9 +108,9 @@ namespace MyDentalHealth.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Auth(Login = false)]
-		public IActionResult Recovery([FromForm] RecoveryEmailDto recoveryEmailDto)
+		public async Task<IActionResult> Recovery([FromForm] RecoveryEmailDto recoveryEmailDto)
 		{
-			User? user = serviceManager.UserService.FindUserWithEmail(recoveryEmailDto.Email);
+			User? user = await serviceManager.UserService.FindUserWithEmail(recoveryEmailDto.Email);
 			string timestamp = DateTime.Now.ToString();
 			if (user is not null)
 			{

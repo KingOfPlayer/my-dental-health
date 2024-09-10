@@ -24,18 +24,13 @@ namespace Service
             this.mapper = mapper;
         }
 
-        public List<Target> GetUserTargets(User user)
-        {
-            return repositoryManager.TargetRepository.GetAllTargets()
-                .Where(t => t.UserId.Equals(user.Id))
-				.ToList();
-		}
+        public async Task<List<Target>> GetUserTargets(User user) => await GetUserTargets(user.Id);
 
-		public List<Target> GetUserTargets(int userId)
-        {
-            return repositoryManager.TargetRepository.GetAllTargets()
+		public async Task<List<Target>> GetUserTargets(int userId)
+		{
+			return await repositoryManager.TargetRepository.GetAllTargets()
 				.Where(t => t.UserId.Equals(userId))
-                .ToList();
+                .ToListAsync();
 		}
         public void CreateTarget(Target target)
         {
@@ -45,17 +40,38 @@ namespace Service
         {
             repositoryManager.TargetRepository.UpdateTarget(target);
         }
-        public void RemoveTarget(Target target)
+
+        public async Task UpdateTargetCheckDates(User user) => await UpdateTargetCheckDates(user.Id);
+
+		public async Task UpdateTargetCheckDates(int userId)
+		{
+			List<Target> outdatedTargets = await repositoryManager.TargetRepository.GetAllTargets()
+				.Where(t => t.UserId.Equals(userId))
+				.Where(t => 
+                (t.TargetPeriodTypeId == 1 && DateTime.Now > t.PeriodTime.AddDays(t.PeriodLength)) ||
+                (t.TargetPeriodTypeId == 2 && DateTime.Now > t.PeriodTime.AddDays(7*t.PeriodLength)) ||
+                (t.TargetPeriodTypeId == 3 && DateTime.Now > t.PeriodTime.AddMonths(t.PeriodLength)) ||
+                (t.TargetPeriodTypeId == 4 && DateTime.Now > t.PeriodTime.AddYears(t.PeriodLength))
+                ).ToListAsync();
+            for (int i = 0; i < outdatedTargets.Count(); i++)
+			{
+				DateTime temp = outdatedTargets[i].PeriodTime;
+
+				do
+				{
+					temp = Target.GetPeriodEndTime(outdatedTargets[i].TargetPeriodType!.Id, temp, outdatedTargets[i].PeriodLength);
+				} 
+                while (DateTime.Now > Target.GetPeriodEndTime(outdatedTargets[i].TargetPeriodType!.Id,temp, outdatedTargets[i].PeriodLength));
+				outdatedTargets[i].PeriodTime = temp;
+
+			}
+            repositoryManager.TargetRepository.UpdateTargetRange(outdatedTargets);
+		}
+		public void RemoveTarget(Target target)
         {
             repositoryManager.TargetRepository.RemoveTarget(target);
         }
-        public void RemoveTarget(Target target, int userId)
-        {
-            Target? _target = repositoryManager.TargetRepository.GetAllTargets()
-                .Where(t => t.UserId.Equals(userId))
-                .Where(t => t.Id.Equals(target.Id)).SingleOrDefault();
-            repositoryManager.TargetRepository.RemoveTarget(target);
-        }
+        public void RemoveTarget(Target target, int userId) => RemoveTarget(target.Id, userId);
         public void RemoveTarget(int targetId, int userId)
         {
             Target? _target = repositoryManager.TargetRepository.GetAllTargets()
@@ -64,21 +80,13 @@ namespace Service
             repositoryManager.TargetRepository.RemoveTarget(_target!);
         }
 
-        public List<TargetStatus> GetAllTargetStatus(Target target)
-        {
-            return repositoryManager.TargetRepository.GetAllTargetStatus()
-                .Where(ts => ts.TargetId.Equals(target)).ToList();
-        }
+        public List<TargetStatus> GetAllTargetStatus(Target target) => GetAllTargetStatus(target.Id);
         public List<TargetStatus> GetAllTargetStatus(int targetId)
         {
             return repositoryManager.TargetRepository.GetAllTargetStatus()
                 .Where(ts => ts.TargetId.Equals(targetId)).ToList();
         }
-        public TargetStatus? GetTargetStatus(TargetStatus targetStatus)
-        {
-            return repositoryManager.TargetRepository.GetAllTargetStatus()
-                .Where(ts => ts.Id.Equals(targetStatus.Id)).SingleOrDefault();
-        }
+        public TargetStatus? GetTargetStatus(TargetStatus targetStatus) => GetTargetStatus(targetStatus.Id); 
         public TargetStatus? GetTargetStatus(int targetStatusId)
         {
             return repositoryManager.TargetRepository.GetAllTargetStatus()
@@ -112,5 +120,5 @@ namespace Service
         {
             return repositoryManager.TargetRepository.GetTargetPiroities().ToList();
         }
-    }
+	}
 }

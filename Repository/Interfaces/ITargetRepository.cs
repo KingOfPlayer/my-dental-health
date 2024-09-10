@@ -12,15 +12,18 @@ namespace Repository.Interfaces
     {
         void CreateTarget(Target target);
         void UpdateTarget(Target target);
-        void RemoveTarget(Target target);
+		void UpdateTargetRange(List<Target> target);
+		void RemoveTarget(Target target);
         void RemoveTarget(List<Target> target);
-        public IQueryable<Target> GetAllTargets();
-        void CreateTargetStatus(TargetStatus targetStatus);
+        IQueryable<Target> GetAllTargets();
+		IQueryable<Target> GetAllTargetsWithTrack();
+		void CreateTargetStatus(TargetStatus targetStatus);
         void UpdateTargetStatus(TargetStatus targetStatus);
         void RemoveTargetStatus(TargetStatus targetStatus);
         void RemoveTargetStatus(List<TargetStatus> targetStatus);
-        public IQueryable<TargetStatus> GetAllTargetStatus();
-        public IQueryable<TargetPeriodType> GetTargetPeriodTypes();
-		public IQueryable<TargetPiroity> GetTargetPiroities();
+        IQueryable<TargetStatus> GetAllTargetStatus();
+        IQueryable<TargetPeriodType> GetTargetPeriodTypes();
+		IQueryable<TargetPiroity> GetTargetPiroities();
+		void SaveChanges();
 	}
 }

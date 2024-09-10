@@ -76,7 +76,7 @@
 */
 		foreach(Target target in Model)
 		{
-			var endDate = @addTime(target.PeriodTime, target.TargetPeriodType.Id, target.PeriodLength);
+			var endDate = @addTime(target.PeriodTime, target.TargetPeriodType!.Id, target.PeriodLength);
 
 			<div class="border rounded px-5 py-5 my-3">
 				<div class="fs-3 px-5 d-flex justify-content-between align-items-start">
@@ -90,14 +90,14 @@
 							</span>
 						}
 						<span class="text-end badge @GetPiroity(target.TargetPiroityId) rounded-pill">
-							@target.TargetPiroity.Name
+							@target.TargetPiroity!.Name
 						</span>
 					</div>
 				</div>
 				<hr />
 				<div class="px-4 list-group">
 					<li class="list-group-item list-group-item-action">Description: @target.Description</li>
-					<li class="list-group-item list-group-item-action">@target.Count times per @target.TargetPeriodType.Name</li>
+					<li class="list-group-item list-group-item-action">@target.Count times per @target.PeriodLength @target.TargetPeriodType.Name</li>
 					<li class="list-group-item list-group-item-action">Period Date: @target.PeriodTime</li>
 					<li class="list-group-item list-group-item-action">Period End Date: @endDate</li>
 					@{

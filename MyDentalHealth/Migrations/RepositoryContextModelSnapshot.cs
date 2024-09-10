@@ -105,8 +105,20 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test",
                             PeriodLength = 1,
-                            PeriodTime = new DateTime(2024, 9, 9, 17, 12, 31, 975, DateTimeKind.Local).AddTicks(4005),
+                            PeriodTime = new DateTime(2024, 9, 10, 11, 10, 7, 761, DateTimeKind.Local).AddTicks(1094),
                             TargetPeriodTypeId = 1,
+                            TargetPiroityId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Count = 10,
+                            Description = "My Description",
+                            Name = "My Target Test2",
+                            PeriodLength = 2,
+                            PeriodTime = new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TargetPeriodTypeId = 2,
                             TargetPiroityId = 1,
                             UserId = 1
                         });
@@ -132,22 +144,22 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Daily"
+                            Name = "Day"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Weekly"
+                            Name = "Week"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Monthly"
+                            Name = "Month"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Yearly"
+                            Name = "Year"
                         });
                 });
 
