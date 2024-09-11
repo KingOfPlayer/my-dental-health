@@ -173,14 +173,16 @@ namespace MyDentalHealth.Migrations
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 1, "1", "1" },
-                    { 2, "2", "2" },
-                    { 3, "3", "3" },
-                    { 4, "4", "4" },
-                    { 5, "5", "5" },
-                    { 6, "6", "6" },
-                    { 7, "7", "7" },
-                    { 8, "8", "8" }
+                    { 1, "Brushing your teeth twice a day with fluoride toothpaste helps remove plaque and bacteria, keeping your teeth and gums healthy.", "Brush Twice Daily" },
+                    { 2, "Flossing once a day removes food particles and plaque from between teeth, areas a toothbrush can't reach, reducing the risk of gum disease and cavities.", "Floss Daily" },
+                    { 3, "Mouthwash can help kill bacteria, freshen breath, and strengthen enamel, especially when using fluoride or antiseptic mouthwashes.", "Use Mouthwash" },
+                    { 4, "Excess sugar in your diet fuels bacteria that produce acid, leading to tooth decay. Avoid sugary snacks and beverages, especially between meals.", "Limit Sugary Foods and Drinks" },
+                    { 5, "Drinking water helps wash away food particles and bacteria, and staying hydrated ensures your mouth produces enough saliva to protect your teeth.", "Stay Hydrated" },
+                    { 6, "Regular dental check-ups and cleanings (every 6 months) allow for early detection of problems and professional plaque removal.", "Visit Your Dentist Regularly" },
+                    { 7, "Smoking and using tobacco can lead to gum disease, tooth decay, and even oral cancer. Avoiding these products is key to long-term oral health.", "Don’t Use Tobacco Products" },
+                    { 8, "A soft-bristle toothbrush is gentle on your gums and enamel, reducing the risk of erosion or irritation. Replace your toothbrush every 3-4 months.", "Use a Soft-Bristle Toothbrush" },
+                    { 9, "Foods rich in calcium, vitamin D, and phosphorus help strengthen teeth and bones, while crunchy fruits and vegetables stimulate saliva production.", "Eat a Balanced Diet" },
+                    { 10, "If you play contact sports, wearing a mouthguard helps protect your teeth from injury or trauma, reducing the risk of chipped or broken teeth.", "Wear a Mouthguard for Sports" }
                 });
 
             migrationBuilder.InsertData(
@@ -223,8 +225,8 @@ namespace MyDentalHealth.Migrations
                 columns: new[] { "Id", "Count", "Description", "Name", "PeriodLength", "PeriodTime", "TargetPeriodTypeId", "TargetPiroityId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 10, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6042), 1, 1, 1 },
-                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 7, 22, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6063), 2, 1, 1 }
+                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 11, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2786), 1, 1, 1 },
+                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 7, 23, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2805), 2, 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -241,8 +243,8 @@ namespace MyDentalHealth.Migrations
                 columns: new[] { "Id", "Attime", "ImgHash", "Minutes", "Second", "TargetId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 9, 9, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6158), "", 0, 10, 1 },
-                    { 2, new DateTime(2024, 8, 26, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6160), "", 0, 10, 1 }
+                    { 1, new DateTime(2024, 9, 10, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2904), "", 0, 10, 1 },
+                    { 2, new DateTime(2024, 8, 27, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2906), "", 0, 10, 1 }
                 });
 
             migrationBuilder.CreateIndex(

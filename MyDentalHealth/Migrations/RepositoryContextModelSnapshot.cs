@@ -46,50 +46,62 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "1",
-                            Name = "1"
+                            Description = "Brushing your teeth twice a day with fluoride toothpaste helps remove plaque and bacteria, keeping your teeth and gums healthy.",
+                            Name = "Brush Twice Daily"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "2",
-                            Name = "2"
+                            Description = "Flossing once a day removes food particles and plaque from between teeth, areas a toothbrush can't reach, reducing the risk of gum disease and cavities.",
+                            Name = "Floss Daily"
                         },
                         new
                         {
                             Id = 3,
-                            Description = "3",
-                            Name = "3"
+                            Description = "Mouthwash can help kill bacteria, freshen breath, and strengthen enamel, especially when using fluoride or antiseptic mouthwashes.",
+                            Name = "Use Mouthwash"
                         },
                         new
                         {
                             Id = 4,
-                            Description = "4",
-                            Name = "4"
+                            Description = "Excess sugar in your diet fuels bacteria that produce acid, leading to tooth decay. Avoid sugary snacks and beverages, especially between meals.",
+                            Name = "Limit Sugary Foods and Drinks"
                         },
                         new
                         {
                             Id = 5,
-                            Description = "5",
-                            Name = "5"
+                            Description = "Drinking water helps wash away food particles and bacteria, and staying hydrated ensures your mouth produces enough saliva to protect your teeth.",
+                            Name = "Stay Hydrated"
                         },
                         new
                         {
                             Id = 6,
-                            Description = "6",
-                            Name = "6"
+                            Description = "Regular dental check-ups and cleanings (every 6 months) allow for early detection of problems and professional plaque removal.",
+                            Name = "Visit Your Dentist Regularly"
                         },
                         new
                         {
                             Id = 7,
-                            Description = "7",
-                            Name = "7"
+                            Description = "Smoking and using tobacco can lead to gum disease, tooth decay, and even oral cancer. Avoiding these products is key to long-term oral health.",
+                            Name = "Don’t Use Tobacco Products"
                         },
                         new
                         {
                             Id = 8,
-                            Description = "8",
-                            Name = "8"
+                            Description = "A soft-bristle toothbrush is gentle on your gums and enamel, reducing the risk of erosion or irritation. Replace your toothbrush every 3-4 months.",
+                            Name = "Use a Soft-Bristle Toothbrush"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "Foods rich in calcium, vitamin D, and phosphorus help strengthen teeth and bones, while crunchy fruits and vegetables stimulate saliva production.",
+                            Name = "Eat a Balanced Diet"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "If you play contact sports, wearing a mouthguard helps protect your teeth from injury or trauma, reducing the risk of chipped or broken teeth.",
+                            Name = "Wear a Mouthguard for Sports"
                         });
                 });
 
@@ -127,7 +139,7 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 1,
-                            Attime = new DateTime(2024, 9, 9, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6158),
+                            Attime = new DateTime(2024, 9, 10, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2904),
                             ImgHash = "",
                             Minutes = 0,
                             Second = 10,
@@ -136,7 +148,7 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 2,
-                            Attime = new DateTime(2024, 8, 26, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6160),
+                            Attime = new DateTime(2024, 8, 27, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2906),
                             ImgHash = "",
                             Minutes = 0,
                             Second = 10,
@@ -196,7 +208,7 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test",
                             PeriodLength = 1,
-                            PeriodTime = new DateTime(2024, 9, 10, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6042),
+                            PeriodTime = new DateTime(2024, 9, 11, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2786),
                             TargetPeriodTypeId = 1,
                             TargetPiroityId = 1,
                             UserId = 1
@@ -208,7 +220,7 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test2",
                             PeriodLength = 2,
-                            PeriodTime = new DateTime(2024, 7, 22, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6063),
+                            PeriodTime = new DateTime(2024, 7, 23, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2805),
                             TargetPeriodTypeId = 2,
                             TargetPiroityId = 1,
                             UserId = 1
