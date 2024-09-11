@@ -1,0 +1,152 @@
+﻿@using Entity.Models.Target
+@using Entity.Models.Target.Status
+<div>
+	@await Component.InvokeAsync("UserSummary", @User)
+</div>
+<hr />
+<div>
+
+	<h1 class="px-5">My Statuses</h1>
+	<hr />
+	<div class="d-flex justify-content-between align-items-start px-4">
+		<div class="btn-group">
+
+			<a class="btn btn-success" asp-controller="Target" asp-action="CreateTargetStatus" asp-route-c="@ViewContext.HttpContext.Request.Path"><i class="fa-plus"></i> New Status</a>
+		</div>
+		<div>
+			<form class="input-group">
+				<input class="input-group-text" type="search" name="" value="" />
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</form>
+		</div>
+	</div>
+	<hr />
+	<div>
+		@{
+			string GetPiroity(int PiroityId)
+			{
+				switch (PiroityId)
+				{
+					case 1:
+						return "text-bg-danger";
+					case 2:
+						return "text-bg-warning";
+					default:
+						return "text-bg-info";
+				}
+			}
+			DateTime addTime(DateTime dateTime, int TargetPeriodTypeId, int PeridodLength)
+			{
+				switch (TargetPeriodTypeId)
+				{
+					case 1:
+						return dateTime.AddDays(PeridodLength);
+					case 2:
+						return dateTime.AddDays(7 * PeridodLength);
+					case 3:
+						return dateTime.AddMonths(PeridodLength);
+					case 4:
+						return dateTime.AddYears(PeridodLength);
+					default:
+						return DateTime.Now;
+				}
+			}
+		}
+		@if (((List<Target>)ViewBag.targets).Count() != 0)
+		{
+			<div>
+			@foreach (Target target in ViewBag.targets)
+				{
+					var endDate = @addTime(target.PeriodTime, target.TargetPeriodType!.Id, target.PeriodLength);
+					<div class="border border-1 rounded-3 row my-4">
+						<div class="col-4 bg-light p-4">
+						<p class="fs-5 px-4">
+								@target.Name 
+								<span class="text-end badge @GetPiroity(target.TargetPiroityId) rounded-pill">
+									@target.TargetPiroity!.Name
+								</span> @if (target.TargetStatuses.Select(ts => ts.Attime > @target.PeriodTime && ts.Attime < endDate).Count() < target.Count)
+								{
+									<span class="text-end badge text-bg-warning rounded-pill">
+										Not Done
+									</span>
+								}
+						</p>
+						<p class="fs-6 px-4">
+							@target.Description
+						</p>
+						<p class="fs-6 px-4">
+							@target.Count times per @target.PeriodLength @target.TargetPeriodType.Name
+						</p>
+					</div>
+					<div class="col-8">
+							@if (target.TargetStatuses.Count != 0)
+							{
+								<div class="p-3">
+								@foreach (TargetStatus targetStatus in target.TargetStatuses)
+								{
+										<div class="border border-1 rounded-3 my-3 row">
+											<div class="col-6 p-4 d-flex justify-content-center align-content-center">
+												@if (@targetStatus.ImgHash is null)
+												{
+													<img src="~/static/Img/@(targetStatus.ImgHash).png" />
+												}
+												else
+												{
+													<i class="fa-regular fa-image fa-10x"></i>
+												}
+											</div>
+											<div class="col-6 p-4 d-flex justify-content-center align-items-center">
+												<div>
+													@if (targetStatus.Minutes != 0)
+													{
+														<li>
+															$"{targetStatus.Minutes} Minute
+														</li>
+													}
+													<li>
+														@(targetStatus.Second == 0 ? "" : $"{targetStatus.Second} Second")
+													</li>
+													<li>
+														At @targetStatus.Attime
+													</li>
+												</div>
+											</div>
+										</div>
+									}
+								</div>
+							}
+							else
+							{
+								<div class="alert alert-warning m-4">
+									<p class="fs-5 px-4">There is no status yet</p>
+									<hr />
+									<div class ="px-2">
+										<p c>Let's add new status!</p>
+										<a class="btn btn-success" asp-controller="Target" asp-action="CreateTargetStatus" asp-route-c="@ViewContext.HttpContext.Request.Path"><i class="fa-plus"></i> New Status</a>
+									</div>
+								</div>
+							}
+						</div>
+				</div>
+
+			}
+			</div>
+		}
+		else
+		{
+			<div class="alert alert-primary">
+
+				<p class="fs-3 px-3">
+					It seems you haven't added any Target
+				</p>
+				<p class="fs-5 px-3">
+					Now add Target
+				</p>
+
+				<a class="btn btn-success" asp-controller="Target" asp-action="CreateTarget" asp-route-c="@ViewContext.HttpContext.Request.Path"><i class="fa-plus"></i> Create New Target</a>
+
+				<hr />
+			</div>
+		}
+	</div>
+</div>

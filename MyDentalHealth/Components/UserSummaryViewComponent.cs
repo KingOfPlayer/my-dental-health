@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace MyDentalHealth.Components
 {
-	public class HomeUserSummaryViewComponent : ViewComponent
+	public class UserSummaryViewComponent : ViewComponent
 	{
 		private readonly IServiceManager serviceManager;
 
-		public HomeUserSummaryViewComponent(IServiceManager serviceManager)
+		public UserSummaryViewComponent(IServiceManager serviceManager)
 		{
 			this.serviceManager = serviceManager;
 		}

@@ -3,22 +3,21 @@
 		<p class="mx-5 px-5 fs-1 text-center">Hi @User!.Name</p>
 		<hr />
 	</div>
-	<ul class="nav nav-tabs mx-5 px-5 my-0 border-0">
+
+
+	<ul class="nav nav-tabs mx-5 px-5 my-0 border-0" id="MyHomeTab" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active" aria-current="page" href="#">Active</a>
+			<a class="nav-link" id="target-status-tab" data-bs-toggle="tab" href="#target-status" role="tab" aria-controls="target-status" aria-selected="true">My Status</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#">Link</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="#">Link</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link disabled" aria-disabled="true">Disabled</a>
+			<a class="nav-link" id="target-tab" data-bs-toggle="tab" href="#target" role="tab" aria-controls="target" aria-selected="false">My Targets</a>
 		</li>
 	</ul>
-	<div class="border border-1 rounded-5 p-5">
-		<div id="Targets">
+	<div class="tab-content border border-1 rounded-5 p-5" id="MyHomeTabContent">
+		<div class="tab-pane fade" id="target-status" role="tabpanel" aria-labelledby="target-status-tab">
+			@await Component.InvokeAsync("TargetStatuses", @User)
+		</div>
+		<div class="tab-pane fade" id="target" role="tabpanel" aria-labelledby="target-tab">
 			@await Component.InvokeAsync("Targets", @User)
 		</div>
 	</div>

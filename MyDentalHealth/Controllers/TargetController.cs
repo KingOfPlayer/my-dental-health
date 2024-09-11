@@ -58,13 +58,6 @@ namespace MyDentalHealth.Controllers
 			this.mapper = mapper;
 		}
 
-		public async Task<IActionResult> Index()
-        {
-			await serviceManager.TargetService.UpdateTargetCheckDates(User!.Id);
-			List<Target> targets = await serviceManager.TargetService.GetUserTargets(User!);
-            return View(targets);
-        }
-
 		public void SetViewBagTargetContent()
 		{
 			ViewBag.TargetPiroities = new SelectList(serviceManager.TargetService.GetTargetPiroities(), "Id", "Name", "1");
@@ -79,7 +72,7 @@ namespace MyDentalHealth.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-        public IActionResult CreateTarget([FromForm] TargetDto targetDto)
+        public IActionResult CreateTarget([FromForm] TargetDto targetDto, [FromQuery(Name = "c")] string url)
         {
 			var Valid = true;
 			if (ModelState.IsValid && Valid)
@@ -87,7 +80,7 @@ namespace MyDentalHealth.Controllers
 				Target target = mapper.Map<Target>(targetDto);
 				target.UserId = HttpContext.Session.GetJson<int>("UserId");
 				serviceManager.TargetService.CreateTarget(target);
-				return RedirectToAction("");
+				return Redirect(url);
 			}
 			SetViewBagTargetContent();
 			return View(targetDto);
@@ -103,7 +96,7 @@ namespace MyDentalHealth.Controllers
             return View(TargetId);
         }
 
-        public IActionResult NewTargetStatus([FromQuery(Name = "TargetId")] int TargetId)
+        public IActionResult CreateTargetStatus([FromQuery(Name = "TargetId")] int TargetId)
 		{
 			return View(TargetId);
         }

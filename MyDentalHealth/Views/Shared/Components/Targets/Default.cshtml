@@ -3,7 +3,8 @@
 <hr />
 <div class="d-flex justify-content-between align-items-start px-4">
 	<div class="btn-group">
-		<a class="btn btn-success" asp-action="CreateTarget"><i class="fa-plus"></i> Create New Target</a>
+		
+		<a class="btn btn-success" asp-controller="Target" asp-action="CreateTarget" asp-route-c="@ViewContext.HttpContext.Request.Path"><i class="fa-plus"></i> Create New Target</a>
 	</div>
 	<div>
 		<form class="input-group">
@@ -77,48 +78,48 @@
 		{
 			var endDate = @addTime(target.PeriodTime, target.TargetPeriodType!.Id, target.PeriodLength);
 
-			<div class="border rounded px-5 py-5 my-3">
-				<div class="fs-3 px-5 d-flex justify-content-between align-items-start">
-					<p>
-						@target.Name
-					</p>
-					<div>
-						@if (target.TargetStatuses.Select(ts => ts.Attime > @target.PeriodTime && ts.Attime < endDate).Count() < target.Count)
+				<div class="border rounded px-5 py-5 my-3">
+					<div class="fs-3 px-5 d-flex justify-content-between align-items-start">
+						<p>
+							@target.Name
+						</p>
+						<div>
+							@if (target.TargetStatuses.Select(ts => ts.Attime > @target.PeriodTime && ts.Attime < endDate).Count() < target.Count)
 						{
-							<span class="text-end badge text-bg-warning rounded-pill">
-								Not Done
-							</span>
+								<span class="text-end badge text-bg-warning rounded-pill">
+									Not Done
+								</span>
 						}
-						<span class="text-end badge @GetPiroity(target.TargetPiroityId) rounded-pill">
-							@target.TargetPiroity!.Name
-						</span>
+							<span class="text-end badge @GetPiroity(target.TargetPiroityId) rounded-pill">
+								@target.TargetPiroity!.Name
+							</span>
+						</div>
 					</div>
-				</div>
-				<hr />
-				<div class="px-4 list-group">
-					<li class="list-group-item list-group-item-action">Description: @target.Description</li>
-					<li class="list-group-item list-group-item-action">@target.Count times per @target.PeriodLength @target.TargetPeriodType.Name</li>
-					<li class="list-group-item list-group-item-action">Period Date: @target.PeriodTime</li>
-					<li class="list-group-item list-group-item-action">Period End Date: @endDate</li>
-					@{
+					<hr />
+					<div class="px-4 list-group">
+						<li class="list-group-item list-group-item-action">Description: @target.Description</li>
+						<li class="list-group-item list-group-item-action">@target.Count times per @target.PeriodLength @target.TargetPeriodType.Name</li>
+						<li class="list-group-item list-group-item-action">Period Date: @target.PeriodTime</li>
+						<li class="list-group-item list-group-item-action">Period End Date: @endDate</li>
+						@{
 						if (target.TargetStatuses.FirstOrDefault() is not null)
 						{
-							<li class="list-group-item list-group-item-action">@target.TargetStatuses.FirstOrDefault()?.Attime}</li>
+									<li class="list-group-item list-group-item-action">@target.TargetStatuses.FirstOrDefault()?.Attime}</li>
 						}
 						else
 						{
-							<li class="list-group-item list-group-item-action text-info">No status added yet</li>
+									<li class="list-group-item list-group-item-action text-info">No status added yet</li>
 						}
-					}
-				</div>
-				<div class="d-flex justify-content-end my-3 px-4">
-					<div class="btn-group">
-						<a class="btn btn-outline-success" asp-action="NewTargetStatus" asp-route-TargetId="@target.Id"><i class="fa-plus"></i> Add New Target Status</a>
-						<a class="btn btn-primary"><i class="fa-solid fa-bars"></i> Edit Target</a>
-						<a class="btn btn-primary" asp-action="TargetDetails" asp-route-TargetId="@target.Id">Details</a>
+						}
+					</div>
+					<div class="d-flex justify-content-end my-3 px-4">
+						<div class="btn-group">
+							<a class="btn btn-outline-success" asp-action="NewTargetStatus" asp-route-TargetId="@target.Id"><i class="fa-plus"></i> Add New Target Status</a>
+							<a class="btn btn-primary"><i class="fa-solid fa-bars"></i> Edit Target</a>
+							<a class="btn btn-primary" asp-action="TargetDetails" asp-route-TargetId="@target.Id">Details</a>
+						</div>
 					</div>
 				</div>
-			</div>
 		}
 	}
 </div>

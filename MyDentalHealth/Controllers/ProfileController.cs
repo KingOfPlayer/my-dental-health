@@ -123,7 +123,9 @@ namespace MyDentalHealth.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Email([FromForm] EmailUpdateDto emailUpdateDto)
 		{
-			if (ModelState.IsValid)
+			if(User!.Email == emailUpdateDto.Email)
+				ModelState.AddModelError("Email", "Enter different email");
+			else if (ModelState.IsValid)
 			{
 				User? t_serchedUser = await serviceManager.UserService.FindUserWithEmail(emailUpdateDto.Email);
 				if (t_serchedUser is null)

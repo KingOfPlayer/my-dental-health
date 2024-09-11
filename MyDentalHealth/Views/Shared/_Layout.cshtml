@@ -35,6 +35,21 @@
 					})
 				})()
 			</script>
+
+			<script>
+				$(document).ready(function () {
+					var hash = window.location.hash;
+					if (hash) {
+						$('#MyHomeTab a[href="' + hash + '"]').tab('show');
+					} else {
+						$('#MyHomeTab a[href="#target-status"]').tab('show');
+					}
+
+					$('#MyHomeTab a').on('click', function (e) {
+						var target = $(this).attr('href');
+						history.replaceState(null, null, target);
+					});
+				});</script>
 		@await RenderSectionAsync("Scripts", false)
 	</body>
 </html>
