@@ -1,10 +1,25 @@
 ﻿<div >
-	<h1 class="mx-5 px-5 text-center">Hi @User!.Name</h1>
-	<hr />
-
-	<div class="d-flex justify-content-between">
-		<div>
-			@await Component.InvokeAsync("LatestTargets",@User)
+	<div class="mx-5">
+		<p class="mx-5 px-5 fs-1 text-center">Hi @User!.Name</p>
+		<hr />
+	</div>
+	<ul class="nav nav-tabs mx-5 px-5 my-0 border-0">
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page" href="#">Active</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Link</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Link</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link disabled" aria-disabled="true">Disabled</a>
+		</li>
+	</ul>
+	<div class="border border-1 rounded-5 p-5">
+		<div id="Targets">
+			@await Component.InvokeAsync("Targets", @User)
 		</div>
 	</div>
 </div>
