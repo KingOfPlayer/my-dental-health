@@ -1,15 +1,7 @@
 ﻿
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        @if (User == null)
-        {
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">My Dental Health</a>
-        }
-        else
-        {
-            <a class="navbar-brand" asp-controller="MyHome" asp-action="Index">My Dental Health</a>
-        }
-        
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">My Dental Health</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

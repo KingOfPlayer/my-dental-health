@@ -14,6 +14,20 @@ namespace MyDentalHealth.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Advices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Advices", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TargetPeriodTypes",
                 columns: table => new
                 {
@@ -155,6 +169,21 @@ namespace MyDentalHealth.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Advices",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "1", "1" },
+                    { 2, "2", "2" },
+                    { 3, "3", "3" },
+                    { 4, "4", "4" },
+                    { 5, "5", "5" },
+                    { 6, "6", "6" },
+                    { 7, "7", "7" },
+                    { 8, "8", "8" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "TargetPeriodTypes",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
@@ -194,8 +223,8 @@ namespace MyDentalHealth.Migrations
                 columns: new[] { "Id", "Count", "Description", "Name", "PeriodLength", "PeriodTime", "TargetPeriodTypeId", "TargetPiroityId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 10, 11, 10, 7, 761, DateTimeKind.Local).AddTicks(1094), 1, 1, 1 },
-                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 1 }
+                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 10, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6042), 1, 1, 1 },
+                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 7, 22, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6063), 2, 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -205,6 +234,15 @@ namespace MyDentalHealth.Migrations
                 {
                     { 1, 1 },
                     { 1, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TargetStatus",
+                columns: new[] { "Id", "Attime", "ImgHash", "Minutes", "Second", "TargetId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 9, 9, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6158), "", 0, 10, 1 },
+                    { 2, new DateTime(2024, 8, 26, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6160), "", 0, 10, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -236,6 +274,9 @@ namespace MyDentalHealth.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Advices");
+
             migrationBuilder.DropTable(
                 name: "TargetStatus");
 

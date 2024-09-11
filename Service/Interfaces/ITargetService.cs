@@ -19,6 +19,8 @@ namespace Service.Interfaces
 		List<TargetPiroity> GetTargetPiroities();
 		TargetStatus? GetTargetStatus(TargetStatus targetStatus);
         TargetStatus? GetTargetStatus(int targetStatusId);
+		List<TargetStatus> GetUsersTargetStatus(User user);
+		List<TargetStatus> GetUsersAllTargetStatus(int userId);
 		Task<List<Target>> GetUserTargets(User user);
 		Task<List<Target>> GetUserTargets(int userId);
         void RemoveTarget(Target target);

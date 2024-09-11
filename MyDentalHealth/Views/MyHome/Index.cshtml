@@ -1,8 +1,10 @@
 ﻿<div >
 	<h1 class="mx-5 px-5 text-center">Hi @User!.Name</h1>
 	<hr />
-	<div class="container">
-		<h4 class="px-4 text-center">Personal Info</h4>
-		<p class="px-2 text-center">There is your personal info</p>
+
+	<div class="d-flex justify-content-between">
+		<div>
+			@await Component.InvokeAsync("LatestTargets",@User)
+		</div>
 	</div>
 </div>

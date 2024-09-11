@@ -36,7 +36,7 @@ namespace Repository.ContextConfig
 					TargetPeriodTypeId = 2,
 					PeriodLength = 2,
 					Count = 10,
-					PeriodTime = new DateTime(2024, 6, 15)
+					PeriodTime = DateTime.Now.AddDays(-50)
 				});
 		}
 	}

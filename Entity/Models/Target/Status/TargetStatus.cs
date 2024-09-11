@@ -8,6 +8,6 @@
 		public int Second { get; set; }
 		public string ImgHash { get; set; } = string.Empty;
 		public int TargetId { get; set; }
-		public required Target Target { get; set; }
+		public Target Target { get; set; }
 	}
 }

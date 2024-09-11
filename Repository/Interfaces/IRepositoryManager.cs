@@ -4,5 +4,6 @@
 	{
 		IUserRepository UserRepository { get; }
 		ITargetRepository TargetRepository { get; }
+		IAdviceRepository AdviceRepository { get; }
 	}
 }

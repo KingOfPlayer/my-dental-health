@@ -78,9 +78,16 @@ namespace Service
                 .Where(t => t.UserId.Equals(userId))
                 .Where(t => t.Id.Equals(targetId)).SingleOrDefault();
             repositoryManager.TargetRepository.RemoveTarget(_target!);
-        }
+		}
 
-        public List<TargetStatus> GetAllTargetStatus(Target target) => GetAllTargetStatus(target.Id);
+		public List<TargetStatus> GetUsersTargetStatus(User user) => GetUsersAllTargetStatus(user.Id);
+		public List<TargetStatus> GetUsersAllTargetStatus(int userId)
+		{
+			return repositoryManager.TargetRepository.GetAllTargetStatus()
+				.Include(ts=>ts.Target).Where(ts => ts.Target.UserId.Equals(userId)).ToList();
+		}
+
+		public List<TargetStatus> GetAllTargetStatus(Target target) => GetAllTargetStatus(target.Id);
         public List<TargetStatus> GetAllTargetStatus(int targetId)
         {
             return repositoryManager.TargetRepository.GetAllTargetStatus()

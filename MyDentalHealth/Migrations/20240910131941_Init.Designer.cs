@@ -12,7 +12,7 @@ using Repository;
 namespace MyDentalHealth.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240910081008_Init")]
+    [Migration("20240910131941_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -24,6 +24,77 @@ namespace MyDentalHealth.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Entity.Models.Advice.Advice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Advices");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "1",
+                            Name = "1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "2",
+                            Name = "2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "3",
+                            Name = "3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "4",
+                            Name = "4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "5",
+                            Name = "5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "6",
+                            Name = "6"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "7",
+                            Name = "7"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "8",
+                            Name = "8"
+                        });
+                });
 
             modelBuilder.Entity("Entity.Models.Target.Status.TargetStatus", b =>
                 {
@@ -54,6 +125,26 @@ namespace MyDentalHealth.Migrations
                     b.HasIndex("TargetId");
 
                     b.ToTable("TargetStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Attime = new DateTime(2024, 9, 9, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6158),
+                            ImgHash = "",
+                            Minutes = 0,
+                            Second = 10,
+                            TargetId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Attime = new DateTime(2024, 8, 26, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6160),
+                            ImgHash = "",
+                            Minutes = 0,
+                            Second = 10,
+                            TargetId = 1
+                        });
                 });
 
             modelBuilder.Entity("Entity.Models.Target.Target", b =>
@@ -108,7 +199,7 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test",
                             PeriodLength = 1,
-                            PeriodTime = new DateTime(2024, 9, 10, 11, 10, 7, 761, DateTimeKind.Local).AddTicks(1094),
+                            PeriodTime = new DateTime(2024, 9, 10, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6042),
                             TargetPeriodTypeId = 1,
                             TargetPiroityId = 1,
                             UserId = 1
@@ -120,7 +211,7 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test2",
                             PeriodLength = 2,
-                            PeriodTime = new DateTime(2024, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PeriodTime = new DateTime(2024, 7, 22, 16, 19, 41, 17, DateTimeKind.Local).AddTicks(6063),
                             TargetPeriodTypeId = 2,
                             TargetPiroityId = 1,
                             UserId = 1
@@ -302,7 +393,7 @@ namespace MyDentalHealth.Migrations
             modelBuilder.Entity("Entity.Models.Target.Status.TargetStatus", b =>
                 {
                     b.HasOne("Entity.Models.Target.Target", "Target")
-                        .WithMany("TargetStatus")
+                        .WithMany("TargetStatuses")
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -358,7 +449,7 @@ namespace MyDentalHealth.Migrations
 
             modelBuilder.Entity("Entity.Models.Target.Target", b =>
                 {
-                    b.Navigation("TargetStatus");
+                    b.Navigation("TargetStatuses");
                 });
 
             modelBuilder.Entity("Entity.Models.Target.TargetPeriodType", b =>

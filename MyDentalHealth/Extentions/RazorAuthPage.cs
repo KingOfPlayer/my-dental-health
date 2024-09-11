@@ -6,31 +6,39 @@ namespace MyDentalHealth.Extentions
 {
 	public class AuthRazorPage<TModel> : RazorPage<TModel>
 	{
+		private User? user = null;
 		public new User? User
 		{
 			get
 			{
-				int UserId = base.ViewContext.HttpContext.Session.GetJson<int>("UserId");
-				if (UserId != 0)
+				if (user == null)
 				{
-					IServiceManager? serviceManager = Context.RequestServices.CreateScope().ServiceProvider.GetService<IServiceManager>();
-					return serviceManager?.UserService.GetUserWithId(UserId);
+					int UserId = base.ViewContext.HttpContext.Session.GetJson<int>("UserId");
+					if (UserId != 0)
+					{
+						IServiceManager? serviceManager = Context.RequestServices.CreateScope().ServiceProvider.GetService<IServiceManager>();
+						user = serviceManager?.UserService.GetUserWithId(UserId);
+					}
 				}
-				return null;
+				return user;
 			}
 		}
 
+		private List<UserRole>? roles = null;
 		public List<UserRole>? Roles
 		{
 			get
 			{
-				int UserId = base.ViewContext.HttpContext.Session.GetJson<int>("UserId");
-				if (UserId != 0)
+				if(roles == null)
 				{
-					IServiceManager? serviceManager = Context.RequestServices.CreateScope().ServiceProvider.GetService<IServiceManager>();
-					return serviceManager?.UserService.GetUserRolesWithUserId(UserId);
+					int UserId = base.ViewContext.HttpContext.Session.GetJson<int>("UserId");
+					if (UserId != 0)
+					{
+						IServiceManager? serviceManager = Context.RequestServices.CreateScope().ServiceProvider.GetService<IServiceManager>();
+						roles = serviceManager?.UserService.GetUserRolesWithUserId(UserId);
+					}
 				}
-				return null;
+				return roles;
 			}
 		}
 		public override Task ExecuteAsync()

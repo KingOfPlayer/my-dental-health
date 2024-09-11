@@ -9,31 +9,13 @@ namespace MyDentalHealth.Controllers
 	{
 		IServiceManager serviceManager;
 
-        public new User? User
-        {
-            get
-            {
-                int UserId = HttpContext.Session.GetJson<int>("UserId");
-                if (UserId != 0)
-                {
-                    return serviceManager?.UserService.GetUserWithId(UserId);
-                }
-                return null;
-            }
-        }
-
-        public HomeController(IServiceManager serviceManager)
+		public HomeController(IServiceManager serviceManager)
 		{
 			this.serviceManager = serviceManager;
 		}
 
 		public IActionResult Index()
 		{
-            if(User is not null)
-            {
-                return RedirectToAction("Index","MyHome");
-            }
-
             return View();
 		}
 	}

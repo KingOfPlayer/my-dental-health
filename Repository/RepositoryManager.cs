@@ -7,15 +7,18 @@ namespace Repository
 		private readonly RepositoryContext repositoryContext;
 		private readonly IUserRepository userRepository;
 		private readonly ITargetRepository targetRepository;
+		private readonly IAdviceRepository adviceRepository;
 
-        public RepositoryManager(RepositoryContext repositoryContext, IUserRepository userRepository, ITargetRepository targetRepository)
-        {
-            this.repositoryContext = repositoryContext;
-            this.userRepository = userRepository;
-            this.targetRepository = targetRepository;
-        }
+		public RepositoryManager(RepositoryContext repositoryContext, IUserRepository userRepository, ITargetRepository targetRepository, IAdviceRepository adviceRepository)
+		{
+			this.repositoryContext = repositoryContext;
+			this.userRepository = userRepository;
+			this.targetRepository = targetRepository;
+			this.adviceRepository = adviceRepository;
+		}
 
-        public IUserRepository UserRepository => userRepository;
+		public IUserRepository UserRepository => userRepository;
 		public ITargetRepository TargetRepository => targetRepository;
+		public IAdviceRepository AdviceRepository => adviceRepository;
 	}
 }

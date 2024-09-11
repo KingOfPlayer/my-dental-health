@@ -17,7 +17,7 @@ namespace Entity.Models.Target
 		public TargetPeriodType? TargetPeriodType { get; set; }
 		public int PeriodLength { get; set; }
 		public int Count { get; set; }
-		public HashSet<TargetStatus> TargetStatus { get; set; } = new HashSet<TargetStatus>();
+		public HashSet<TargetStatus> TargetStatuses { get; set; } = new HashSet<TargetStatus>();
 
 		public static DateTime GetPeriodEndTime(int TargetPeriodTypeId, DateTime PeriodTime, int PeriodLength)
 		{

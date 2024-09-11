@@ -1,4 +1,21 @@
-﻿@for (int i = 0; i < 50; i++)
-{
-	<h6>OK!</h6>
+﻿
+@if(User is null){
+	<div class="text-center h-50">
+		<h1>My Dental Health</h1>
+		<hr />
+		<p>
+			Set your target for dental Health
+			<br />
+			Track Your target daily, mountly etc.
+			<br />
+			Take care of your health by achieving your goal
+		</p>
+	</div>
+}else{
+	<div>
+		<h1 class="mx-5 px-5 text-center">Hi @User!.Name</h1>
+		<hr />
+
+		@await Component.InvokeAsync("HomeUserSummary", @User)
+	</div>
 }

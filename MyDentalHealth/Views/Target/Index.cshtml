@@ -84,7 +84,7 @@
 						@target.Name
 					</p>
 					<div>
-						@if(target.TargetStatus.Select(ts => ts.Attime > @target.PeriodTime && ts.Attime < endDate).Count() < target.Count){
+						@if(target.TargetStatuses.Select(ts => ts.Attime > @target.PeriodTime && ts.Attime < endDate).Count() < target.Count){
 							<span class="text-end badge text-bg-warning rounded-pill">
 								Not Done
 							</span>
@@ -101,9 +101,9 @@
 					<li class="list-group-item list-group-item-action">Period Date: @target.PeriodTime</li>
 					<li class="list-group-item list-group-item-action">Period End Date: @endDate</li>
 					@{
-						if (target.TargetStatus.FirstOrDefault() is not null)
+						if (target.TargetStatuses.FirstOrDefault() is not null)
 						{
-							<li class="list-group-item list-group-item-action">@target.TargetStatus.FirstOrDefault()?.Attime}</li>
+							<li class="list-group-item list-group-item-action">@target.TargetStatuses.FirstOrDefault()?.Attime}</li>
 						}
 						else
 						{

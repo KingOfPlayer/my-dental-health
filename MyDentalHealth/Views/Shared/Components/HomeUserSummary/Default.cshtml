@@ -1,0 +1,56 @@
+﻿@using Entity.Models.Target.Status
+<div>
+	<p class="fs-2 text-center">There is last 7 Day Summary</p>
+	<div class="row border border-1 rounded-5 ">
+		<div class="col-auto alert alert-info rounded-5 p-5 rounded-end-0 m-0">
+			<p class="fs-5">In Last 7 Day:</p>
+			<p>You added @ViewBag.targetStatuses.Count Status</p>
+			<hr />
+			<i class="fa-solid fa-teeth fa-10x"></i>
+		</div>
+		<div class="col w-100 m-0 p-5">
+			<p class="fs-3">Lastest added Status</p>
+			<hr />
+			<div class="list-group">
+				@if(((List<TargetStatus>)ViewBag.targetStatuses).Count() != 0)
+					@foreach (var t in ((List<TargetStatus>)ViewBag.targetStatuses).GroupBy(ts => ts.Target))
+					{
+						<div class="p-3 list-group-item list-group-item-action">
+
+							<p class="fs-3 px-3">
+								@t.Key.Name
+							</p>
+							<p class="fs-5 px-3">
+								@t.Key.Description
+							</p>
+							<hr />
+							<div class="px-2">
+								@foreach (var ts in t)
+								{
+									<li>
+										@(ts.Minutes == 0 ? "" : $"{ts.Minutes} Minute")
+										@(ts.Second == 0 ? "" : $"{ts.Second} Second")
+										At
+										@ts.Attime
+									</li>
+								}
+							</div>
+						</div>
+					}
+				else
+				{
+					<div class="alert alert-primary">
+
+						<p class="fs-3 px-3">
+							It seems you haven't added any statuses
+						</p>
+						<p class="fs-5 px-3">
+							Now add Target and Status!
+						</p>
+						<hr />
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

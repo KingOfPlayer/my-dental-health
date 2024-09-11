@@ -1,4 +1,5 @@
-﻿using Entity.Models.Target;
+﻿using Entity.Models.Advice;
+using Entity.Models.Target;
 using Entity.Models.Target.Status;
 using Entity.Models.User;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace Repository
 		public DbSet<TargetPiroity> TargetPiroities { get; set; }
 		public DbSet<Target> Targets { get; set; }
 		public DbSet<TargetStatus> TargetStatus { get; set; }
+		public DbSet<Advice> Advices { get; set; }
 
 		public RepositoryContext(DbContextOptions<RepositoryContext> options)
 		: base(options)
@@ -31,6 +33,8 @@ namespace Repository
 			modelBuilder.ApplyConfiguration(new TargetPeriodTypeConfig());
 			modelBuilder.ApplyConfiguration(new TargetPiroityConfig());
 			modelBuilder.ApplyConfiguration(new TargetConfig());
+			modelBuilder.ApplyConfiguration(new TargetStatusConfig());
+			modelBuilder.ApplyConfiguration(new AdviceConfig());
 		}
 	}
 }

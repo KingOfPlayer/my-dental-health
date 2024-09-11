@@ -14,15 +14,17 @@ namespace MyDentalHealth.Extentions
 			serviceDescriptors.AddScoped<IRepositoryManager, RepositoryManager>();
 			serviceDescriptors.AddScoped<IUserRepository, UserRepository>();
 			serviceDescriptors.AddScoped<ITargetRepository, TargetRepository>();
+			serviceDescriptors.AddScoped<IAdviceRepository, AdviceRepository>();
+			
 		}
 		public static void ConfigureService(this IServiceCollection serviceDescriptors)
 		{
 			serviceDescriptors.AddScoped<IServiceManager, ServiceManager>();
 			serviceDescriptors.AddScoped<IUserService, UserService>();
 			serviceDescriptors.AddScoped<ITargetService, TargetService>();
+			serviceDescriptors.AddScoped<IAdviceService, AdviceService>();
 
 			serviceDescriptors.AddAutoMapper(typeof(MappingProfile));
-
 		}
 		public static void ConfigureSession(this IServiceCollection serviceDescriptors)
 		{

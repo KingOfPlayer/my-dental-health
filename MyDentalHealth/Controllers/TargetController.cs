@@ -17,29 +17,38 @@ namespace MyDentalHealth.Controllers
 		private readonly IServiceManager serviceManager;
 		private readonly IMapper mapper;
 
+		private User? user;
 		public new User? User
 		{
 			get
 			{
-				int UserId = HttpContext.Session.GetJson<int>("UserId");
-				if (UserId != 0)
+				if (user == null)
 				{
-					return serviceManager?.UserService.GetUserWithId(UserId);
+					int UserId = HttpContext.Session.GetJson<int>("UserId");
+					if (UserId != 0)
+					{
+						user = serviceManager?.UserService.GetUserWithId(UserId);
+					}
 				}
-				return null;
+				return user;
 			}
 		}
 
+		private List<UserRole>? roles;
 		public List<UserRole>? Roles
 		{
 			get
 			{
-				int UserId = HttpContext.Session.GetJson<int>("UserId");
-				if (UserId != 0)
+				if (roles == null)
 				{
-					return serviceManager?.UserService.GetUserRolesWithUserId(UserId);
+					int UserId = HttpContext.Session.GetJson<int>("UserId");
+					if (UserId != 0)
+					{
+						roles = serviceManager?.UserService.GetUserRolesWithUserId(UserId);
+						return roles;
+					}
 				}
-				return null;
+				return roles;
 			}
 		}
 
