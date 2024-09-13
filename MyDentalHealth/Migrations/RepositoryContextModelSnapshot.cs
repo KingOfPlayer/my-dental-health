@@ -139,7 +139,7 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 1,
-                            Attime = new DateTime(2024, 9, 10, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2904),
+                            Attime = new DateTime(2024, 9, 13, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(7093),
                             ImgHash = "",
                             Minutes = 0,
                             Second = 10,
@@ -148,7 +148,7 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 2,
-                            Attime = new DateTime(2024, 8, 27, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2906),
+                            Attime = new DateTime(2024, 8, 30, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(7096),
                             ImgHash = "",
                             Minutes = 0,
                             Second = 10,
@@ -208,7 +208,7 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test",
                             PeriodLength = 1,
-                            PeriodTime = new DateTime(2024, 9, 11, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2786),
+                            PeriodTime = new DateTime(2024, 9, 14, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(6932),
                             TargetPeriodTypeId = 1,
                             TargetPiroityId = 1,
                             UserId = 1
@@ -220,7 +220,7 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test2",
                             PeriodLength = 2,
-                            PeriodTime = new DateTime(2024, 7, 23, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2805),
+                            PeriodTime = new DateTime(2024, 7, 26, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(6950),
                             TargetPeriodTypeId = 2,
                             TargetPiroityId = 1,
                             UserId = 1

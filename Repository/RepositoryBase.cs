@@ -24,8 +24,8 @@ namespace Repository
 		{
 			repositoryContext.Set<T>().Remove(entity);
 			Save<T>();
-        }
-        public void RemoveAll<T>(List<T> entity) where T : class
+		}
+        public void Remove<T>(List<T> entity) where T : class
         {
             repositoryContext.Set<T>().RemoveRange(entity);
             Save<T>();
@@ -67,5 +67,9 @@ namespace Repository
 			return repositoryContext.Set<T>();
 		}
 
+		public void Attach<T>(T entity) where T : class
+		{
+			repositoryContext.Set<T>().Attach(entity);
+		}
 	}
 }

@@ -22,7 +22,8 @@ namespace Repository
 		public void UpdateTargetRange(List<Target> target) => UpdateRange(target);
 		public void RemoveTarget(Target target) => Remove(target);
         public void RemoveTarget(List<Target> target) => Remove(target);
-        public IQueryable<Target> GetAllTargets() => GetAll<Target>().
+		public void AttachTarget(Target target) => Attach(target);
+		public IQueryable<Target> GetAllTargets() => GetAll<Target>().
             Include(target => target.TargetPeriodType)
             .Include(target => target.TargetPiroity)
             .Include(target => target.TargetStatuses.OrderByDescending(ts => ts.Attime))

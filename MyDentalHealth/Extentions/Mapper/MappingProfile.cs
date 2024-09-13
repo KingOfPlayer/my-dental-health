@@ -2,6 +2,7 @@
 using Entity.Models.Dto;
 using Entity.Models.Dto.Profile;
 using Entity.Models.Target;
+using Entity.Models.Target.Status;
 using Entity.Models.User;
 
 namespace MyDentalHealth.Extentions.Mapper
@@ -22,6 +23,9 @@ namespace MyDentalHealth.Extentions.Mapper
 
             //Target Dto
             CreateMap<TargetDto, Target>().ReverseMap();
+
+            //Target Status Dto
+            CreateMap<TargetStatusDto, TargetStatus>().ReverseMap();
         }
     }
 }

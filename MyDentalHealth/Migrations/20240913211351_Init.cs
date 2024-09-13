@@ -225,8 +225,8 @@ namespace MyDentalHealth.Migrations
                 columns: new[] { "Id", "Count", "Description", "Name", "PeriodLength", "PeriodTime", "TargetPeriodTypeId", "TargetPiroityId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 11, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2786), 1, 1, 1 },
-                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 7, 23, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2805), 2, 1, 1 }
+                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 14, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(6932), 1, 1, 1 },
+                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 7, 26, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(6950), 2, 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -243,8 +243,8 @@ namespace MyDentalHealth.Migrations
                 columns: new[] { "Id", "Attime", "ImgHash", "Minutes", "Second", "TargetId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 9, 10, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2904), "", 0, 10, 1 },
-                    { 2, new DateTime(2024, 8, 27, 11, 15, 43, 871, DateTimeKind.Local).AddTicks(2906), "", 0, 10, 1 }
+                    { 1, new DateTime(2024, 9, 13, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(7093), "", 0, 10, 1 },
+                    { 2, new DateTime(2024, 8, 30, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(7096), "", 0, 10, 1 }
                 });
 
             migrationBuilder.CreateIndex(

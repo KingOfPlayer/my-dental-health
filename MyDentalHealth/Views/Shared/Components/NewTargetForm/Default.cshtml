@@ -1,0 +1,42 @@
+﻿@model TargetDto
+<p class="fs-1 px-5 text-black">New Target</p>
+<hr />
+
+<form method="post" asp-controller="Target" asp-action="CreateTarget" class="needs-validation px-4" novalidate>
+
+	<div class="form-floating my-2">
+		<input asp-for="Name" placeholder="name@example.com" class="form-control" title="">
+		<label asp-for="Name">Target Name</label>
+		<div id="Name" class="invalid-feedback">
+		</div>
+	</div>
+	<div class="form-floating my-2">
+		<textarea asp-for="Description" placeholder="Description" class="form-control" title="" style="height: 100px"></textarea>
+		<label asp-for="Description">Description</label>
+		<div id="Description" class="invalid-feedback">
+		</div>
+	</div>
+	<div class="form-floating my-2">
+		<select asp-for="TargetPiroityId" asp-items="@ViewBag.TargetPiroities" class="form-select"></select>
+		<label asp-for="TargetPiroityId">Target Piroity</label>
+	</div>
+	<div class="form-floating my-2">
+		<select asp-for="TargetPeriodTypeId" asp-items="@ViewBag.TargetPeriodTypes" class="form-select"></select>
+		<label asp-for="TargetPeriodTypeId">Target Period Type</label>
+	</div>
+	<div class="form-floating my-2">
+		<input asp-for="PeriodLength" class="form-control" min="1" value="1" title="">
+		<label asp-for="PeriodLength">Period Length</label>
+		<div id="PeriodLength" class="invalid-feedback">
+		</div>
+	</div>
+	<div class="form-floating my-2">
+		<input asp-for="Count" class="form-control" min="1" value="1" title="">
+		<label asp-for="Count"></label>
+		<div id="Count" class="invalid-feedback">
+		</div>
+	</div>
+	<div class="form-group my-2">
+		<button type="submit" class="btn btn-primary w-100"><i class="fa-solid fa-plus"></i> Create New Target</button>
+	</div>
+</form>

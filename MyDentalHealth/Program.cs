@@ -9,7 +9,7 @@ builder.Services.ConfigureSqlConnection(builder);
 
 builder.Services.ConfigureRepository();
 builder.Services.ConfigureService();
-builder.Services.ConfigureSession();
+builder.Services.ConfigureSession(builder);
 
 var app = builder.Build();
 

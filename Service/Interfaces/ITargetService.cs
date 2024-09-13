@@ -12,7 +12,7 @@ namespace Service.Interfaces
     public interface ITargetService
     {
         void CreateTarget(Target target);
-        void CreateTarget(TargetStatus targetStatus);
+        void CreateTargetStatus(TargetStatus targetStatus);
         List<TargetStatus> GetAllTargetStatus(Target target);
         List<TargetStatus> GetAllTargetStatus(int targetId);
 		List<TargetPeriodType> GetTargetPeriodTypes();
@@ -24,10 +24,11 @@ namespace Service.Interfaces
 		Task<List<Target>> GetUserTargets(User user);
 		Task<List<Target>> GetUserTargets(int userId);
         void RemoveTarget(Target target);
-        void RemoveTarget(Target target, int userId);
-        void RemoveTarget(int targetId, int userId);
-        void RemoveTargetStatus(TargetStatus targetStatus);
-        void RemoveTargetStatus(int targetStatusId);
+        Task RemoveTarget(Target target, int userId);
+        Task RemoveTarget(int targetId, int userId);
+		void RemoveTargetStatus(TargetStatus targetStatus);
+		void RemoveTargetStatus(List<TargetStatus> targetStatus);
+		void RemoveTargetStatus(int targetStatusId);
         void UpdateTarget(Target target);
 		Task UpdateTargetCheckDates(int userId);
 		Task UpdateTargetCheckDates(User user);

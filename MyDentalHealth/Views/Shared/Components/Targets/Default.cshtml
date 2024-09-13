@@ -3,123 +3,116 @@
 <hr />
 <div class="d-flex justify-content-between align-items-start px-4">
 	<div class="btn-group">
-		
-		<a class="btn btn-success" asp-controller="Target" asp-action="CreateTarget" asp-route-c="@ViewContext.HttpContext.Request.Path"><i class="fa-plus"></i> Create New Target</a>
+
+		<div>
+			<button class="btn btn-success mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#newTarget" aria-expanded="false" aria-controls="newTarget"><i class="fa-plus"></i> Create New Target</button>
+			
+		</div>
 	</div>
+	<!--
 	<div>
 		<form class="input-group">
 			<input class="input-group-text" type="search" name="" value="" />
 			<button class="btn btn-outline-success" type="submit">Search</button>
 		</form>
 	</div>
+	-->
 </div>
-<div class="d-flex flex-column px-3">
-	@{
-		string GetPiroity(int PiroityId)
-		{
-			switch (PiroityId)
+<div class="px-3">
+	<div class="collapse multi-collapse" id="newTarget">
+		<div class="border border-1 rounded p-5 my-3">
+			<div id="formDiv">
+				@await Component.InvokeAsync("NewTargetForm")
+			</div>
+		</div>
+	</div>
+	<div class="d-flex flex-column">
+		@{
+			string GetPiroity(int PiroityId)
 			{
-				case 1:
-					return "text-bg-danger";
-				case 2:
-					return "text-bg-warning";
-				default:
-					return "text-bg-info";
+				switch (PiroityId)
+				{
+					case 1:
+						return "text-bg-danger";
+					case 2:
+						return "text-bg-warning";
+					default:
+						return "text-bg-info";
+				}
 			}
-		}
 
-		DateTime addTime(DateTime dateTime, int TargetPeriodTypeId, int PeridodLength)
-		{
-			switch (TargetPeriodTypeId)
+			DateTime addTime(DateTime dateTime, int TargetPeriodTypeId, int PeridodLength)
 			{
-				case 1:
-					return dateTime.AddDays(PeridodLength);
-				case 2:
-					return dateTime.AddDays(7 * PeridodLength);
-				case 3:
-					return dateTime.AddMonths(PeridodLength);
-				case 4:
-					return dateTime.AddYears(PeridodLength);
-				default:
-					return DateTime.Now;
+				switch (TargetPeriodTypeId)
+				{
+					case 1:
+						return dateTime.AddDays(PeridodLength);
+					case 2:
+						return dateTime.AddDays(7 * PeridodLength);
+					case 3:
+						return dateTime.AddMonths(PeridodLength);
+					case 4:
+						return dateTime.AddYears(PeridodLength);
+					default:
+						return DateTime.Now;
+				}
 			}
-		}
+			if (((List<Target>)ViewBag.Targets).Count() > 0){
+				foreach (Target target in ViewBag.Targets)
+				{
+					var endDate = @addTime(target.PeriodTime, target.TargetPeriodType!.Id, target.PeriodLength);
 
-
-		/*
-		for(int i = 0; i<10; i++)
-		{
-		<div class="border rounded px-5 py-5 my-3">
-		<div class="fs-3 px-2 d-flex justify-content-between align-items-start">
-		<p>
-		My Target Name
-		</p>
-		<span class="text-end badge text-bg-info rounded-pill">
-		Öncelik
-		</span>
-		</div>
-		<hr />
-		<div class="px-2 list-group">
-		<li class="list-group-item list-group-item-action">Description</li>
-		<li class="list-group-item list-group-item-action">Period / Count</li>
-		<li class="list-group-item list-group-item-action">Last period time</li>
-		<li class="list-group-item list-group-item-action">Lastest status added date</li>
-		</div>
-		<div class="d-flex justify-content-end my-3 px-2">
-		<div class="btn-group">
-		<a class="btn btn-outline-success"><i class="fa-plus"></i> Add New Target Status</a>
-		<a class="btn btn-primary">Details</a>
-		</div>
-		</div>
-		</div>
-		}
-		*/
-		foreach (Target target in ViewBag.Targets)
-		{
-			var endDate = @addTime(target.PeriodTime, target.TargetPeriodType!.Id, target.PeriodLength);
-
-				<div class="border rounded px-5 py-5 my-3">
-					<div class="fs-3 px-5 d-flex justify-content-between align-items-start">
-						<p>
-							@target.Name
-						</p>
-						<div>
-							@if (target.TargetStatuses.Select(ts => ts.Attime > @target.PeriodTime && ts.Attime < endDate).Count() < target.Count)
-						{
-								<span class="text-end badge text-bg-warning rounded-pill">
-									Not Done
+					<div class="border rounded p-5 my-3">
+						<div class="fs-3 px-5 d-flex justify-content-between align-items-start">
+							<p>
+								@target.Name
+							</p>
+							<div>
+								@if (target.TargetStatuses.Select(ts => ts.Attime > @target.PeriodTime && ts.Attime < endDate).Count() < target.Count)
+							{
+									<span class="text-end badge text-bg-warning rounded-pill">
+										Not Done
+									</span>
+							}
+								<span class="text-end badge @GetPiroity(target.TargetPiroityId) rounded-pill">
+									@target.TargetPiroity!.Name
 								</span>
-						}
-							<span class="text-end badge @GetPiroity(target.TargetPiroityId) rounded-pill">
-								@target.TargetPiroity!.Name
-							</span>
+							</div>
 						</div>
-					</div>
-					<hr />
-					<div class="px-4 list-group">
-						<li class="list-group-item list-group-item-action">Description: @target.Description</li>
-						<li class="list-group-item list-group-item-action">@target.Count times per @target.PeriodLength @target.TargetPeriodType.Name</li>
-						<li class="list-group-item list-group-item-action">Period Date: @target.PeriodTime</li>
-						<li class="list-group-item list-group-item-action">Period End Date: @endDate</li>
-						@{
-						if (target.TargetStatuses.FirstOrDefault() is not null)
-						{
+						<hr />
+						<div class="px-4 list-group">
+							<li class="list-group-item list-group-item-action">Description: @target.Description</li>
+							<li class="list-group-item list-group-item-action">@target.Count times per @target.PeriodLength @target.TargetPeriodType.Name</li>
+							<li class="list-group-item list-group-item-action">Period Date: @target.PeriodTime</li>
+							<li class="list-group-item list-group-item-action">Period End Date: @endDate</li>
+							@{
+								if (target.TargetStatuses.FirstOrDefault() is not null)
+								{
 									<li class="list-group-item list-group-item-action">@target.TargetStatuses.FirstOrDefault()?.Attime}</li>
-						}
-						else
-						{
+								}
+								else
+								{
 									<li class="list-group-item list-group-item-action text-info">No status added yet</li>
-						}
-						}
-					</div>
-					<div class="d-flex justify-content-end my-3 px-4">
-						<div class="btn-group">
-							<a class="btn btn-outline-success" asp-action="NewTargetStatus" asp-route-TargetId="@target.Id"><i class="fa-plus"></i> Add New Target Status</a>
-							<a class="btn btn-primary"><i class="fa-solid fa-bars"></i> Edit Target</a>
-							<a class="btn btn-primary" asp-action="TargetDetails" asp-route-TargetId="@target.Id">Details</a>
+								}
+							}
+						</div>
+						<div class="d-flex justify-content-end my-3 px-4">
+							<div class="btn-group">
+								<button asp-controller="Target" asp-action="RemoveTarget" asp-route-TargetId="@target.Id" asp-route-Validate="false" modelttile="Remove The Target" modelicon="fa-solid fa-trash fa-shake fa-10x m-5 px-5" modeltext="Remove The @target.Name</br>Are u Sure?" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Remove</button>
+								<button asp-controller="Target" asp-action="UpdateTarget" asp-route-TargetId="@target.Id" asp-route-Validate="false" modelttile="Edit The Target" modeltext="Remove The Target" class="btn btn-primary"><i class="fa-solid fa-bars"></i> Edit Target</button>
+							</div>
 						</div>
 					</div>
+				}
+			} 
+			else
+			{
+				<div class="alert alert-warning my-3">
+					<p class="fs-4 px-4">Seems you haven't any target</p>
+					<hr />
+					<p class="px-3">Lets add new target!</p>
 				</div>
+			}
 		}
-	}
+	</div>
 </div>

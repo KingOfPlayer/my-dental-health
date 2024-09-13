@@ -26,9 +26,14 @@ namespace MyDentalHealth.Extentions
 
 			serviceDescriptors.AddAutoMapper(typeof(MappingProfile));
 		}
-		public static void ConfigureSession(this IServiceCollection serviceDescriptors)
+		public static void ConfigureSession(this IServiceCollection serviceDescriptors, WebApplicationBuilder builder)
 		{
-			serviceDescriptors.AddDistributedMemoryCache();
+			serviceDescriptors.AddDistributedSqlServerCache(options =>
+			{
+				options.ConnectionString = builder.Configuration.GetConnectionString("mssqlconnection");
+				options.SchemaName = "dbo";
+				options.TableName = "UserSessions";
+			});
 
 			serviceDescriptors.AddSession(options =>
 			{

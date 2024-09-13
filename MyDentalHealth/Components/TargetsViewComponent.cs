@@ -1,4 +1,5 @@
-﻿using Entity.Models.Target;
+﻿using Entity.Models.Dto;
+using Entity.Models.Target;
 using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;

@@ -18,7 +18,7 @@ namespace MyDentalHealth.Components
 
 			await serviceManager.TargetService.UpdateTargetCheckDates(user.Id);
 			ViewBag.targets = await serviceManager.TargetService.GetUserTargets(user);
-			ViewBag.targetStatuses = serviceManager.TargetService.GetUsersTargetStatus(user).Where(ts => DateTime.Now.AddDays(-7) < ts.Attime).ToList();
+			ViewBag.targetStatuses = serviceManager.TargetService.GetUsersTargetStatus(user).ToList();
 			return View();
 		}
 	}

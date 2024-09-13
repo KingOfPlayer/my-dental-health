@@ -3,6 +3,7 @@ using Entity.Models.Target;
 using Entity.Models.Target.Status;
 using Entity.Models.User;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 using Repository.Interfaces;
 using Service.Interfaces;
 using System;
@@ -71,20 +72,23 @@ namespace Service
         {
             repositoryManager.TargetRepository.RemoveTarget(target);
         }
-        public void RemoveTarget(Target target, int userId) => RemoveTarget(target.Id, userId);
-        public void RemoveTarget(int targetId, int userId)
+        public async Task RemoveTarget(Target target, int userId) => await RemoveTarget(target.Id, userId);
+		public void RemoveTarget(List<Target> targets)
+		{
+			
+			repositoryManager.TargetRepository.RemoveTarget(targets);
+		}
+		public async Task RemoveTarget(int targetId, int userId)
         {
-            Target? _target = repositoryManager.TargetRepository.GetAllTargets()
-                .Where(t => t.UserId.Equals(userId))
-                .Where(t => t.Id.Equals(targetId)).SingleOrDefault();
-            repositoryManager.TargetRepository.RemoveTarget(_target!);
+			List<Target> targets = await repositoryManager.TargetRepository.GetAllTargets().Where(t => t.Id.Equals(targetId) && t.UserId.Equals(userId)).ToListAsync();
+            repositoryManager.TargetRepository.RemoveTarget(targets);
 		}
 
 		public List<TargetStatus> GetUsersTargetStatus(User user) => GetUsersAllTargetStatus(user.Id);
 		public List<TargetStatus> GetUsersAllTargetStatus(int userId)
 		{
 			return repositoryManager.TargetRepository.GetAllTargetStatus()
-				.Include(ts=>ts.Target).Where(ts => ts.Target.UserId.Equals(userId)).ToList();
+				.Include(ts=>ts.Target).Where(ts => ts.Target.UserId.Equals(userId)).AsNoTracking().ToList();
 		}
 
 		public List<TargetStatus> GetAllTargetStatus(Target target) => GetAllTargetStatus(target.Id);
@@ -99,7 +103,7 @@ namespace Service
             return repositoryManager.TargetRepository.GetAllTargetStatus()
                 .Where(ts => ts.Id.Equals(targetStatusId)).SingleOrDefault();
         }
-        public void CreateTarget(TargetStatus targetStatus)
+        public void CreateTargetStatus(TargetStatus targetStatus)
         {
             repositoryManager.TargetRepository.CreateTargetStatus(targetStatus);
         }
@@ -108,6 +112,10 @@ namespace Service
             repositoryManager.TargetRepository.UpdateTargetStatus(targetStatus);
         }
         public void RemoveTargetStatus(TargetStatus targetStatus)
+        {
+            repositoryManager.TargetRepository.RemoveTargetStatus(targetStatus);
+        }
+        public void RemoveTargetStatus(List<TargetStatus> targetStatus)
         {
             repositoryManager.TargetRepository.RemoveTargetStatus(targetStatus);
         }
