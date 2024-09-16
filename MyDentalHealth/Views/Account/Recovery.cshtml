@@ -28,11 +28,6 @@
 			@ViewData?.ModelState["Failed"]?.Errors?[0].ErrorMessage
 		</div>
 	}
-	@if (ViewData?.ModelState["Temp"] is not null)
-	{
-		<p>temp</p>
-		<a href="@ViewData?.ModelState["Temp"]?.Errors?[0].ErrorMessage">Reset Page</a>
-	}
 	<div class="form-group my-2">
 		<button type="submit" class="btn btn-primary w-100">Send Recovery Mail <i class="fa-solid fa-envelope"></i></button>
 		<p class="text-center">

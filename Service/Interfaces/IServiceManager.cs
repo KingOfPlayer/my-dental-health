@@ -5,5 +5,6 @@
 		IUserService UserService { get; }
 		ITargetService TargetService { get; }
 		IAdviceService AdviceService { get; }
+		IMailService MailService { get; }
 	}
 }

@@ -120,7 +120,8 @@ namespace MyDentalHealth.Controllers
 					Hash = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes($"{user.Password}{timestamp}{user.Id}")));
 				}
 				ModelState.AddModelError("Success", "Sended Mail");
-				ModelState.AddModelError("Temp", $"http://localhost:5095/Account/ResetPassword?h={Hash}&t={Convert.ToBase64String(Encoding.UTF8.GetBytes(timestamp))}&u={user.Id}");
+
+				await serviceManager.MailService.SendRevoceryMail(user.Email, $"http://localhost:5095/Account/ResetPassword?h={Hash}&t={Convert.ToBase64String(Encoding.UTF8.GetBytes(timestamp))}&u={user.Id}");
 				return View(recoveryEmailDto);
 			}
 			ModelState.AddModelError("Failed", "This email is not used");

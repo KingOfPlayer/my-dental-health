@@ -23,6 +23,7 @@ namespace MyDentalHealth.Extentions
 			serviceDescriptors.AddScoped<IUserService, UserService>();
 			serviceDescriptors.AddScoped<ITargetService, TargetService>();
 			serviceDescriptors.AddScoped<IAdviceService, AdviceService>();
+			serviceDescriptors.AddSingleton<IMailService, MailService>();
 
 			serviceDescriptors.AddAutoMapper(typeof(MappingProfile));
 		}

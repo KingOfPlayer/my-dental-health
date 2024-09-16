@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>MyDentalHealth</RootNamespace>
+    <UserSecretsId>ea06c969-8102-43a8-9dea-c5f34b3df512</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
