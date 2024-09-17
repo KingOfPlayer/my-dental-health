@@ -121,7 +121,7 @@ namespace MyDentalHealth.Controllers
 				}
 				ModelState.AddModelError("Success", "Sended Mail");
 
-				await serviceManager.MailService.SendRevoceryMail(user.Email, $"http://localhost:5095/Account/ResetPassword?h={Hash}&t={Convert.ToBase64String(Encoding.UTF8.GetBytes(timestamp))}&u={user.Id}");
+				await serviceManager.MailService.SendRevoceryMail(user.Email,user.Name , $"http://localhost:5095/Account/ResetPassword?h={Hash}&t={Convert.ToBase64String(Encoding.UTF8.GetBytes(timestamp))}&u={user.Id}");
 				return View(recoveryEmailDto);
 			}
 			ModelState.AddModelError("Failed", "This email is not used");
