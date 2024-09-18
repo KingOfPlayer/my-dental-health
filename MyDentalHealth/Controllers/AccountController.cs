@@ -92,6 +92,7 @@ namespace MyDentalHealth.Controllers
 				if (user is null)
 				{
 					serviceManager.UserService.CreateNewUser(newUserDto);
+					await serviceManager.MailService.SendNewUserMail(newUserDto.Email, newUserDto.Name);
 					return RedirectToAction("Singin");
 				}
 				else
