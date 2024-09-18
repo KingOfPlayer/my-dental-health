@@ -12,7 +12,7 @@
 			<hr />
 			<div class="list-group">
 				@if(((List<TargetStatus>)ViewBag.targetStatuses).Count() != 0)
-					@foreach (var t in ((List<TargetStatus>)ViewBag.targetStatuses).GroupBy(t => new { t.Target.Name,t.Target.Description,t.TargetId }))
+					@foreach (var t in ((List<TargetStatus>)ViewBag.targetStatuses).GroupBy(t => new { t.Target!.Name,t.Target.Description,t.TargetId }))
 					{
 						<div class="p-3 list-group-item list-group-item-action">
 

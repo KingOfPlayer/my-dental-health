@@ -9,6 +9,7 @@ namespace Repository
 {
 	public class RepositoryContext : DbContext
 	{
+		public DbSet<UserSession> UserSessions { get; set; }
 		public DbSet<UserRole> UserRoles { get; set; }
 		public DbSet<User> Users { get; set; }
 		public DbSet<UserUserRole> UserUserRoles { get; set; }

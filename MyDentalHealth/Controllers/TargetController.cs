@@ -73,7 +73,7 @@ namespace MyDentalHealth.Controllers
 				serviceManager.TargetService.CreateTarget(target);
 				return Json(new { success = true , clear = true});
 			}
-			var errors = ModelState.Where(err => err.Value.Errors.Count() > 0).Select(err => new {Key = err.Key,errs= err.Value.Errors.Select(x => x.ErrorMessage)});
+			var errors = ModelState.Where(err => err.Value?.Errors.Count() > 0).Select(err => new {Key = err.Key,errs= err.Value?.Errors.Select(x => x.ErrorMessage)});
 			return Json(new { success = false , errors });
 		}
 
@@ -103,7 +103,7 @@ namespace MyDentalHealth.Controllers
 					return Json(new { success = true, clear = true });
 				}
 			}
-			var errors = ModelState.Where(err => err.Value.Errors.Count() > 0).Select(err => new { Key = err.Key, errs = err.Value.Errors.Select(x => x.ErrorMessage) });
+			var errors = ModelState.Where(err => err.Value?.Errors.Count() > 0).Select(err => new { Key = err.Key, errs = err.Value?.Errors.Select(x => x.ErrorMessage) });
 			return Json(new { success = false, errors });
 		}
 		

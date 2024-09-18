@@ -84,6 +84,21 @@ namespace MyDentalHealth.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserSessions",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(449)", nullable: false),
+                    Value = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ExpiresAtTime = table.Column<DateTimeOffset>(type: "datetimeoffset(7)", nullable: false),
+                    SlidingExpirationInSeconds = table.Column<long>(type: "bigint", nullable: true),
+                    AbsoluteExpiration = table.Column<DateTimeOffset>(type: "datetimeoffset(7)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSessions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Targets",
                 columns: table => new
                 {
@@ -218,15 +233,15 @@ namespace MyDentalHealth.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "BirthdayDate", "Email", "Name", "Password", "Surname" },
-                values: new object[] { 1, new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", "admin", "YP50QG5/NT7ZefNQ8vu2ouhpCl+n0bDDKYPR2LP5X2c=", "admin" });
+                values: new object[] { 1, new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", "admin", "elZ/nqXsL8E8T1V+9ZPb0bI4HZD0Sc7/ok9DdfxVFjQuGHj+Scya3q9wLXiX+I36", "admin" });
 
             migrationBuilder.InsertData(
                 table: "Targets",
                 columns: new[] { "Id", "Count", "Description", "Name", "PeriodLength", "PeriodTime", "TargetPeriodTypeId", "TargetPiroityId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 14, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(6932), 1, 1, 1 },
-                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 7, 26, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(6950), 2, 1, 1 }
+                    { 1, 1, "My Description", "My Target Test", 1, new DateTime(2024, 9, 18, 12, 1, 23, 812, DateTimeKind.Local).AddTicks(1963), 1, 1, 1 },
+                    { 2, 10, "My Description", "My Target Test2", 2, new DateTime(2024, 7, 30, 12, 1, 23, 812, DateTimeKind.Local).AddTicks(1986), 2, 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -243,8 +258,8 @@ namespace MyDentalHealth.Migrations
                 columns: new[] { "Id", "Attime", "ImgHash", "Minutes", "Second", "TargetId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 9, 13, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(7093), "", 0, 10, 1 },
-                    { 2, new DateTime(2024, 8, 30, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(7096), "", 0, 10, 1 }
+                    { 1, new DateTime(2024, 9, 17, 12, 1, 23, 812, DateTimeKind.Local).AddTicks(2115), "", 0, 10, 1 },
+                    { 2, new DateTime(2024, 9, 3, 12, 1, 23, 812, DateTimeKind.Local).AddTicks(2118), "", 0, 10, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -281,6 +296,9 @@ namespace MyDentalHealth.Migrations
 
             migrationBuilder.DropTable(
                 name: "TargetStatus");
+
+            migrationBuilder.DropTable(
+                name: "UserSessions");
 
             migrationBuilder.DropTable(
                 name: "UserUserRoles");

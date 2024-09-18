@@ -88,7 +88,7 @@ namespace Service
 		public List<TargetStatus> GetUsersAllTargetStatus(int userId)
 		{
 			return repositoryManager.TargetRepository.GetAllTargetStatus()
-				.Include(ts=>ts.Target).Where(ts => ts.Target.UserId.Equals(userId)).AsNoTracking().ToList();
+				.Include(ts=>ts.Target).Where(ts => ts.Target!.UserId.Equals(userId)).AsNoTracking().ToList();
 		}
 
 		public List<TargetStatus> GetAllTargetStatus(Target target) => GetAllTargetStatus(target.Id);

@@ -18,9 +18,9 @@ namespace Entity.Models.User
 		public static string HashPassword(string Password)
 		{
 			string h_Password = "";
-			using (SHA256 sHA256 = SHA256.Create())
+			using (SHA384 SHA384 = SHA384.Create())
 			{
-				h_Password = Convert.ToBase64String(sHA256.ComputeHash(Encoding.UTF8.GetBytes(Password)));
+				h_Password = Convert.ToBase64String(SHA384.ComputeHash(Encoding.UTF8.GetBytes(Password)));
 			}
 			return h_Password;
 		}

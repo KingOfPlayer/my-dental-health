@@ -12,7 +12,7 @@ using Repository;
 namespace MyDentalHealth.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240913211351_Init")]
+    [Migration("20240918090124_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -142,7 +142,7 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 1,
-                            Attime = new DateTime(2024, 9, 13, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(7093),
+                            Attime = new DateTime(2024, 9, 17, 12, 1, 23, 812, DateTimeKind.Local).AddTicks(2115),
                             ImgHash = "",
                             Minutes = 0,
                             Second = 10,
@@ -151,7 +151,7 @@ namespace MyDentalHealth.Migrations
                         new
                         {
                             Id = 2,
-                            Attime = new DateTime(2024, 8, 30, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(7096),
+                            Attime = new DateTime(2024, 9, 3, 12, 1, 23, 812, DateTimeKind.Local).AddTicks(2118),
                             ImgHash = "",
                             Minutes = 0,
                             Second = 10,
@@ -211,7 +211,7 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test",
                             PeriodLength = 1,
-                            PeriodTime = new DateTime(2024, 9, 14, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(6932),
+                            PeriodTime = new DateTime(2024, 9, 18, 12, 1, 23, 812, DateTimeKind.Local).AddTicks(1963),
                             TargetPeriodTypeId = 1,
                             TargetPiroityId = 1,
                             UserId = 1
@@ -223,7 +223,7 @@ namespace MyDentalHealth.Migrations
                             Description = "My Description",
                             Name = "My Target Test2",
                             PeriodLength = 2,
-                            PeriodTime = new DateTime(2024, 7, 26, 0, 13, 50, 900, DateTimeKind.Local).AddTicks(6950),
+                            PeriodTime = new DateTime(2024, 7, 30, 12, 1, 23, 812, DateTimeKind.Local).AddTicks(1986),
                             TargetPeriodTypeId = 2,
                             TargetPiroityId = 1,
                             UserId = 1
@@ -341,7 +341,7 @@ namespace MyDentalHealth.Migrations
                             BirthdayDate = new DateTime(1999, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             Name = "admin",
-                            Password = "YP50QG5/NT7ZefNQ8vu2ouhpCl+n0bDDKYPR2LP5X2c=",
+                            Password = "elZ/nqXsL8E8T1V+9ZPb0bI4HZD0Sc7/ok9DdfxVFjQuGHj+Scya3q9wLXiX+I36",
                             Surname = "admin"
                         });
                 });
@@ -373,6 +373,29 @@ namespace MyDentalHealth.Migrations
                             Id = 2,
                             Name = "User"
                         });
+                });
+
+            modelBuilder.Entity("Entity.Models.User.UserSession", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(449)");
+
+                    b.Property<DateTimeOffset?>("AbsoluteExpiration")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<DateTimeOffset>("ExpiresAtTime")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<long?>("SlidingExpirationInSeconds")
+                        .HasColumnType("bigint");
+
+                    b.Property<byte[]>("Value")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserSessions");
                 });
 
             modelBuilder.Entity("Entity.Models.User.UserUserRole", b =>
