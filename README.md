@@ -15,7 +15,7 @@
 		>dotnet user-secrets set "EmailSettings:Password" "-------"<br>
 		>dotnet user-secrets set "EmailSettings:FromEmail" "------@-----"<br>
  2. Run `MyDentalHealth/RefleshDatabase.bat` file for migrations and database update<br>
-	1. Script will Check dotnet-ef tool if is not installed dotnet-ef, it will install
+	1. Script will checking missing tool and NuGet packets. it will restore tool and packets
  3. Ready to build/start<br>
 
  Default database values directory: `Repository/ContextConfig/`<br>

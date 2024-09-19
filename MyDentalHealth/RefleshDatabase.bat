@@ -11,6 +11,7 @@ if %ERRORLEVEL% EQU 0 (
 )
 del /Q tools.tmp > nul 2>&1
 del /Q .\Migrations\ > nul 2>&1
+dotnet restore
 dotnet ef migrations add Init
 dotnet ef database drop --force
 dotnet ef database update
