@@ -6,10 +6,10 @@
 	1. Init User secrets 
 		>Execute in MyDentalHealth folder<br>
 		>dotnet user-secrets init<br>
-	1. Set your SQL Connection for SQL database<br>
+	1. Set your SQL Connection for SQL Database<br>
 		>Execute in MyDentalHealth folder<br>
-		>dotnet user-secrets set "ConnectionStrings:mssqlconnection" "SqlconnectionString;"<br>
-	2. Set your SMTP mail information for mail service<br>
+		>dotnet user-secrets set "ConnectionStrings:mssqlconnection" "Server=localhost;Database=mdhapp;User Id=-----;Password=-----;Trusted_Connection=False; Encrypt=True; TrustServerCertificate=True;;"<br>
+	2. Set your SMTP mail information for Mail Service<br>
 		>Execute in MyDentalHealth folder<br>
 		>dotnet user-secrets set "EmailSettings:Username" "------@-----"<br>
 		>dotnet user-secrets set "EmailSettings:Password" "-------"<br>
