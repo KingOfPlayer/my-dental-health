@@ -18,7 +18,7 @@ namespace Service
 		}
 
 		public IUserService UserService => userService;
-        public ITargetService TargetService => targetService;
+		public ITargetService TargetService => targetService;
 		public IAdviceService AdviceService => adviceService;
 		public IMailService MailService => mailService;
 

@@ -2,12 +2,12 @@
 
 namespace MyDentalHealth.ViewComponents
 {
-    public class MyHomeNavbarViewComponent : ViewComponent
-    {
+	public class MyHomeNavbarViewComponent : ViewComponent
+	{
 
-        public string Invoke()
-        {
-            return "K";
-        }
-    }
+		public string Invoke()
+		{
+			return "K";
+		}
+	}
 }

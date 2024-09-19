@@ -1,5 +1,4 @@
-﻿using Entity.Models.User;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
 
 namespace MyDentalHealth.Components

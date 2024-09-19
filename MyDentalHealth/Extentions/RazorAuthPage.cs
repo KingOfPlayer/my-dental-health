@@ -29,7 +29,7 @@ namespace MyDentalHealth.Extentions
 		{
 			get
 			{
-				if(roles == null)
+				if (roles == null)
 				{
 					int UserId = base.ViewContext.HttpContext.Session.GetJson<int>("UserId");
 					if (UserId != 0)

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Entity.Models.Dto;
 using Entity.Models.Dto.Profile;
 using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc;
@@ -58,12 +57,12 @@ namespace MyDentalHealth.Controllers
 		public IActionResult Index()
 		{
 			return View();
-			
+
 		}
 
 		public IActionResult Name()
 		{
-			return View(new NameUpdateDto() { Name = User!.Name});
+			return View(new NameUpdateDto() { Name = User!.Name });
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
@@ -77,15 +76,15 @@ namespace MyDentalHealth.Controllers
 				return RedirectToAction("");
 			}
 			return View(nameUpdateDto);
-        }
+		}
 
-        public IActionResult Surname()
-        {
-            return View(new SurnameUpdateDto() { Surname = User!.Surname });
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Surname([FromForm] SurnameUpdateDto surnameUpdateDto)
+		public IActionResult Surname()
+		{
+			return View(new SurnameUpdateDto() { Surname = User!.Surname });
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Surname([FromForm] SurnameUpdateDto surnameUpdateDto)
 		{
 			if (ModelState.IsValid)
 			{
@@ -97,7 +96,7 @@ namespace MyDentalHealth.Controllers
 			return View(surnameUpdateDto);
 		}
 
-        public IActionResult Birthday()
+		public IActionResult Birthday()
 		{
 			return View(new BirthdayDateUpdateDto() { BirthdayDate = User!.BirthdayDate });
 		}
@@ -123,7 +122,7 @@ namespace MyDentalHealth.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Email([FromForm] EmailUpdateDto emailUpdateDto)
 		{
-			if(User!.Email == emailUpdateDto.Email)
+			if (User!.Email == emailUpdateDto.Email)
 				ModelState.AddModelError("Email", "Enter different email");
 			else if (ModelState.IsValid)
 			{

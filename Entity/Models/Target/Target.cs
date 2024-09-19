@@ -1,5 +1,4 @@
 ﻿using Entity.Models.Target.Status;
-using System;
 
 namespace Entity.Models.Target
 {

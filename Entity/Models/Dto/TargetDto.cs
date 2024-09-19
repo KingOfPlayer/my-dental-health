@@ -1,19 +1,12 @@
-﻿using Entity.Models.Target.Status;
-using Entity.Models.Target;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Entity.Models.Dto
 {
-    public class TargetDto
-    {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        [Required]
+	public class TargetDto
+	{
+		public int Id { get; set; }
+		public int UserId { get; set; }
+		[Required]
 		[DataType(DataType.Text)]
 		public string Name { get; set; } = string.Empty;
 		[DataType(DataType.MultilineText)]
@@ -26,5 +19,5 @@ namespace Entity.Models.Dto
 		public int PeriodLength { get; set; }
 		[Required]
 		public int Count { get; set; }
-    }
+	}
 }

@@ -1,6 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
+﻿using Microsoft.EntityFrameworkCore;
 using MyDentalHealth.Extentions.Mapper;
 using Repository;
 using Repository.Interfaces;
@@ -17,7 +15,7 @@ namespace MyDentalHealth.Extentions
 			serviceDescriptors.AddScoped<IUserRepository, UserRepository>();
 			serviceDescriptors.AddScoped<ITargetRepository, TargetRepository>();
 			serviceDescriptors.AddScoped<IAdviceRepository, AdviceRepository>();
-			
+
 		}
 		public static void ConfigureService(this IServiceCollection serviceDescriptors)
 		{
@@ -53,12 +51,12 @@ namespace MyDentalHealth.Extentions
 			{
 				options.UseSqlServer(builder.Configuration.GetConnectionString("mssqlconnection"), b => b.MigrationsAssembly("MyDentalHealth"));
 				options.EnableSensitiveDataLogging(true);
-			},ServiceLifetime.Scoped);
+			}, ServiceLifetime.Scoped);
 		}
 		public static void ConfigureEndPoints(this WebApplication webApplication)
 		{
 			webApplication.MapControllerRoute("default", "/{Controller=Home}/{action=Index}/{id?}");
 			webApplication.MapControllers();
-        }
-    }
+		}
+	}
 }

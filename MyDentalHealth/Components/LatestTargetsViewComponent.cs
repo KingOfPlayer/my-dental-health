@@ -1,9 +1,6 @@
-﻿using Entity.Models.Target;
-using Entity.Models.Target.Status;
-using Entity.Models.User;
+﻿using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
-using System.Linq;
 
 namespace MyDentalHealth.Components
 {

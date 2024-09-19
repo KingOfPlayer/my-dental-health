@@ -7,25 +7,26 @@ using Entity.Models.User;
 
 namespace MyDentalHealth.Extentions.Mapper
 {
-    public class MappingProfile : Profile
-    {
-        public MappingProfile() {
+	public class MappingProfile : Profile
+	{
+		public MappingProfile()
+		{
 
-            //New User
-            CreateMap<NewUserDto, User>().ReverseMap();
+			//New User
+			CreateMap<NewUserDto, User>().ReverseMap();
 
-            //User Profile Update
-            CreateMap<BirthdayDateUpdateDto, User>();
-            CreateMap<EmailUpdateDto, User>();
-            CreateMap<NameUpdateDto, User>();
-            CreateMap<SurnameUpdateDto, User>();
-            CreateMap<PasswordUpdateDto, User>();
+			//User Profile Update
+			CreateMap<BirthdayDateUpdateDto, User>();
+			CreateMap<EmailUpdateDto, User>();
+			CreateMap<NameUpdateDto, User>();
+			CreateMap<SurnameUpdateDto, User>();
+			CreateMap<PasswordUpdateDto, User>();
 
-            //Target Dto
-            CreateMap<TargetDto, Target>().ReverseMap();
+			//Target Dto
+			CreateMap<TargetDto, Target>().ReverseMap();
 
-            //Target Status Dto
-            CreateMap<TargetStatusDto, TargetStatus>().ReverseMap();
-        }
-    }
+			//Target Status Dto
+			CreateMap<TargetStatusDto, TargetStatus>().ReverseMap();
+		}
+	}
 }

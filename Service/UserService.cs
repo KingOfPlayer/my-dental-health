@@ -12,13 +12,13 @@ namespace Service
 		private readonly IRepositoryManager repositoryManager;
 		private readonly IMapper mapper;
 
-        public UserService(IRepositoryManager repositoryManager, IMapper mapper)
-        {
-            this.repositoryManager = repositoryManager;
-            this.mapper = mapper;
-        }
+		public UserService(IRepositoryManager repositoryManager, IMapper mapper)
+		{
+			this.repositoryManager = repositoryManager;
+			this.mapper = mapper;
+		}
 
-        public IEnumerable<User> GetAllUsers()
+		public IEnumerable<User> GetAllUsers()
 		{
 			return repositoryManager.UserRepository.GetAllUsers();
 		}

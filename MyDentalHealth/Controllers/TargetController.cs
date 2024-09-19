@@ -4,19 +4,13 @@ using Entity.Models.Target;
 using Entity.Models.Target.Status;
 using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MyDentalHealth.Extentions;
-using Service;
 using Service.Interfaces;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.Intrinsics.Arm;
-using System.Security.Cryptography;
 
 namespace MyDentalHealth.Controllers
 {
-    [Auth]
-    public class TargetController : Controller
+	[Auth]
+	public class TargetController : Controller
 	{
 		private readonly IServiceManager serviceManager;
 		private readonly IMapper mapper;
@@ -64,17 +58,17 @@ namespace MyDentalHealth.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-        public IActionResult CreateTarget([FromForm] TargetDto targetDto)
-        {
+		public IActionResult CreateTarget([FromForm] TargetDto targetDto)
+		{
 			if (ModelState.IsValid)
 			{
 				Target target = mapper.Map<Target>(targetDto);
 				target.UserId = HttpContext.Session.GetJson<int>("UserId");
 				serviceManager.TargetService.CreateTarget(target);
-				return Json(new { success = true , clear = true});
+				return Json(new { success = true, clear = true });
 			}
-			var errors = ModelState.Where(err => err.Value?.Errors.Count() > 0).Select(err => new {Key = err.Key,errs= err.Value?.Errors.Select(x => x.ErrorMessage)});
-			return Json(new { success = false , errors });
+			var errors = ModelState.Where(err => err.Value?.Errors.Count() > 0).Select(err => new { Key = err.Key, errs = err.Value?.Errors.Select(x => x.ErrorMessage) });
+			return Json(new { success = false, errors });
 		}
 
 
@@ -85,7 +79,8 @@ namespace MyDentalHealth.Controllers
 			if (ModelState.IsValid)
 			{
 				Target? target = (await serviceManager.TargetService.GetUserTargets(User!.Id)).Where(t => t.Id.Equals(targetStatusDto.TargetId)).FirstOrDefault();
-				if (target is not null) {
+				if (target is not null)
+				{
 
 					TargetStatus targetStatus = mapper.Map<TargetStatus>(targetStatusDto);
 					if (File is not null)
@@ -106,15 +101,15 @@ namespace MyDentalHealth.Controllers
 			var errors = ModelState.Where(err => err.Value?.Errors.Count() > 0).Select(err => new { Key = err.Key, errs = err.Value?.Errors.Select(x => x.ErrorMessage) });
 			return Json(new { success = false, errors });
 		}
-		
-		public async Task<IActionResult> RemoveTarget([FromQuery(Name = "TargetId")] int TargetId,[FromQuery(Name = "Validate")] bool Validate)
+
+		public async Task<IActionResult> RemoveTarget([FromQuery(Name = "TargetId")] int TargetId, [FromQuery(Name = "Validate")] bool Validate)
 		{
 			var Target = (await serviceManager.TargetService.GetUserTargets(User!.Id)).Any(ts => ts.Id.Equals(TargetId));
 			if (!Target)
 			{
 				return Json(new { success = false });
 			}
-			var TargetStatus = serviceManager.TargetService.GetAllTargetStatus(TargetId).ToList(); 
+			var TargetStatus = serviceManager.TargetService.GetAllTargetStatus(TargetId).ToList();
 			if (TargetStatus.Any())
 			{
 				if (!Validate)
@@ -123,8 +118,8 @@ namespace MyDentalHealth.Controllers
 				}
 				serviceManager.TargetService.RemoveTargetStatus(TargetStatus);
 			}
-			await serviceManager.TargetService.RemoveTarget(TargetId,User!.Id);
-			return Json(new { success = true});
+			await serviceManager.TargetService.RemoveTarget(TargetId, User!.Id);
+			return Json(new { success = true });
 		}
 		/*
 		public IActionResult TargetDetails([FromQuery(Name = "TargetId")] int TargetId)
@@ -142,5 +137,5 @@ namespace MyDentalHealth.Controllers
 		}
 		*/
 
-    }
+	}
 }

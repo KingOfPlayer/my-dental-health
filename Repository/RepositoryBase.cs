@@ -25,19 +25,19 @@ namespace Repository
 			repositoryContext.Set<T>().Remove(entity);
 			Save<T>();
 		}
-        public void Remove<T>(List<T> entity) where T : class
-        {
-            repositoryContext.Set<T>().RemoveRange(entity);
-            Save<T>();
-        }
+		public void Remove<T>(List<T> entity) where T : class
+		{
+			repositoryContext.Set<T>().RemoveRange(entity);
+			Save<T>();
+		}
 
-        public void Update<T>(T entity) where T : class
+		public void Update<T>(T entity) where T : class
 		{
 			repositoryContext.Set<T>().Update(entity);
 			Save<T>();
 		}
 
-        public void UpdateRange<T>(IEnumerable<T> entity) where T : class
+		public void UpdateRange<T>(IEnumerable<T> entity) where T : class
 		{
 			repositoryContext.Set<T>().UpdateRange(entity);
 			Save<T>();

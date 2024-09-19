@@ -1,9 +1,6 @@
-﻿using Entity.Models.Target;
-using Entity.Models.Target.Status;
-using Entity.Models.User;
+﻿using Entity.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
-using System.Linq;
 
 namespace MyDentalHealth.Components
 {
@@ -20,7 +17,7 @@ namespace MyDentalHealth.Components
 		{
 			ViewBag.targetStatuses = serviceManager.TargetService.GetUsersTargetStatus(user).Where(ts => DateTime.Now.AddDays(-7) < ts.Attime).ToList();
 
-            return View();
+			return View();
 		}
 	}
 }
