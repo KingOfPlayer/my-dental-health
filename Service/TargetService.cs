@@ -23,7 +23,7 @@ namespace Service
 
 		public async Task<List<Target>> GetUserTargets(int userId)
 		{
-			return await repositoryManager.TargetRepository.GetAllTargets()
+			return await repositoryManager.TargetRepository.GetAllTargetsWithDetails()
 				.Where(t => t.UserId.Equals(userId))
 				.ToListAsync();
 		}
@@ -40,7 +40,7 @@ namespace Service
 
 		public async Task UpdateTargetCheckDates(int userId)
 		{
-			List<Target> outdatedTargets = await repositoryManager.TargetRepository.GetAllTargets()
+			List<Target> outdatedTargets = await repositoryManager.TargetRepository.GetAllTargets().AsNoTracking()
 				.Where(t => t.UserId.Equals(userId))
 				.Where(t =>
 				(t.TargetPeriodTypeId == 1 && DateTime.Now > t.PeriodTime.AddDays(t.PeriodLength)) ||
@@ -54,9 +54,9 @@ namespace Service
 
 				do
 				{
-					temp = Target.GetPeriodEndTime(outdatedTargets[i].TargetPeriodType!.Id, temp, outdatedTargets[i].PeriodLength);
+					temp = Target.GetPeriodEndTime(outdatedTargets[i].TargetPeriodTypeId, temp, outdatedTargets[i].PeriodLength);
 				}
-				while (DateTime.Now > Target.GetPeriodEndTime(outdatedTargets[i].TargetPeriodType!.Id, temp, outdatedTargets[i].PeriodLength));
+				while (DateTime.Now > Target.GetPeriodEndTime(outdatedTargets[i].TargetPeriodTypeId, temp, outdatedTargets[i].PeriodLength));
 				outdatedTargets[i].PeriodTime = temp;
 
 			}

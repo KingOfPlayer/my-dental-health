@@ -18,8 +18,9 @@ namespace Repository.ContextConfig
 					TargetPiroityId = 1,
 					TargetPeriodTypeId = 1,
 					PeriodLength = 1,
-					Count = 1
-				},
+					Count = 1,
+					PeriodTime = DateTime.Now.AddDays(-7)
+                },
 				new Target()
 				{
 					Id = 2,

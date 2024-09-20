@@ -17,7 +17,9 @@ namespace Repository
 		public void RemoveTarget(Target target) => Remove(target);
 		public void RemoveTarget(List<Target> target) => Remove(target);
 		public void AttachTarget(Target target) => Attach(target);
-		public IQueryable<Target> GetAllTargets() => GetAll<Target>().
+		public IQueryable<Target> GetAllTargets() => GetAll<Target>();
+
+        public IQueryable<Target> GetAllTargetsWithDetails() => GetAll<Target>().
 			Include(target => target.TargetPeriodType)
 			.Include(target => target.TargetPiroity)
 			.Include(target => target.TargetStatuses.OrderByDescending(ts => ts.Attime))

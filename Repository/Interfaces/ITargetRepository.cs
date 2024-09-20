@@ -11,6 +11,7 @@ namespace Repository.Interfaces
 		void RemoveTarget(Target target);
 		void RemoveTarget(List<Target> target);
 		IQueryable<Target> GetAllTargets();
+		IQueryable<Target> GetAllTargetsWithDetails();
 		IQueryable<Target> GetAllTargetsWithTrack();
 		void CreateTargetStatus(TargetStatus targetStatus);
 		void UpdateTargetStatus(TargetStatus targetStatus);
